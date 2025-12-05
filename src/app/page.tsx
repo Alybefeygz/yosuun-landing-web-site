@@ -271,6 +271,78 @@ function ChevronDownIcon() {
   );
 }
 
+type AnimatedSegment = {
+  text: string;
+  className?: string;
+  color?: string; // rgb string e.g. "28,42,60"
+};
+
+function AnimatedHeading({
+  segments,
+  className,
+  start = 0.55,
+  end = 0.15,
+}: {
+  segments: AnimatedSegment[];
+  className?: string;
+  start?: number;
+  end?: number;
+}) {
+  const ref = useRef<HTMLHeadingElement | null>(null);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const handler = () => {
+      const node = ref.current;
+      if (!node) return;
+      const rect = node.getBoundingClientRect();
+      const viewport = window.innerHeight || 1;
+      const startPx = viewport * start;
+      const endPx = viewport * end;
+      const distance = startPx - endPx || 1;
+      const raw = (startPx - rect.top) / distance;
+      const clamped = Math.min(1, Math.max(0, raw));
+      setProgress(clamped);
+    };
+    handler();
+    window.addEventListener("scroll", handler, { passive: true });
+    window.addEventListener("resize", handler);
+    return () => {
+      window.removeEventListener("scroll", handler);
+      window.removeEventListener("resize", handler);
+    };
+  }, [start, end]);
+
+  const baseColor = "28,42,60";
+
+  return (
+    <div ref={ref} className={className} style={{ lineHeight: "1.2" }}>
+      {segments.map((seg, sIdx) => (
+        <span key={sIdx} className={seg.className}>
+          {seg.text.split("").map((char, idx) => {
+            const step = 0.0125;
+            const perChar = Math.min(1, Math.max(0, (progress - idx * step) / 0.4));
+            const alpha = 0.2 + perChar * 0.8;
+            const color = seg.color ? seg.color : baseColor;
+            return (
+              <span
+                key={`${sIdx}-${idx}`}
+                style={{
+                  color: `rgba(${color}, ${alpha})`,
+                  transition: "color 120ms ease-out",
+                  whiteSpace: char === "\n" ? "pre" : undefined,
+                }}
+              >
+                {char}
+              </span>
+            );
+          })}
+        </span>
+      ))}
+    </div>
+  );
+}
+
 export default function Home() {
   const marqueeItems = useMemo(() => [...logoStrip, ...logoStrip], []);
   const textToReveal =
@@ -474,11 +546,13 @@ export default function Home() {
 
       <section className="mx-auto mt-20 w-full max-w-6xl px-6 md:px-12 lg:px-16">
         <div className="flex flex-col items-center gap-3 text-center">
-          <h3 className="text-4xl font-semibold leading-tight tracking-tight text-slate-900 md:text-5xl">
-            Where innovation
-            <br />
-            meets <span className="font-serif italic text-slate-400">aesthetics</span>
-          </h3>
+          <AnimatedHeading
+            className="text-4xl font-semibold tracking-tight text-slate-900 md:text-5xl whitespace-pre-line text-center"
+            segments={[
+              { text: "Where innovation\n", color: "28,42,60" },
+              { text: "meets aesthetics", color: "112,129,159", className: "font-serif italic" },
+            ]}
+          />
         </div>
 
         <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3 xl:grid-cols-6">
@@ -520,38 +594,49 @@ export default function Home() {
 
       <section className="mx-auto mt-24 w-full max-w-6xl px-6 md:px-12 lg:px-16">
         <div className="text-center">
-          <p className="text-4xl font-semibold leading-tight tracking-tight text-slate-900 md:text-5xl">
-            How we transformed a small
-            <br />
-            business&apos;s <span className="font-serif italic text-slate-400">online presence</span>
-          </p>
+          <AnimatedHeading
+            className="text-4xl font-semibold tracking-tight text-slate-900 md:text-5xl whitespace-pre-line text-center"
+            segments={[
+              { text: "How we transformed a small\n", color: "28,42,60" },
+              { text: "business's ", color: "28,42,60" },
+              { text: "online presence", color: "112,129,159", className: "font-serif italic" },
+            ]}
+          />
         </div>
 
-        <div className="mt-14 grid gap-12">
+        <div className="mt-14 space-y-16">
           {caseStudies.map((item) => (
-            <div key={item.title} className="relative h-[78vh] min-h-[520px]">
-              <div className="sticky top-24 flex flex-col gap-4">
+            <div
+              key={item.title}
+              className="relative h-[82vh] min-h-[520px]"
+            >
+              <div className="sticky top-20">
                 <div
-                  className="relative h-full overflow-hidden rounded-[28px] shadow-xl shadow-black/15"
+                  className="relative overflow-hidden rounded-[32px] bg-white shadow-[0_20px_50px_rgba(0,0,0,0.12)]"
                   style={{ backgroundImage: item.gradient }}
                 >
-                  <div className="absolute left-5 top-5 rounded-full bg-white/80 px-3 py-1 text-xs font-semibold text-slate-800">
-                    Case Study
-                  </div>
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.45),transparent_35%),radial-gradient(circle_at_80%_0%,rgba(255,255,255,0.35),transparent_40%)]" />
-                  <div className="flex h-full flex-col justify-end bg-gradient-to-t from-black/10 to-transparent p-8">
-                    <div className="max-w-xl rounded-2xl bg-white/70 px-5 py-4 shadow-lg backdrop-blur">
-                      <p className="text-2xl font-semibold text-slate-900">{item.title}</p>
-                      <p className="text-sm text-slate-600">{item.subtitle}</p>
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_20%,rgba(255,255,255,0.55),transparent_32%),radial-gradient(circle_at_80%_10%,rgba(255,255,255,0.55),transparent_30%),radial-gradient(circle_at_50%_80%,rgba(255,255,255,0.35),transparent_40%)]" />
+                  <div className="relative px-6 py-6 md:px-10 md:py-8">
+                    <span className="inline-flex items-center rounded-full bg-white/80 px-4 py-2 text-xs font-semibold tracking-wide text-slate-700 shadow-sm backdrop-blur">
+                      Case Study
+                    </span>
+                    <div className="mt-6 w-full rounded-2xl bg-white/85 px-5 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.12)] backdrop-blur">
+                      <p className="text-2xl font-semibold text-slate-900 md:text-3xl">{item.title}</p>
+                      <p className="mt-1 text-sm text-slate-600 md:text-base">{item.subtitle}</p>
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-wrap gap-3">
+
+                <div className="mt-4 flex flex-wrap gap-3">
                   {item.tags.map((tag) => (
                     <span
-                      key={tag}
-                      className="rounded-full border px-4 py-2 text-sm font-medium text-slate-700"
-                      style={{ borderColor: `${item.accent}33`, color: item.accent }}
+                      key={`${item.title}-${tag}`}
+                      className="rounded-full border px-4 py-2 text-sm font-semibold"
+                      style={{
+                        borderColor: `${item.accent}40`,
+                        color: item.accent,
+                        backgroundColor: `${item.accent}12`,
+                      }}
                     >
                       {tag}
                     </span>
@@ -565,11 +650,14 @@ export default function Home() {
 
       <section className="mx-auto mt-24 w-full max-w-6xl px-6 md:px-12 lg:px-16">
         <div className="text-center">
-          <p className="text-4xl font-semibold leading-tight tracking-tight text-slate-900 md:text-5xl">
-            Meet the creative minds
-            <br />
-            behind <span className="font-serif italic text-slate-400">our success</span>
-          </p>
+          <AnimatedHeading
+            className="text-4xl font-semibold tracking-tight text-slate-900 md:text-5xl whitespace-pre-line text-center"
+            segments={[
+              { text: "Meet the creative minds\n", color: "28,42,60" },
+              { text: "behind ", color: "28,42,60" },
+              { text: "our success", color: "112,129,159", className: "font-serif italic" },
+            ]}
+          />
         </div>
 
         <div className="mt-14 grid grid-cols-1 gap-10 sm:grid-cols-2 xl:grid-cols-4">
@@ -604,12 +692,14 @@ export default function Home() {
 
       <section className="mx-auto mt-24 w-full max-w-6xl px-6 md:px-12 lg:px-16">
         <div className="text-center">
-          <p className="text-4xl font-semibold leading-tight tracking-tight text-slate-900 md:text-5xl">
-            What our satisfied customers
-            <br />
-            are say<span className="text-slate-400">ing</span>{" "}
-            <span className="font-serif italic text-slate-400">about us</span>
-          </p>
+          <AnimatedHeading
+            className="text-4xl font-semibold tracking-tight text-slate-900 md:text-5xl whitespace-pre-line text-center"
+            segments={[
+              { text: "What our satisfied customers\n", color: "28,42,60" },
+              { text: "are saying ", color: "28,42,60" },
+              { text: "about us", color: "112,129,159", className: "font-serif italic" },
+            ]}
+          />
         </div>
 
         <div className="mt-14 grid gap-6 lg:grid-cols-3 lg:items-stretch">
@@ -720,11 +810,14 @@ export default function Home() {
       <section className="mx-auto mt-24 w-full max-w-6xl px-0 md:px-6">
         <div className="rounded-[32px] bg-[linear-gradient(180deg,#fff7ed_0%,#f8ebdf_100%)] px-4 py-12 shadow-sm md:px-10 lg:px-14">
           <div className="text-center">
-            <p className="text-4xl font-semibold leading-tight tracking-tight text-[#1c2a3c] md:text-5xl">
-              Got questions?
-              <br />
-              We&apos;ve got <span className="font-serif italic text-[#70819f]">answers</span>
-            </p>
+            <AnimatedHeading
+              className="text-4xl font-semibold tracking-tight text-[#1c2a3c] md:text-5xl whitespace-pre-line text-center"
+              segments={[
+                { text: "Got questions?\n", color: "28,42,60" },
+                { text: "We've got ", color: "28,42,60" },
+                { text: "answers", color: "112,129,159", className: "font-serif italic" },
+              ]}
+            />
           </div>
 
           <div className="mt-10 space-y-4">
