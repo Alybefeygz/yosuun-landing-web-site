@@ -768,6 +768,77 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <section className="mx-auto mt-24 w-full max-w-6xl px-6 md:px-12 lg:px-16">
+        <div className="overflow-hidden rounded-[32px] bg-gradient-to-r from-[#e5f4ff] via-white to-[#ffe9c7] px-6 py-16 text-center shadow-[0_16px_40px_rgba(0,0,0,0.08)] md:px-14 lg:px-20">
+          <h3 className="text-4xl font-semibold leading-tight tracking-tight text-slate-900 md:text-5xl">
+            Innovative Solutions for{" "}
+            <span className="font-serif italic text-slate-500">bold brands</span>
+          </h3>
+          <p className="mt-4 text-base leading-7 text-slate-600 md:text-lg">
+            Looking to elevate your brand? We craft immersive experiences that captivate, engage, and
+            make your business unforgettable in every interaction.
+          </p>
+          <div className="mt-8 flex justify-center">
+            <button className="inline-flex items-center gap-3 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-black/20 transition hover:translate-y-[-1px]">
+              Let&apos;s craft together
+              <span className="grid h-8 w-8 place-items-center rounded-full bg-white/15">
+                <ArrowIcon />
+              </span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <footer className="mx-auto mt-20 w-full max-w-6xl px-6 pb-16 md:px-12 lg:px-16">
+        <div className="grid gap-10 border-t border-slate-200/70 pt-10 md:grid-cols-4 md:gap-6">
+          <div className="space-y-4 md:col-span-1">
+            <div className="flex items-center gap-3">
+              <div className="grid h-12 w-12 place-items-center rounded-2xl border border-slate-900/10 bg-white shadow-sm">
+                <HexIcon />
+              </div>
+              <span className="text-lg font-semibold tracking-tight text-slate-900">Awake</span>
+            </div>
+            <p className="text-sm leading-6 text-slate-600">
+              Empowering businesses with innovative solutions. Let&apos;s create something amazing
+              together.
+            </p>
+            <div className="flex items-center gap-4 text-slate-700">
+              <span className="text-sm font-semibold">X</span>
+              <span className="text-sm font-semibold">in</span>
+              <span className="text-sm font-semibold">@</span>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <p className="text-sm font-semibold text-slate-900">Sitemap</p>
+            <div className="space-y-2 text-sm text-slate-600">
+              <a href="#">About us</a>
+              <a href="#">Work</a>
+              <a href="#">Services</a>
+              <a href="#">Pricing</a>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <p className="text-sm font-semibold text-slate-900">Other Pages</p>
+            <div className="space-y-2 text-sm text-slate-600">
+              <a href="#">Contact Us</a>
+              <a href="#">Error 404</a>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <p className="text-sm font-semibold text-slate-900">Contact Details</p>
+            <div className="space-y-2 text-sm text-slate-600">
+              <p>81 Rivington Street London</p>
+              <p>EC2A 3AY</p>
+              <p>hello@awake.agency</p>
+              <p>0105 192 3556</p>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
