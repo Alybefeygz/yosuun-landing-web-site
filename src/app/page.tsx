@@ -110,6 +110,17 @@ const teamMembers = [
   },
 ];
 
+const testimonial = {
+  quote:
+    "Awake’s expertise transformed my vision into success with creativity, precision, and a deep understanding of my goals.",
+  author: "Sarah Mitchell",
+  title: "Founder of Chipsland",
+  image:
+    "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1600&q=80",
+  stat: "91%",
+  statLabel: "clients recommend our design services.”",
+};
+
 function HexIcon() {
   return (
     <svg
@@ -475,6 +486,52 @@ export default function Home() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="mx-auto mt-24 w-full max-w-6xl px-6 md:px-12 lg:px-16">
+        <div className="text-center">
+          <p className="text-4xl font-semibold leading-tight tracking-tight text-slate-900 md:text-5xl">
+            What our satisfied customers
+            <br />
+            are say<span className="text-slate-400">ing</span>{" "}
+            <span className="font-serif italic text-slate-400">about us</span>
+          </p>
+        </div>
+
+        <div className="mt-14 grid gap-6 lg:grid-cols-3 lg:items-stretch">
+          <div className="lg:col-span-2">
+            <div className="relative overflow-hidden rounded-[28px] bg-slate-900 shadow-xl shadow-black/20">
+              <div
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: `url(${testimonial.image})` }}
+                aria-hidden
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/45 to-black/20" />
+              <div className="relative flex min-h-[320px] flex-col justify-end gap-3 p-8 text-white md:min-h-[420px] md:p-10">
+                <p className="text-xs font-semibold tracking-[0.2em] text-white/70">
+                  CUSTOMER STORIES
+                </p>
+                <p className="text-xl font-semibold leading-8 md:text-2xl md:leading-9">
+                  {testimonial.quote}
+                </p>
+                <div className="mt-3 text-sm text-white/80">
+                  <p className="font-semibold">{testimonial.author}</p>
+                  <p>{testimonial.title}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col justify-between rounded-[28px] bg-[#f2df78] px-8 py-10 text-slate-900 shadow-lg shadow-black/10">
+            <p className="text-xs font-semibold tracking-[0.2em] text-slate-700">FACTS & NUMBERS</p>
+            <div className="mt-10 flex flex-col gap-3">
+              <p className="text-5xl font-semibold leading-none">{testimonial.stat}</p>
+              <p className="text-lg font-semibold leading-7 text-slate-800">
+                {testimonial.statLabel}
+              </p>
+            </div>
+          </div>
         </div>
       </section>
     </div>
