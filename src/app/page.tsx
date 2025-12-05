@@ -75,6 +75,41 @@ const caseStudies = [
   },
 ];
 
+const teamMembers = [
+  {
+    name: "Logan Dang",
+    role: "Wordpress Developer",
+    photo:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80",
+    backdrop:
+      "radial-gradient(circle at 20% 30%, #3d32ff 0 30%, transparent 30%), radial-gradient(circle at 80% 35%, #2a22ff 0 30%, transparent 30%), radial-gradient(circle at 50% 80%, #4f46ff 0 36%, transparent 36%), #2f23ff",
+  },
+  {
+    name: "Ana Belić",
+    role: "Social Media Specialist",
+    photo:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80",
+    backdrop:
+      "radial-gradient(circle at 30% 25%, #f0f0f0 0 32%, transparent 32%), radial-gradient(circle at 70% 65%, #d8d8d8 0 28%, transparent 28%), #bfbfbf",
+  },
+  {
+    name: "Brian Hanley",
+    role: "Product Designer",
+    photo:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80",
+    backdrop:
+      "radial-gradient(circle at 40% 30%, #f7f1c7 0 34%, transparent 34%), radial-gradient(circle at 70% 60%, #ffeaa0 0 30%, transparent 30%), #f5d96b",
+  },
+  {
+    name: "Darko Stanković",
+    role: "UI Designer",
+    photo:
+      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80",
+    backdrop:
+      "radial-gradient(circle at 25% 25%, #48c0ff 0 32%, transparent 32%), radial-gradient(circle at 75% 55%, #4cb8ff 0 32%, transparent 32%), #2aa5f5",
+  },
+];
+
 function HexIcon() {
   return (
     <svg
@@ -398,6 +433,45 @@ export default function Home() {
                     </span>
                   ))}
                 </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto mt-24 w-full max-w-6xl px-6 md:px-12 lg:px-16">
+        <div className="text-center">
+          <p className="text-4xl font-semibold leading-tight tracking-tight text-slate-900 md:text-5xl">
+            Meet the creative minds
+            <br />
+            behind <span className="font-serif italic text-slate-400">our success</span>
+          </p>
+        </div>
+
+        <div className="mt-14 grid grid-cols-1 gap-10 sm:grid-cols-2 xl:grid-cols-4">
+          {teamMembers.map((member) => (
+            <div key={member.name} className="flex flex-col items-center text-center">
+              <div className="relative aspect-[4/5] w-full max-w-xs overflow-hidden rounded-[38%] shadow-lg shadow-black/15">
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: member.backdrop,
+                  }}
+                />
+                <div
+                  className="absolute inset-[10%] rounded-[32%] bg-cover bg-center"
+                  style={{ backgroundImage: `url(${member.photo})` }}
+                  role="img"
+                  aria-label={member.name}
+                />
+              </div>
+              <div className="mt-6 space-y-2">
+                <p className="text-xl font-semibold text-slate-900">{member.name}</p>
+                <p className="text-sm text-slate-600">{member.role}</p>
+              </div>
+              <div className="mt-3 flex items-center gap-3 text-sm text-slate-500">
+                <span className="rounded-full border border-slate-200 px-2.5 py-1">X</span>
+                <span className="rounded-full border border-slate-200 px-2.5 py-1">in</span>
               </div>
             </div>
           ))}
