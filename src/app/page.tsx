@@ -166,6 +166,39 @@ const pricingPlans = [
   },
 ];
 
+const faqs = [
+  {
+    question: "What services does Awake Agency offer?",
+    answer:
+      "We deliver brand strategy, UI/UX design, web development, digital marketing, analytics, and ongoing optimization to keep your product moving forward.",
+  },
+  {
+    question: "How long does a typical project take?",
+    answer:
+      "Most engagements run 4–10 weeks depending on scope. We set a clear milestone plan at kickoff and share weekly progress updates.",
+  },
+  {
+    question: "How is pricing structured at Awake Agency?",
+    answer:
+      "We offer fixed-scope packages and retainer options. Our pricing is transparent—no hidden costs—and aligned to outcomes, not hours.",
+  },
+  {
+    question: "Do you offer ongoing support after project completion?",
+    answer:
+      "Yes. We provide continuous design and product support retainers, including experimentation, CRO, and design system upkeep.",
+  },
+  {
+    question: "How often will I receive updates on my project?",
+    answer:
+      "You get weekly demos plus async updates via your shared workspace. Urgent items are handled in under one business day.",
+  },
+  {
+    question: "How do I get started with Awake Agency?",
+    answer:
+      "Book a short discovery call, we’ll map goals and timelines, then propose a tailored plan with timeline, team, and budget.",
+  },
+];
+
 function HexIcon() {
   return (
     <svg
@@ -221,6 +254,23 @@ function CheckIcon() {
   );
 }
 
+function ChevronDownIcon() {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 24 24"
+      className="h-5 w-5 text-slate-500"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  );
+}
+
 export default function Home() {
   const marqueeItems = useMemo(() => [...logoStrip, ...logoStrip], []);
   const textToReveal =
@@ -228,6 +278,7 @@ export default function Home() {
 
   const [revealProgress, setRevealProgress] = useState(0);
   const revealRef = useRef<HTMLHeadingElement | null>(null);
+  const [openFaqs, setOpenFaqs] = useState<boolean[]>(faqs.map((_, idx) => idx === 0));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -663,6 +714,58 @@ export default function Home() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="mx-auto mt-24 w-full max-w-6xl px-0 md:px-6">
+        <div className="rounded-[32px] bg-[linear-gradient(180deg,#fff7ed_0%,#f8ebdf_100%)] px-4 py-12 shadow-sm md:px-10 lg:px-14">
+          <div className="text-center">
+            <p className="text-4xl font-semibold leading-tight tracking-tight text-[#1c2a3c] md:text-5xl">
+              Got questions?
+              <br />
+              We&apos;ve got <span className="font-serif italic text-[#70819f]">answers</span>
+            </p>
+          </div>
+
+          <div className="mt-10 space-y-4">
+            {faqs.map((item, idx) => {
+              const isOpen = openFaqs[idx];
+              return (
+                <div
+                  key={item.question}
+                  className="overflow-hidden rounded-[18px] border border-[#e6dfd5] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
+                >
+                  <button
+                    type="button"
+                    className="flex w-full items-center justify-between px-6 py-5 text-left text-lg font-semibold text-[#1c2a3c]"
+                    onClick={() =>
+                      setOpenFaqs((prev) =>
+                        prev.map((open, i) => (i === idx ? !open : open))
+                      )
+                    }
+                  >
+                    <span>{item.question}</span>
+                    <span className={`transition ${isOpen ? "rotate-180" : ""}`}>
+                      <ChevronDownIcon />
+                    </span>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-250 ease-out ${
+                      isOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+                    }`}
+                  >
+                    <div
+                      className={`px-6 text-base leading-6 text-[#465568] ${
+                        isOpen ? "pb-6" : "pb-0"
+                      }`}
+                    >
+                      {item.answer}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
     </div>
