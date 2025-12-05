@@ -121,6 +121,51 @@ const testimonial = {
   statLabel: "clients recommend our design services.”",
 };
 
+const pricingPlans = [
+  {
+    name: "Starter",
+    price: "$2500",
+    cadence: "month",
+    description: "For companies who need design support. One request at a time",
+    features: [
+      "Design Updates Every 2 Days",
+      "Mid-level Designer",
+      "SEO optimization",
+      "Monthly analytics",
+      "2x Calls Per Month",
+      "License free assets",
+    ],
+    bg: "#f3dd6d",
+    text: "#1f1b10",
+    pillBg: "#1f1b10",
+    pillText: "#f3dd6d",
+    ctaBg: "#f3dd6d",
+    ctaText: "#1f1b10",
+    buttonInverted: false,
+  },
+  {
+    name: "Pro",
+    price: "$3500",
+    cadence: "month",
+    description: "2x the speed. Great for an MVP, Web App or complex problem",
+    features: [
+      "Design Updates Daily",
+      "Senior-level Designer",
+      "AI Advisory Framework",
+      "Full-service Creative Team",
+      "4x Calls Per Month",
+      "License free assets",
+    ],
+    bg: "#3b32ff",
+    text: "#f6f4ff",
+    pillBg: "#161329",
+    pillText: "#f6f4ff",
+    ctaBg: "#f6f4ff",
+    ctaText: "#161329",
+    buttonInverted: true,
+  },
+];
+
 function HexIcon() {
   return (
     <svg
@@ -155,6 +200,23 @@ function StarIcon() {
   return (
     <svg aria-hidden viewBox="0 0 24 24" className="h-4 w-4 text-amber-500" fill="currentColor">
       <path d="m12 2.5 2.9 6 6.6.9-4.8 4.7 1.1 6.6L12 17.6l-5.8 3 1.1-6.6-4.8-4.7 6.6-.9z" />
+    </svg>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 24 24"
+      className="h-4 w-4 text-slate-900"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="m5 13 4 4 10-10" />
     </svg>
   );
 }
@@ -532,6 +594,75 @@ export default function Home() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="mx-auto mt-24 w-full max-w-6xl px-6 md:px-12 lg:px-16">
+        <div className="text-center">
+          <p className="text-4xl font-semibold leading-tight tracking-tight text-slate-900 md:text-5xl">
+            Pick the plan that fits your <span className="font-serif italic text-slate-400">start-up</span>
+          </p>
+        </div>
+
+        <div className="mt-14 grid gap-6 lg:grid-cols-2">
+          {pricingPlans.map((plan) => (
+            <div
+              key={plan.name}
+              className="flex flex-col justify-between rounded-[26px] p-8 shadow-lg shadow-black/15 lg:p-10"
+              style={{ backgroundColor: plan.bg, color: plan.text }}
+            >
+              <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-10">
+                <div className="flex-1 space-y-4">
+                  <span
+                    className="inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold"
+                    style={{ backgroundColor: plan.pillBg, color: plan.pillText }}
+                  >
+                    {plan.name}
+                  </span>
+                  <p className="text-sm leading-6 opacity-90">{plan.description}</p>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-4xl font-semibold tracking-tight">{plan.price}</span>
+                    <span className="text-base font-semibold opacity-90">/{plan.cadence}</span>
+                  </div>
+                </div>
+
+                <div className="flex-1 space-y-3">
+                  <p className="text-sm font-semibold opacity-90">Features</p>
+                  <div className="space-y-3 text-sm">
+                    {plan.features.map((feature) => (
+                      <div key={feature} className="flex items-center gap-3">
+                        <CheckIcon />
+                        <span>{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-8">
+                <button
+                  className={`inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold shadow-sm transition hover:translate-y-[-1px] ${
+                    plan.buttonInverted
+                      ? "bg-white text-slate-900"
+                      : "border border-current bg-white/0 text-current"
+                  }`}
+                  style={
+                    plan.buttonInverted
+                      ? { color: plan.ctaText }
+                      : { backgroundColor: plan.ctaBg, color: plan.ctaText }
+                  }
+                >
+                  Let&apos;s Collaborate
+                  <span
+                    className="grid h-7 w-7 place-items-center rounded-full bg-black/10"
+                    style={{ backgroundColor: plan.buttonInverted ? "#e6e6e6" : "#e6d660" }}
+                  >
+                    <ArrowIcon />
+                  </span>
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
     </div>
