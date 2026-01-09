@@ -1,14 +1,16 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 const navItems = [
-  "Home",
-  "About us",
-  "Services",
-  "Work",
-  "Team",
-  "Pricing",
-  "Awards",
+  "Ana Sayfa",
+  "Nasıl Düşünür",
+  "Kimler İçin",
+  "Nasıl Çalışır",
+  "Deneyimler",
+  "Demo",
+  "SSS",
 ];
 
 const avatarPalette = [
@@ -100,48 +102,36 @@ const caseStudies = [
 
 const teamMembers = [
   {
-    name: "Logan Dang",
+    name: "Arda Güner",
     role: "Wordpress Developer",
-    photo:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80",
+    photo: "/Arda.jpeg",
     backdrop:
       "radial-gradient(circle at 20% 30%, #3d32ff 0 30%, transparent 30%), radial-gradient(circle at 80% 35%, #2a22ff 0 30%, transparent 30%), radial-gradient(circle at 50% 80%, #4f46ff 0 36%, transparent 36%), #2f23ff",
   },
   {
-    name: "Ana Belić",
+    name: "Muhammet Mustafa Dincer",
     role: "Social Media Specialist",
-    photo:
-      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80",
+    photo: "/Muhammet.jpeg",
     backdrop:
       "radial-gradient(circle at 30% 25%, #f0f0f0 0 32%, transparent 32%), radial-gradient(circle at 70% 65%, #d8d8d8 0 28%, transparent 28%), #bfbfbf",
   },
   {
-    name: "Brian Hanley",
+    name: "Yağız Efe Alaybay",
     role: "Product Designer",
-    photo:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80",
+    photo: "/Yagiz.jpeg",
     backdrop:
       "radial-gradient(circle at 40% 30%, #f7f1c7 0 34%, transparent 34%), radial-gradient(circle at 70% 60%, #ffeaa0 0 30%, transparent 30%), #f5d96b",
-  },
-  {
-    name: "Darko Stanković",
-    role: "UI Designer",
-    photo:
-      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80",
-    backdrop:
-      "radial-gradient(circle at 25% 25%, #48c0ff 0 32%, transparent 32%), radial-gradient(circle at 75% 55%, #4cb8ff 0 32%, transparent 32%), #2aa5f5",
   },
 ];
 
 const testimonial = {
   quote:
-    "Awake’s expertise transformed my vision into success with creativity, precision, and a deep understanding of my goals.",
-  author: "Sarah Mitchell",
-  title: "Founder of Chipsland",
-  image:
-    "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1600&q=80",
-  stat: "91%",
-  statLabel: "clients recommend our design services.”",
+    "Kontrol hâlâ bende ama yük artık değil. Birden fazla markayı yönetirken e-ticaret arka planda kendi kendine ilerliyor ve ben asıl işime odaklanıyorum.",
+  author: "Serhat ATİK",
+  title: "Swifty E-Ticaret Marka Yönetim Ajansı | E-Ticaret Eğitmeni",
+  image: "/customer-story.jpg",
+  stat: "%147",
+  statLabel: "Artık e-ticarette neyi ne zaman yapacağımızı düşünmüyoruz.",
 };
 
 const pricingPlans = [
@@ -156,9 +146,8 @@ const pricingPlans = [
       "SEO optimization",
       "Monthly analytics",
       "2x Calls Per Month",
-      "License free assets",
     ],
-    bg: "#f3dd6d",
+    bg: "#ccfac5",
     text: "#1f1b10",
     pillBg: "#1f1b10",
     pillText: "#f3dd6d",
@@ -177,9 +166,8 @@ const pricingPlans = [
       "AI Advisory Framework",
       "Full-service Creative Team",
       "4x Calls Per Month",
-      "License free assets",
     ],
-    bg: "#3b32ff",
+    bg: "#000000",
     text: "#f6f4ff",
     pillBg: "#161329",
     pillText: "#f6f4ff",
@@ -191,35 +179,31 @@ const pricingPlans = [
 
 const faqs = [
   {
-    question: "What services does Awake Agency offer?",
+    question: "Yosuun tam olarak ne yapar?",
     answer:
-      "We deliver brand strategy, UI/UX design, web development, digital marketing, analytics, and ongoing optimization to keep your product moving forward.",
+      "Yosuun, e-ticaret operasyonunu senin adına izler, analiz eder ve gerekli izinlerle uygular. Ürün, stok, rakip ve planlama süreçlerini tek sistemde toplar ve yükü üzerinden alır.",
   },
   {
-    question: "How long does a typical project take?",
+    question: "Yosuun benim yerime karar mı verir?",
     answer:
-      "Most engagements run 4–10 weeks depending on scope. We set a clear milestone plan at kickoff and share weekly progress updates.",
+      "Normal akışta hayır. Kontrol sende kalır. Yosuun veriyi okur, aksiyonları üretir, sana gösterir ve onayladığında uygular. İstersen gerekli izinleri ve kuralları tanımladığında, bu aksiyonları sana sormadan otomatik olarak da uygular. Yapılan tüm işlemler her zaman görünür ve kayıt altındadır.",
   },
   {
-    question: "How is pricing structured at Awake Agency?",
+    question: "Rakiplerimi nasıl takip ediyor?",
     answer:
-      "We offer fixed-scope packages and retainer options. Our pricing is transparent—no hidden costs—and aligned to outcomes, not hours.",
+      "Sen rakip mağazaların linklerini eklersin. Yosuun bu mağazalar için özel bir sanal alan oluşturur ve ürün, fiyat, içerik ve yorum değişikliklerini düzenli olarak izler.",
   },
   {
-    question: "Do you offer ongoing support after project completion?",
+    question: "Yosuun yaptığı işlemleri görebilir miyim?",
     answer:
-      "Yes. We provide continuous design and product support retainers, including experimentation, CRO, and design system upkeep.",
+      "Evet. Yapılan tüm işlemler takvimde tarih ve saat bilgisiyle kayıt altındadır. Hangi gün, hangi aksiyon alındı net şekilde görünür.",
   },
   {
-    question: "How often will I receive updates on my project?",
+    question: "Demo nasıl ilerliyor?",
     answer:
-      "You get weekly demos plus async updates via your shared workspace. Urgent items are handled in under one business day.",
+      "Demo’da Yosuun’u canlı olarak gösteriyoruz. İstersen örnek bir yapı üzerinden, istersen kendi mağazanı bağlayarak sistemi birebir görürsün. Demo sonrasında dilediğin anda kendi mağazaların için kullanmaya başlayabilirsin.",
   },
-  {
-    question: "How do I get started with Awake Agency?",
-    answer:
-      "Book a short discovery call, we’ll map goals and timelines, then propose a tailored plan with timeline, team, and budget.",
-  },
+
 ];
 
 function HexIcon() {
@@ -366,7 +350,32 @@ function AnimatedHeading({
   );
 }
 
+function useInView(options?: IntersectionObserverInit) {
+  const [isInView, setIsInView] = useState(false);
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsInView(true);
+        if (ref.current) observer.unobserve(ref.current);
+      }
+    }, options);
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) observer.unobserve(ref.current);
+    };
+  }, [options]);
+
+  return { ref, isInView };
+}
+
 export default function Home() {
+  const searchParams = useSearchParams();
   const marqueeItems = useMemo(() => [...logoStrip, ...logoStrip], []);
   const textSegments = [
     { text: "Yosuun, e-ticareti takip etmez.\n" },
@@ -400,17 +409,218 @@ export default function Home() {
     []
   );
 
+  const textSegments3 = [
+    { text: "Yosuun, e-ticareti " },
+    { text: "baştan sona", className: "font-serif italic", color: "120, 246, 102" },
+    { text: "\n" },
+    { text: "kendi", className: "font-serif italic", color: "120, 246, 102" },
+    { text: " " },
+    { text: "başına", className: "font-serif italic", color: "120, 246, 102" },
+    { text: " yürütür." },
+  ];
+
+  const allChars3 = useMemo(
+    () =>
+      textSegments3.flatMap((seg) =>
+        seg.text.split("").map((char) => ({ char, className: seg.className, color: seg.color }))
+      ),
+    []
+  );
+
+  const textSegments4 = [
+    { text: "Tercih edenler, " },
+    { text: "e-ticarette", className: "font-serif italic", color: "120, 246, 102" },
+    { text: "\nneleri artık " },
+    { text: "düşünmediklerini", className: "font-serif italic", color: "120, 246, 102" },
+    { text: "\nanlatıyor." },
+  ];
+
+  const allChars4 = useMemo(
+    () =>
+      textSegments4.flatMap((seg) =>
+        seg.text.split("").map((char) => ({ char, className: seg.className, color: seg.color }))
+      ),
+    []
+  );
+
+  const textSegments5 = [
+    { text: "Bu sistemi " },
+    { text: "anlatmak", className: "font-serif italic", color: "120, 246, 102" },
+    { text: " yerine,\n" },
+    { text: "demo", className: "font-serif italic", color: "120, 246, 102" },
+    { text: " ile gösteriyoruz." },
+  ];
+
+  const allChars5 = useMemo(
+    () =>
+      textSegments5.flatMap((seg) =>
+        seg.text.split("").map((char) => ({ char, className: seg.className, color: seg.color }))
+      ),
+    []
+  );
+
+  const textSegments6 = [
+    { text: "Yosuun", className: "font-serif italic", color: "120, 246, 102" },
+    { text: " hakkında\n" },
+    { text: "en çok " },
+    { text: "merak", className: "font-serif italic", color: "120, 246, 102" },
+    { text: " edilenler." },
+  ];
+
+  const allChars6 = useMemo(
+    () =>
+      textSegments6.flatMap((seg) =>
+        seg.text.split("").map((char) => ({ char, className: seg.className, color: seg.color }))
+      ),
+    []
+  );
+
+  const textSegments7 = [
+    { text: "E-ticareti " },
+    { text: "senin yerine", className: "font-serif italic", color: "120, 246, 102" },
+    { text: " yöneten bir " },
+    { text: "sistemle" },
+    { text: " tanış." },
+  ];
+
+  const allChars7 = useMemo(
+    () =>
+      textSegments7.flatMap((seg) =>
+        seg.text.split("").map((char) => ({ char, className: seg.className, color: seg.color }))
+      ),
+    []
+  );
+
   const [revealProgress, setRevealProgress] = useState(0);
   const revealRef = useRef<HTMLHeadingElement | null>(null);
   const [revealProgress2, setRevealProgress2] = useState(0);
   const revealRef2 = useRef<HTMLHeadingElement | null>(null);
   const [revealProgress3, setRevealProgress3] = useState(0);
   const revealRef3 = useRef<HTMLHeadingElement | null>(null);
+  const [revealProgress4, setRevealProgress4] = useState(0);
+  const revealRef4 = useRef<HTMLHeadingElement | null>(null);
+  const [revealProgress5, setRevealProgress5] = useState(0);
+  const revealRef5 = useRef<HTMLHeadingElement | null>(null);
+  const [revealProgress6, setRevealProgress6] = useState(0);
+  const revealRef6 = useRef<HTMLHeadingElement | null>(null);
+  const [revealProgress7, setRevealProgress7] = useState(0);
+  const revealRef7 = useRef<HTMLHeadingElement | null>(null);
   const timelineRef = useRef<HTMLDivElement | null>(null);
   const [timelineTop, setTimelineTop] = useState<number>(9999);
-  const [openFaqs, setOpenFaqs] = useState<boolean[]>(faqs.map((_, idx) => idx === 0));
+  const [openFaqs, setOpenFaqs] = useState<boolean[]>(faqs.map(() => false));
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState(0);
+  const [heroKey, setHeroKey] = useState(0);
+  const { ref: headingRef, isInView: isHeadingVisible } = useInView({ threshold: 0.1 });
+  const { ref: pillsRef, isInView: isPillsVisible } = useInView({ threshold: 0.1 });
+  const { ref: statsRef, isInView: isStatsVisible } = useInView({ threshold: 0.1 });
+  const { ref: whoForHeadingRef, isInView: isWhoForHeadingVisible } = useInView({ threshold: 0.1 });
+  const { ref: servicesRef, isInView: isServicesVisible } = useInView({ threshold: 0.1 });
+  const { ref: ctaRef, isInView: isCtaVisible } = useInView({ threshold: 0.1 });
+  const { ref: howItWorksHeadingRef, isInView: isHowItWorksHeadingVisible } = useInView({ threshold: 0.1 });
+  const { ref: testimonialsHeadingRef, isInView: isTestimonialsHeadingVisible } = useInView({ threshold: 0.1 });
+  const { ref: testimonialsContentRef, isInView: isTestimonialsContentVisible } = useInView({ threshold: 0.1 });
+  const { ref: demoHeadingRef, isInView: isDemoHeadingVisible } = useInView({ threshold: 0.1 });
+  const { ref: featureCardsRef, isInView: isFeatureCardsVisible } = useInView({ threshold: 0.1 });
+  const { ref: demoCtaRef, isInView: isDemoCtaVisible } = useInView({ threshold: 0.1 });
+  const { ref: faqHeadingRef, isInView: isFaqHeadingVisible } = useInView({ threshold: 0.1 });
+  const { ref: faqItemsRef, isInView: isFaqItemsVisible } = useInView({ threshold: 0.1 });
+
+  const handleFaqToggle = (idx: number) => {
+    const currentOpenIdx = openFaqs.findIndex((isOpen) => isOpen);
+
+    if (currentOpenIdx === idx) {
+      setOpenFaqs((prev) => prev.map(() => false));
+      return;
+    }
+
+    if (currentOpenIdx !== -1) {
+      setOpenFaqs((prev) => prev.map(() => false));
+      setTimeout(() => {
+        setOpenFaqs((prev) => prev.map((_, i) => i === idx));
+      }, 500);
+    } else {
+      setOpenFaqs((prev) => prev.map((_, i) => i === idx));
+    }
+  };
+
+  const sectionIds = ['ana-sayfa', 'nasil-dusunur', 'kimler-icin', 'nasil-calisir', 'deneyimler', 'demo', 'sss'];
+
+  const scrollToSection = (idx: number) => {
+    if (idx === 0) {
+      setHeroKey((prev) => prev + 1);
+    }
+    const sectionId = sectionIds[idx];
+    const section = document.getElementById(sectionId);
+    if (section) {
+      // Deneyimler (4), Demo (5), SSS (6) use 150px
+      // Others:
+      // - Large Desktop (> 1500px): 250px (Preserves "super" layout)
+      // - Standard Desktop (724px - 1500px): 200px (To avoid shifting down too much)
+      // - Mobile (< 724px): 180px
+      let navbarOffset;
+      if (idx >= 4) {
+        navbarOffset = 150;
+      } else {
+        const width = window.innerWidth;
+        if (width > 1500) {
+          navbarOffset = 250;
+        } else if (width >= 724) {
+          navbarOffset = 200;
+        } else {
+          navbarOffset = 180;
+        }
+      }
+      console.log(`Scrolling to: ${sectionId}, idx: ${idx}, offset: ${navbarOffset}`);
+      const elementPosition = section.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: elementPosition - navbarOffset,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  // Handle scrollTo query parameter from other pages (e.g., /iletisim)
+  useEffect(() => {
+    const scrollTo = searchParams.get('scrollTo');
+    if (scrollTo) {
+      // Longer delay to ensure page is fully loaded and rendered
+      const timeout = setTimeout(() => {
+        // Use requestAnimationFrame to ensure DOM is ready
+        requestAnimationFrame(() => {
+          const sectionIdx = sectionIds.indexOf(scrollTo);
+
+          // For external navigation, scroll directly without triggering heroKey animation reset
+          const section = document.getElementById(scrollTo);
+          if (section) {
+            let navbarOffset;
+            if (sectionIdx >= 4) {
+              navbarOffset = 150;
+            } else {
+              const width = window.innerWidth;
+              if (width > 1500) {
+                navbarOffset = 250;
+              } else if (width >= 724) {
+                navbarOffset = 200;
+              } else {
+                navbarOffset = 180;
+              }
+            }
+            const elementPosition = section.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({
+              top: elementPosition - navbarOffset,
+              behavior: 'smooth'
+            });
+          }
+
+          // Clean up URL after scrolling
+          window.history.replaceState({}, '', '/');
+        });
+      }, 500);
+      return () => clearTimeout(timeout);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -452,8 +662,107 @@ export default function Home() {
       setRevealProgress3(clamped);
     };
 
+    const handleScroll4 = () => {
+      const node = revealRef4.current;
+      if (!node) return;
+      const rect = node.getBoundingClientRect();
+      const viewport = window.innerHeight || 1;
+      const start = viewport * 0.55;
+      const end = viewport * 0.15;
+      const distance = start - end || 1;
+      const raw = (start - rect.top) / distance;
+      const clamped = Math.min(1, Math.max(0, raw));
+      setRevealProgress4(clamped);
+    };
+
     const handleWindowScroll = () => {
       setIsScrolled(window.scrollY > 20);
+
+      // Active section detection
+      const sections = [
+        { id: 'ana-sayfa', index: 0 },
+        { id: 'nasil-dusunur', index: 1 },
+        { id: 'kimler-icin', index: 2 },
+        { id: 'nasil-calisir', index: 3 },
+        { id: 'deneyimler', index: 4 },
+        { id: 'demo', index: 5 },
+        { id: 'sss', index: 6 },
+      ];
+
+      // Use dynamic offset to match scrollToSection logic + small buffer (10px)
+      // Large Desktop (>1500): 250 + 10 = 260
+      // Standard Desktop (>=724): 200 + 10 = 210
+      // Mobile: 200 (approx buffer)
+      let offset = 200;
+      const width = window.innerWidth;
+      if (width > 1500) {
+        offset = 260;
+      } else if (width >= 724) {
+        offset = 210;
+      }
+
+      const scrollPosition = window.scrollY + offset;
+
+      // Check if we're in the footer area (past SSS section).
+      // If we are at the very bottom or the footer is significantly visible, clear selection.
+      const footerSection = document.getElementById('footer-cta');
+      if (footerSection) {
+        const footerRect = footerSection.getBoundingClientRect();
+        const isAtBottom = (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 20;
+        // If footer top is well within viewport (e.g. bottom 20% of screen or hard pixel value)
+        // or we are simply at the bottom of the page.
+        if (isAtBottom || footerRect.top < window.innerHeight - 100) {
+          setActiveSection(-1);
+          return;
+        }
+      }
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i].id);
+        if (section && section.offsetTop <= scrollPosition) {
+          setActiveSection(sections[i].index);
+          break;
+        }
+      }
+    };
+
+    const handleScroll5 = () => {
+      const node = revealRef5.current;
+      if (!node) return;
+      const rect = node.getBoundingClientRect();
+      const viewport = window.innerHeight || 1;
+      const start = viewport * 0.55;
+      const end = viewport * 0.15;
+      const distance = start - end || 1;
+      const raw = (start - rect.top) / distance;
+      const clamped = Math.min(1, Math.max(0, raw));
+      setRevealProgress5(clamped);
+    };
+
+    const handleScroll6 = () => {
+      const node = revealRef6.current;
+      if (!node) return;
+      const rect = node.getBoundingClientRect();
+      const viewport = window.innerHeight || 1;
+      const start = viewport * 0.55;
+      const end = viewport * 0.15;
+      const distance = start - end || 1;
+      const raw = (start - rect.top) / distance;
+      const clamped = Math.min(1, Math.max(0, raw));
+      setRevealProgress6(clamped);
+    };
+
+    const handleScroll7 = () => {
+      const node = revealRef7.current;
+      if (!node) return;
+      const rect = node.getBoundingClientRect();
+      const viewport = window.innerHeight || 1;
+      const start = viewport * 0.55;
+      const end = viewport * 0.15;
+      const distance = start - end || 1;
+      const raw = (start - rect.top) / distance;
+      const clamped = Math.min(1, Math.max(0, raw));
+      setRevealProgress7(clamped);
     };
 
     const handleTimelineScroll = () => {
@@ -466,30 +775,45 @@ export default function Home() {
     handleScroll();
     handleScroll2();
     handleScroll3();
+    handleScroll4();
+    handleScroll5();
+    handleScroll6();
+    handleScroll7();
     handleTimelineScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("scroll", handleScroll2, { passive: true });
     window.addEventListener("scroll", handleScroll3, { passive: true });
+    window.addEventListener("scroll", handleScroll4, { passive: true });
+    window.addEventListener("scroll", handleScroll5, { passive: true });
+    window.addEventListener("scroll", handleScroll6, { passive: true });
+    window.addEventListener("scroll", handleScroll7, { passive: true });
     window.addEventListener("scroll", handleTimelineScroll, { passive: true });
     window.addEventListener("scroll", handleWindowScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("scroll", handleScroll2);
       window.removeEventListener("scroll", handleScroll3);
+      window.removeEventListener("scroll", handleScroll4);
+      window.removeEventListener("scroll", handleScroll5);
+      window.removeEventListener("scroll", handleScroll6);
+      window.removeEventListener("scroll", handleScroll7);
       window.removeEventListener("scroll", handleTimelineScroll);
       window.removeEventListener("scroll", handleWindowScroll);
     };
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#e4f2ff] via-white to-white text-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-[#e8ffe6] via-white to-white text-slate-900">
       <header
         className={`fixed top-5 left-0 right-0 z-[100] mx-auto grid grid-cols-[1fr_auto_1fr] items-center gap-2 min-[500px]:gap-12 px-3 min-[500px]:px-6 md:px-8 transition-all duration-300 w-[95%] max-w-[1440px] ${isScrolled
           ? "bg-white/70 py-3 shadow-lg shadow-black/5 backdrop-blur-md rounded-full"
           : "py-6"
           }`}
       >
-        <div className="relative flex h-12 items-center shrink-0 overflow-visible z-0 justify-self-end min-[724px]:justify-self-start">
+        <div
+          onClick={() => scrollToSection(0)}
+          className="relative flex h-12 items-center shrink-0 overflow-visible z-0 justify-self-end min-[724px]:justify-self-start cursor-pointer"
+        >
           {/* Mobile logo - sabit boyut, sıkıştırılmaz, doğal oran korunur */}
           <img src="/logo-mobile.png" alt="Yosuun" className="min-[724px]:hidden h-[64px]" />
           {/* Desktop logo */}
@@ -499,10 +823,21 @@ export default function Home() {
           {navItems.map((item, idx) => (
             <button
               key={item}
-              onClick={() => idx === 0 && setIsMenuOpen(!isMenuOpen)}
+              onClick={() => {
+                if (idx === 0) {
+                  // Mobile: toggle menu on first item, Desktop: scroll to section
+                  if (window.innerWidth < 1262) {
+                    setIsMenuOpen(!isMenuOpen);
+                  } else {
+                    scrollToSection(idx);
+                  }
+                } else {
+                  scrollToSection(idx);
+                }
+              }}
               className={`rounded-full px-5 py-2 text-sm font-medium transition whitespace-nowrap ${idx === 0
-                ? "bg-white text-slate-900 shadow-sm w-full min-w-[140px] min-[1262px]:min-w-0 min-[1262px]:w-auto relative z-20"
-                : "hidden min-[1262px]:block text-slate-600 hover:bg-white/50 hover:text-slate-900"
+                ? `${activeSection === idx ? "bg-white text-slate-900 shadow-sm" : "text-slate-600"} w-full min-w-[140px] min-[1262px]:min-w-0 min-[1262px]:w-auto relative z-20`
+                : `hidden min-[1262px]:block ${activeSection === idx ? "bg-white text-slate-900 shadow-sm" : "text-slate-600 hover:bg-white/50 hover:text-slate-900"}`
                 }`}
               type="button"
             >
@@ -516,9 +851,13 @@ export default function Home() {
           ))}
           {isMenuOpen && (
             <div className="absolute top-full left-0 right-0 mt-2 flex flex-col gap-1 rounded-[20px] border border-white/20 bg-white/90 p-2 shadow-xl backdrop-blur-md min-[1262px]:hidden z-10">
-              {navItems.slice(1).map((item) => (
+              {navItems.slice(1).map((item, idx) => (
                 <button
                   key={item}
+                  onClick={() => {
+                    scrollToSection(idx + 1);
+                    setIsMenuOpen(false);
+                  }}
                   className="rounded-full px-5 py-3 text-sm font-medium text-slate-600 transition hover:bg-white hover:text-slate-900 hover:shadow-sm text-center whitespace-nowrap"
                   type="button"
                 >
@@ -534,38 +873,60 @@ export default function Home() {
             <ArrowIcon />
           </button>
           {/* Desktop: tam buton */}
-          <button className="hidden min-[724px]:flex items-center gap-2 rounded-full bg-slate-900 pl-5 pr-1.5 py-1.5 text-sm font-semibold text-white shadow-md transition hover:translate-y-[-1px] hover:bg-black whitespace-nowrap">
+          <Link href="/iletisim" className="hidden min-[724px]:flex items-center gap-2 rounded-full bg-black pl-5 pr-1.5 py-1.5 text-sm font-semibold !text-white shadow-md transition hover:translate-y-[-1px] hover:bg-slate-900 whitespace-nowrap">
             Bize Ulaşın
             <span className="grid h-9 w-9 place-items-center rounded-full bg-white text-slate-900">
               <ArrowIcon />
             </span>
-          </button>
+          </Link>
         </div>
       </header>
-      <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col px-6 pb-4 pt-10 md:px-12 lg:px-16">
+      <div id="ana-sayfa" className="mx-auto flex min-h-screen w-full max-w-6xl flex-col px-6 pb-4 pt-10 md:px-12 lg:px-16">
 
         <main className="flex flex-1 flex-col items-center text-center">
-          <div className="flex flex-1 flex-col items-center justify-center gap-6 w-full translate-y-16">
+          <div key={heroKey} className="flex flex-1 flex-col items-center justify-center gap-6 w-full translate-y-16">
             <div className="flex flex-col items-center gap-2">
               <p className="max-w-4xl text-5xl font-semibold leading-tight tracking-tight text-black md:text-6xl lg:text-7xl">
-                Sen hayatını yaşa
+                {"Sen hayatını yaşa".split("").map((char, i) => (
+                  <span
+                    key={i}
+                    className="inline-block animate-slide-in-right opacity-0"
+                    style={{ animationDelay: `${i * 0.015}s` }}
+                  >
+                    {char === " " ? "\u00A0" : char}
+                  </span>
+                ))}
               </p>
               <p className="max-w-4xl text-5xl leading-tight tracking-tight text-slate-800 md:text-6xl lg:text-7xl">
-                <span className="font-serif italic text-black">E-ticaret sessizce çalışsın</span>
+                <span className="font-serif italic text-black">
+                  {"E-ticaret sessizce çalışsın".split("").map((char, i) => (
+                    <span
+                      key={i}
+                      className="inline-block animate-slide-in-right opacity-0"
+                      // Offset delay by first string length (approx 17 chars * 0.015s = ~0.25s)
+                      style={{ animationDelay: `${(17 + i) * 0.015}s` }}
+                    >
+                      {char === " " ? "\u00A0" : char}
+                    </span>
+                  ))}
+                </span>
               </p>
             </div>
 
-            <p className="max-w-3xl text-lg leading-8 text-slate-600 md:text-xl">
+            <p
+              className="max-w-3xl text-lg leading-8 text-slate-600 md:text-xl animate-slide-in-up"
+              style={{ animationDelay: "0.1s" }}
+            >
               Yosuun, e-ticaretteki yükü senden alır. Zamanı okur, doğru aksiyonları kendi başına uygular. Sen hayatını yaşarken, e-ticaret arka planda çalışır.
             </p>
 
             <div className="flex flex-col items-center gap-6 md:flex-row md:gap-10">
-              <button className="group inline-flex w-56 items-center justify-between rounded-full bg-[#78f666] pl-6 pr-2 py-2.5 text-base font-semibold text-white shadow-lg shadow-[#25f707]/30 transition hover:translate-y-[-1px]">
+              <Link href="/iletisim" className="group inline-flex w-56 items-center justify-between rounded-full bg-[#78f666] pl-6 pr-2 py-2.5 text-base font-semibold !text-white shadow-lg shadow-[#25f707]/30 transition hover:translate-y-[-1px]">
                 Yosuun’u Keşfet
                 <span className="grid h-9 w-9 place-items-center rounded-full bg-white text-slate-900">
                   <ArrowIcon />
                 </span>
-              </button>
+              </Link>
 
               <div className="flex flex-col items-center gap-4 md:flex-row md:gap-5">
                 <div className="flex -space-x-3">
@@ -623,58 +984,79 @@ export default function Home() {
         </main>
       </div>
 
-      <section className="mx-auto mt-32 flex w-full max-w-6xl flex-col items-center px-6 md:px-12 lg:px-16">
+      <section id="nasil-dusunur" className="mx-auto mt-32 flex w-full max-w-6xl flex-col items-center px-6 md:px-12 lg:px-16 scroll-mt-[180px] min-[724px]:scroll-mt-[200px] min-[1500px]:scroll-mt-[250px]">
+
+
 
 
         <div className="mt-0 flex w-full flex-col items-center gap-6 text-center">
-          <h2
-            ref={revealRef}
-            className="max-w-full whitespace-pre-line text-4xl font-semibold leading-tight tracking-tight text-slate-800 md:text-5xl"
-          >
-            {allChars.map((item, idx) => {
-              const step = 0.0125;
-              const perChar = Math.min(
-                1,
-                Math.max(0, (revealProgress - idx * step) / 0.05)
-              );
-              const alpha = 0.2 + perChar * 0.8;
-              const baseRgb = item.color || "15, 23, 42";
-              return (
-                <span
-                  key={idx}
-                  className={item.className}
-                  style={{
-                    color: `rgba(${baseRgb}, ${alpha})`,
-                    transition: "color 120ms ease-out",
-                  }}
-                >
-                  {item.char}
-                </span>
-              );
-            })}
-          </h2>
+          <div ref={headingRef} className="w-full">
+            <h2
+              ref={revealRef}
+              className={`max-w-full whitespace-pre-line text-4xl font-semibold leading-tight tracking-tight text-slate-800 md:text-5xl ${isHeadingVisible ? "animate-slide-in-up" : "opacity-0"}`}
+            >
+              {allChars.map((item, idx) => {
+                const totalChars = allChars.length;
+                const step = 0.85 / totalChars; // Dinamik step: tüm karakterler %85 progress'te tamamlanır
+                const perChar = Math.min(
+                  1,
+                  Math.max(0, (revealProgress - idx * step) / 0.05)
+                );
+                const alpha = 0.2 + perChar * 0.8;
+                const baseRgb = item.color || "15, 23, 42";
+                return (
+                  <span
+                    key={idx}
+                    className={item.className}
+                    style={{
+                      color: `rgba(${baseRgb}, ${alpha})`,
+                      transition: "color 120ms ease-out",
+                    }}
+                  >
+                    {item.char}
+                  </span>
+                );
+              })}
+            </h2>
+          </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-6">
-            <span className="flex items-center justify-center gap-2 rounded-full bg-[#78f666] px-10 py-4 text-3xl font-serif italic text-white">
+          <div
+            ref={pillsRef}
+            className="flex flex-wrap items-center justify-center gap-6"
+          >
+            <span
+              className={`flex items-center justify-center gap-2 rounded-full bg-[#78f666] px-10 py-4 text-3xl font-serif italic text-white ${isPillsVisible ? "animate-slide-in-up" : "opacity-0"}`}
+              style={{ animationDelay: "0.4s" }}
+            >
               Akıl
             </span>
-            <span className="flex items-center justify-center gap-2 rounded-full bg-[#78f666] px-10 py-4 text-3xl font-serif italic text-white">
+            <span
+              className={`flex items-center justify-center gap-2 rounded-full bg-[#78f666] px-10 py-4 text-3xl font-serif italic text-white ${isPillsVisible ? "animate-slide-in-up" : "opacity-0"}`}
+              style={{ animationDelay: "0.6s" }}
+            >
               Süreklilik
             </span>
-            <span className="flex items-center justify-center gap-2 rounded-full bg-[#78f666] px-10 py-4 text-3xl font-serif italic text-white">
+            <span
+              className={`flex items-center justify-center gap-2 rounded-full bg-[#78f666] px-10 py-4 text-3xl font-serif italic text-white ${isPillsVisible ? "animate-slide-in-up" : "opacity-0"}`}
+              style={{ animationDelay: "0.8s" }}
+            >
               Uyum
             </span>
           </div>
         </div>
 
-        <div className="mt-20 grid w-full grid-cols-1 gap-12 sm:grid-cols-3 sm:gap-0">
+        <div
+          ref={statsRef}
+          className="mt-20 grid w-full grid-cols-1 gap-12 sm:grid-cols-3 sm:gap-0"
+        >
           {statBlocks.map((stat, idx) => (
             <div
               key={stat.label}
               className={`flex flex-col items-center ${idx !== statBlocks.length - 1
                 ? "sm:border-r sm:border-slate-200"
                 : ""
-                }`}
+                } ${isStatsVisible ? "animate-slide-in-up" : "opacity-0"}`}
+              style={{ animationDelay: `${1.0 + idx * 0.2}s` }}
             >
               <div className="flex items-start justify-center text-[#1a1a1a]">
                 {idx === 0 && (
@@ -690,14 +1072,16 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto mt-56 w-full max-w-6xl px-6 md:px-12 lg:px-16">
-        <div className="flex flex-col items-center gap-3 text-center">
+      <section id="kimler-icin" className="mx-auto mt-56 w-full max-w-6xl px-6 md:px-12 lg:px-16 scroll-mt-[180px] min-[724px]:scroll-mt-[200px] min-[1500px]:scroll-mt-[250px]">
+        <div ref={whoForHeadingRef} className="flex flex-col items-center gap-3 text-center">
           <h2
             ref={revealRef2}
-            className="max-w-full whitespace-pre-line text-4xl font-semibold leading-tight tracking-tight text-slate-800 md:text-5xl"
+            className={`max-w-full whitespace-pre-line text-4xl font-semibold leading-tight tracking-tight text-slate-800 md:text-5xl ${isWhoForHeadingVisible ? "animate-slide-in-up" : "opacity-0"}`}
+            style={{ animationDelay: "0.3s" }}
           >
             {allChars2.map((item, idx) => {
-              const step = 0.025;
+              const totalChars = allChars2.length;
+              const step = 0.85 / totalChars;
               const perChar = Math.min(
                 1,
                 Math.max(0, (revealProgress2 - idx * step) / 0.05)
@@ -720,12 +1104,18 @@ export default function Home() {
           </h2>
         </div>
 
-        <div className="mt-10 flex flex-wrap justify-center gap-4">
-          {services.map((service) => (
+        <div
+          ref={servicesRef}
+          className="mt-10 flex flex-wrap justify-center gap-4"
+        >
+          {services.map((service, idx) => (
             <div
               key={service.title}
-              className="flex h-40 w-40 flex-col justify-between rounded-3xl px-5 py-5"
-              style={{ backgroundColor: service.bg }}
+              className={`flex h-40 w-40 flex-col justify-between rounded-3xl px-5 py-5 ${isServicesVisible ? "animate-slide-in-up" : "opacity-0"}`}
+              style={{
+                backgroundColor: service.bg,
+                animationDelay: `${0.5 + idx * 0.2}s`
+              }}
             >
               {service.image ? (
                 <img src={service.image} alt={service.title} className="h-12 w-12 object-contain" />
@@ -741,39 +1131,47 @@ export default function Home() {
           ))}
         </div>
 
-        <div className="mt-12 mb-12 flex flex-col gap-4 rounded-[26px] bg-black px-6 py-8 text-white shadow-xl shadow-black/25 md:flex-row md:items-center md:justify-between md:gap-6 md:px-10">
+        <div
+          ref={ctaRef}
+          className={`mt-12 mb-12 flex flex-col gap-4 rounded-[26px] bg-black px-6 py-8 text-white shadow-xl shadow-black/25 md:flex-row md:items-center md:justify-between md:gap-6 md:px-10 ${isCtaVisible ? "animate-slide-in-up" : "opacity-0"}`}
+          style={{ animationDelay: "0.5s" }}
+        >
           <div>
             <p className="text-xl font-semibold leading-7">Kim Olursan Ol</p>
             <p className="text-base text-slate-300">Sende Yükünü Devretmek İstiyorsan</p>
           </div>
           <div className="flex flex-col gap-3 md:flex-row md:items-center">
-            <button className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:translate-y-[-1px]">
+            <Link href="/iletisim" className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold !text-black shadow-sm transition hover:translate-y-[-1px]">
               Bize Ulaşın
               <span className="grid h-7 w-7 place-items-center rounded-full bg-slate-900/10 text-slate-900">
                 <ArrowIcon />
               </span>
-            </button>
-            <button className="inline-flex items-center gap-2 rounded-full border border-white/40 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+            </Link>
+            <Link href="/iletisim" className="inline-flex items-center gap-2 rounded-full border border-white/40 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
               Sizi Arayalım
               <span className="grid h-7 w-7 place-items-center rounded-full bg-white/15">
                 <ArrowIcon />
               </span>
-            </button>
+            </Link>
           </div>
         </div>
 
 
       </section>
 
-      <section className="mx-auto mt-56 w-full max-w-6xl px-6 md:px-12 lg:px-16">
-
-        <div className="flex flex-col items-center gap-3 text-center mb-16">
+      <section id="nasil-calisir" className="mx-auto mt-56 w-full max-w-6xl px-6 md:px-12 lg:px-16 scroll-mt-[180px] min-[724px]:scroll-mt-[200px] min-[1500px]:scroll-mt-[250px]">
+        <div
+          ref={howItWorksHeadingRef}
+          className="flex flex-col items-center gap-3 text-center mb-16"
+        >
           <h2
             ref={revealRef3}
-            className="max-w-full whitespace-pre-line text-4xl font-semibold leading-tight tracking-tight text-slate-800 md:text-5xl"
+            className={`max-w-full whitespace-pre-line text-4xl font-semibold leading-tight tracking-tight text-slate-800 md:text-5xl ${isHowItWorksHeadingVisible ? "animate-slide-in-up" : "opacity-0"}`}
+            style={{ animationDelay: "0.3s" }}
           >
-            {allChars2.map((item, idx) => {
-              const step = 0.025;
+            {allChars3.map((item, idx) => {
+              const totalChars = allChars3.length;
+              const step = 0.85 / totalChars;
               const perChar = Math.min(
                 1,
                 Math.max(0, (revealProgress3 - idx * step) / 0.05)
@@ -890,73 +1288,58 @@ export default function Home() {
 
       </section>
 
-      <section className="mx-auto mt-24 w-full max-w-6xl px-6 md:px-12 lg:px-16">
 
-        <div className="text-center">
-          <AnimatedHeading
-            className="text-4xl font-semibold tracking-tight text-slate-900 md:text-5xl whitespace-pre-line text-center"
-            segments={[
-              { text: "Meet the creative minds\n", color: "28,42,60" },
-              { text: "behind ", color: "28,42,60" },
-              { text: "our success", color: "112,129,159", className: "font-serif italic" },
-            ]}
-          />
-        </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-10 sm:grid-cols-2 xl:grid-cols-4">
-          {teamMembers.map((member) => (
-            <div key={member.name} className="flex flex-col items-center text-center">
-              <div className="relative aspect-[4/5] w-full max-w-xs overflow-hidden rounded-[38%] shadow-lg shadow-black/15">
-                <div
-                  className="absolute inset-0"
+      <section id="deneyimler" className="mx-auto mt-[15.5rem] w-full max-w-6xl px-6 md:px-12 lg:px-16 scroll-mt-[150px]">
+        <div
+          ref={testimonialsHeadingRef}
+          className="flex flex-col items-center gap-3 text-center mb-6"
+        >
+          <h2
+            ref={revealRef4}
+            className={`max-w-full whitespace-pre-line text-4xl font-semibold leading-tight tracking-tight text-slate-800 md:text-5xl ${isTestimonialsHeadingVisible ? "animate-slide-in-up" : "opacity-0"}`}
+            style={{ animationDelay: "0.3s" }}
+          >
+            {allChars4.map((item, idx) => {
+              const totalChars = allChars4.length;
+              const step = 0.85 / totalChars;
+              const perChar = Math.min(
+                1,
+                Math.max(0, (revealProgress4 - idx * step) / 0.05)
+              );
+              const alpha = 0.2 + perChar * 0.8;
+              const baseRgb = item.color || "15, 23, 42";
+              return (
+                <span
+                  key={idx}
+                  className={item.className}
                   style={{
-                    background: member.backdrop,
+                    color: `rgba(${baseRgb}, ${alpha})`,
+                    transition: "color 120ms ease-out",
                   }}
-                />
-                <div
-                  className="absolute inset-[10%] rounded-[32%] bg-cover bg-center"
-                  style={{ backgroundImage: `url(${member.photo})` }}
-                  role="img"
-                  aria-label={member.name}
-                />
-              </div>
-              <div className="mt-6 space-y-2">
-                <p className="text-xl font-semibold text-slate-900">{member.name}</p>
-                <p className="text-sm text-slate-600">{member.role}</p>
-              </div>
-              <div className="mt-3 flex items-center gap-3 text-sm text-slate-500">
-                <span className="rounded-full border border-slate-200 px-2.5 py-1">X</span>
-                <span className="rounded-full border border-slate-200 px-2.5 py-1">in</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto mt-24 w-full max-w-6xl px-6 md:px-12 lg:px-16">
-        <div className="text-center">
-          <AnimatedHeading
-            className="text-4xl font-semibold tracking-tight text-slate-900 md:text-5xl whitespace-pre-line text-center"
-            segments={[
-              { text: "What our satisfied customers\n", color: "28,42,60" },
-              { text: "are saying ", color: "28,42,60" },
-              { text: "about us", color: "112,129,159", className: "font-serif italic" },
-            ]}
-          />
+                >
+                  {item.char}
+                </span>
+              );
+            })}
+          </h2>
         </div>
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-3 lg:items-stretch">
-          <div className="lg:col-span-2">
+        <div
+          ref={testimonialsContentRef}
+          className="mt-6 grid gap-6 lg:grid-cols-3 lg:items-stretch"
+        >
+          <div className={`lg:col-span-2 ${isTestimonialsContentVisible ? "animate-slide-in-left" : "opacity-0"}`} style={{ animationDelay: "0.5s" }}>
             <div className="relative overflow-hidden rounded-[28px] bg-slate-900 shadow-xl shadow-black/20">
               <div
-                className="absolute inset-0 bg-cover bg-center"
+                className="absolute inset-0 bg-cover bg-top"
                 style={{ backgroundImage: `url(${testimonial.image})` }}
                 aria-hidden
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/45 to-black/20" />
               <div className="relative flex min-h-[320px] flex-col justify-end gap-3 p-8 text-white md:min-h-[420px] md:p-10">
                 <p className="text-xs font-semibold tracking-[0.2em] text-white/70">
-                  CUSTOMER STORIES
+                  KULLANICI HİKAYESİ
                 </p>
                 <p className="text-xl font-semibold leading-8 md:text-2xl md:leading-9">
                   {testimonial.quote}
@@ -969,11 +1352,11 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex flex-col justify-between rounded-[28px] bg-[#f2df78] px-8 py-10 text-slate-900 shadow-lg shadow-black/10">
-            <p className="text-xs font-semibold tracking-[0.2em] text-slate-700">FACTS & NUMBERS</p>
+          <div className={`flex flex-col justify-between rounded-[28px] bg-[#ccfac5] px-8 py-10 text-slate-900 shadow-lg shadow-black/10 ${isTestimonialsContentVisible ? "animate-slide-in-right" : "opacity-0"}`} style={{ animationDelay: "0.7s" }}>
+            <p className="text-xs font-semibold tracking-[0.2em] text-slate-700">PAW & MORE</p>
             <div className="mt-10 flex flex-col gap-3">
               <p className="text-5xl font-semibold leading-none">{testimonial.stat}</p>
-              <p className="text-lg font-semibold leading-7 text-slate-800">
+              <p className="text-base font-semibold leading-6 text-slate-800">
                 {testimonial.statLabel}
               </p>
             </div>
@@ -981,103 +1364,190 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto mt-24 w-full max-w-6xl px-6 md:px-12 lg:px-16">
-        <div className="text-center">
-          <p className="text-4xl font-semibold leading-tight tracking-tight text-slate-900 md:text-5xl">
-            Pick the plan that fits your <span className="font-serif italic text-slate-400">start-up</span>
-          </p>
+      <section id="demo" className="mx-auto mt-[15.5rem] w-full max-w-6xl px-6 md:px-12 lg:px-16 scroll-mt-[150px]">
+        <div ref={demoHeadingRef} className="text-center">
+          <h2
+            ref={revealRef5}
+            className={`max-w-full whitespace-pre-line text-4xl font-semibold leading-tight tracking-tight text-slate-800 md:text-5xl ${isDemoHeadingVisible ? "animate-slide-in-up" : "opacity-0"}`}
+            style={{ animationDelay: "0.3s" }}
+          >
+            {allChars5.map((item, idx) => {
+              const totalChars = allChars5.length;
+              const step = 0.85 / totalChars;
+              const perChar = Math.min(
+                1,
+                Math.max(0, (revealProgress5 - idx * step) / 0.05)
+              );
+              const alpha = 0.2 + perChar * 0.8;
+              const baseRgb = item.color || "15, 23, 42";
+              return (
+                <span
+                  key={idx}
+                  className={item.className}
+                  style={{
+                    color: `rgba(${baseRgb}, ${alpha})`,
+                    transition: "color 120ms ease-out",
+                  }}
+                >
+                  {item.char}
+                </span>
+              );
+            })}
+          </h2>
         </div>
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-2">
-          {pricingPlans.map((plan) => (
-            <div
-              key={plan.name}
-              className="flex flex-col justify-between rounded-[26px] p-8 shadow-lg shadow-black/15 lg:p-10"
-              style={{ backgroundColor: plan.bg, color: plan.text }}
-            >
-              <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-10">
-                <div className="flex-1 space-y-4">
-                  <span
-                    className="inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold"
-                    style={{ backgroundColor: plan.pillBg, color: plan.pillText }}
-                  >
-                    {plan.name}
-                  </span>
-                  <p className="text-sm leading-6 opacity-90">{plan.description}</p>
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-4xl font-semibold tracking-tight">{plan.price}</span>
-                    <span className="text-base font-semibold opacity-90">/{plan.cadence}</span>
-                  </div>
-                </div>
+        <div
+          ref={featureCardsRef}
+          className="mt-14 grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
+        >
+          {[...pricingPlans, ...pricingPlans].map((plan, idx) => {
+            const cardNames = ["Mağaza", "Stok", "Rakip", "Otomasyon"];
+            const cardFeatures = [
+              ["Mağaza Entegrasyonu", "Sanal Mağaza Paneli", "Detaylı Ürün Düzenleme", "Toplu Ürün Yükleme", "Sipariş Takibi"],
+              ["Anlık Stok Takibi", "Tekli & Toplu Stok Güncelleme", "Detaylı Stok Seviye Belirlemesi", "Stok Alt Limit Uyarıları", "Anında Stok Değişikliği"],
+              ["Rakip Mağaza Ekleme", "Rakip Sanal Mağaza Oluşturma", "Detaylı Rakip Ürün Takibi", "Detaylı Rakip Fiyat Takibi", "Rakip Değişikliklerini Sürekli İzleme"],
+              ["Tüm İşlemleri Yosuun'a Devretme", "Takvim Bazlı İş Planlama", "Geleceğe Yönelik Aksiyon Alma", "Geçmişteki İşlemleri Görüntüleme"],
+            ];
 
-                <div className="flex-1 space-y-3">
-                  <p className="text-sm font-semibold opacity-90">Features</p>
-                  <div className="space-y-3 text-sm">
-                    {plan.features.map((feature) => (
-                      <div key={feature} className="flex items-center gap-3">
-                        <CheckIcon />
-                        <span>{feature}</span>
-                      </div>
-                    ))}
+            let animClass = "";
+            let animDelay = "0s";
+
+            if (idx === 1) { // Stok
+              animClass = "animate-slide-in-left";
+              animDelay = "0s";
+            } else if (idx === 2) { // Rakip
+              animClass = "animate-slide-in-right";
+              animDelay = "0.2s";
+            } else if (idx === 0) { // Mağaza
+              animClass = "animate-slide-in-left";
+              animDelay = "0.4s";
+            } else if (idx === 3) { // Otomasyon
+              animClass = "animate-slide-in-right";
+              animDelay = "0.6s";
+            }
+
+            return (
+              <div
+                key={`${plan.name}-${idx}`}
+                className={`flex flex-col rounded-[20px] px-6 pt-7 pb-10 shadow-lg shadow-black/15 ${isFeatureCardsVisible ? animClass : "opacity-0"}`}
+                style={{ backgroundColor: plan.bg, color: plan.text, animationDelay: animDelay }}
+              >
+                <div className="space-y-6">
+                  <span
+                    className="inline-flex items-center rounded-full px-3 py-1.5 text-sm font-semibold -mt-6"
+                    style={{
+                      backgroundColor: (idx === 1 || idx === 3) ? "#ffffff" : plan.pillBg,
+                      color: (idx === 1 || idx === 3) ? "#000000" : (idx === 0 || idx === 2) ? "#ffffff" : plan.pillText
+                    }}
+                  >
+                    {cardNames[idx]}
+                  </span>
+                  <div className="space-y-2">
+                    <div className="space-y-2 text-sm">
+                      {cardFeatures[idx].map((feature) => (
+                        <div key={feature} className="flex items-center gap-2">
+                          <svg
+                            aria-hidden
+                            viewBox="0 0 24 24"
+                            className={`h-4 w-4 ${(idx === 1 || idx === 3) ? "text-white" : "text-slate-900"}`}
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2.2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path d="m5 13 4 4 10-10" />
+                          </svg>
+                          <span>{feature}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
+            );
+          })}
+        </div>
 
-              <div className="mt-8">
-                <button
-                  className={`inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold shadow-sm transition hover:translate-y-[-1px] ${plan.buttonInverted
-                    ? "bg-white text-slate-900"
-                    : "border border-current bg-white/0 text-current"
-                    }`}
-                  style={
-                    plan.buttonInverted
-                      ? { color: plan.ctaText }
-                      : { backgroundColor: plan.ctaBg, color: plan.ctaText }
-                  }
-                >
-                  Let&apos;s Collaborate
-                  <span
-                    className="grid h-7 w-7 place-items-center rounded-full bg-black/10"
-                    style={{ backgroundColor: plan.buttonInverted ? "#e6e6e6" : "#e6d660" }}
-                  >
-                    <ArrowIcon />
-                  </span>
-                </button>
-              </div>
-            </div>
-          ))}
+        {/* CTA Element */}
+        <div
+          ref={demoCtaRef}
+          className={`mt-12 mb-12 flex flex-col gap-4 rounded-[26px] bg-black px-6 py-8 text-white shadow-xl shadow-black/25 md:flex-row md:items-center md:justify-between md:gap-6 md:px-10 ${isDemoCtaVisible ? "animate-slide-in-up" : "opacity-0"}`}
+          style={{ animationDelay: "0.5s" }}
+        >
+          <div>
+            <p className="text-xl font-semibold leading-7">Demo Talep Et</p>
+            <p className="text-base text-slate-300">Bu kadar detayı tek tek yönetmek zorunda değilsin.</p>
+          </div>
+          <div className="flex flex-col gap-3 md:flex-row md:items-center">
+            <Link href="/iletisim" className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold !text-black shadow-sm transition hover:translate-y-[-1px]">
+              Bize Ulaşın
+              <span className="grid h-7 w-7 place-items-center rounded-full bg-slate-900/10 text-slate-900">
+                <ArrowIcon />
+              </span>
+            </Link>
+            <Link href="/iletisim" className="inline-flex items-center gap-2 rounded-full border border-white/40 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+              Sizi Arayalım
+              <span className="grid h-7 w-7 place-items-center rounded-full bg-white/15">
+                <ArrowIcon />
+              </span>
+            </Link>
+          </div>
         </div>
       </section>
 
-      <section className="mx-auto mt-24 w-full max-w-6xl px-0 md:px-6">
-        <div className="rounded-[32px] bg-[linear-gradient(180deg,#fff7ed_0%,#f8ebdf_100%)] px-4 py-12 shadow-sm md:px-10 lg:px-14">
-          <div className="text-center">
-            <AnimatedHeading
-              className="text-4xl font-semibold tracking-tight text-[#1c2a3c] md:text-5xl whitespace-pre-line text-center"
-              segments={[
-                { text: "Got questions?\n", color: "28,42,60" },
-                { text: "We've got ", color: "28,42,60" },
-                { text: "answers", color: "112,129,159", className: "font-serif italic" },
-              ]}
-            />
+      <section id="sss" className="mx-auto mt-48 mb-48 w-full max-w-4xl px-0 md:px-6 scroll-mt-[150px]">
+        <div>
+          <div
+            ref={faqHeadingRef}
+            className="text-center"
+          >
+            <h2
+              ref={revealRef6}
+              className={`max-w-full whitespace-pre-line text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight text-slate-800 ${isFaqHeadingVisible ? "animate-slide-in-up" : "opacity-0"}`}
+              style={{ animationDelay: "0.3s" }}
+            >
+              {allChars6.map((item, idx) => {
+                const totalChars = allChars6.length;
+                const step = 0.85 / totalChars;
+                const perChar = Math.min(
+                  1,
+                  Math.max(0, (revealProgress6 - idx * step) / 0.05)
+                );
+                const alpha = 0.2 + perChar * 0.8;
+                const baseRgb = item.color || "28, 42, 60";
+                return (
+                  <span
+                    key={idx}
+                    className={item.className}
+                    style={{
+                      color: `rgba(${baseRgb}, ${alpha})`,
+                      transition: "color 120ms ease-out",
+                    }}
+                  >
+                    {item.char}
+                  </span>
+                );
+              })}
+            </h2>
           </div>
 
-          <div className="mt-10 space-y-4">
+          <div
+            ref={faqItemsRef}
+            className="mt-10 space-y-4"
+          >
             {faqs.map((item, idx) => {
               const isOpen = openFaqs[idx];
               return (
                 <div
-                  key={item.question}
-                  className="overflow-hidden rounded-[18px] border border-[#e6dfd5] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
+                  key={idx}
+                  className={`overflow-hidden rounded-[18px] border border-[#e6dfd5] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.05)] ${isFaqItemsVisible ? "animate-slide-in-up" : "opacity-0"}`}
+                  style={{ animationDelay: `${idx * 0.15}s` }}
                 >
                   <button
                     type="button"
                     className="flex w-full items-center justify-between px-6 py-5 text-left text-lg font-semibold text-[#1c2a3c]"
-                    onClick={() =>
-                      setOpenFaqs((prev) =>
-                        prev.map((open, i) => (i === idx ? !open : open))
-                      )
-                    }
+                    onClick={() => handleFaqToggle(idx)}
                   >
                     <span>{item.question}</span>
                     <span className={`transition ${isOpen ? "rotate-180" : ""}`}>
@@ -1085,14 +1555,15 @@ export default function Home() {
                     </span>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-250 ease-out ${isOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+                    className={`grid overflow-hidden transition-all duration-500 ease-in-out ${isOpen
+                      ? "grid-rows-[1fr] opacity-100"
+                      : "grid-rows-[0fr] opacity-0"
                       }`}
                   >
-                    <div
-                      className={`px-6 text-base leading-6 text-[#465568] ${isOpen ? "pb-6" : "pb-0"
-                        }`}
-                    >
-                      {item.answer}
+                    <div className="overflow-hidden">
+                      <div className="px-6 pb-6 text-base leading-6 text-[#465568]">
+                        {item.answer}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1102,39 +1573,58 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto mt-24 w-full max-w-6xl px-6 md:px-12 lg:px-16">
-        <div className="overflow-hidden rounded-[32px] bg-gradient-to-r from-[#e5f4ff] via-white to-white px-6 py-16 text-center shadow-[0_16px_40px_rgba(0,0,0,0.08)] md:px-14 lg:px-20">
-          <h3 className="text-4xl font-semibold leading-tight tracking-tight text-slate-900 md:text-5xl">
-            Innovative Solutions for{" "}
-            <span className="font-serif italic text-slate-500">bold brands</span>
-          </h3>
+      <section id="footer-cta" className="mx-auto mt-48 w-full max-w-6xl px-6 md:px-12 lg:px-16">
+        <div className="overflow-hidden rounded-[32px] bg-gradient-to-r from-[#ccfac5] via-white to-white px-6 py-16 text-center shadow-[0_16px_40px_rgba(0,0,0,0.08)] md:px-14 lg:px-20">
+
+          <h2
+            ref={revealRef7}
+            className="max-w-full whitespace-pre-line text-2xl font-semibold leading-tight tracking-tight text-slate-800 md:text-4xl"
+          >
+            {allChars7.map((item, idx) => {
+              const alpha = 1;
+              const baseRgb = item.color || "15, 23, 42";
+              return (
+                <span
+                  key={idx}
+                  className={item.className}
+                  style={{
+                    color: `rgba(${baseRgb}, ${alpha})`,
+                    transition: "color 120ms ease-out",
+                  }}
+                >
+                  {item.char}
+                </span>
+              );
+            })}
+          </h2>
+
           <p className="mt-4 text-base leading-7 text-slate-600 md:text-lg">
-            Looking to elevate your brand? We craft immersive experiences that captivate, engage, and
-            make your business unforgettable in every interaction.
+            Yosuun, mağaza, stok, rakip ve planlama yükünü devralır. <br />Sen sadece kontrolü elinde tutarsın.
           </p>
           <div className="mt-8 flex justify-center">
-            <button className="inline-flex items-center gap-3 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-black/20 transition hover:translate-y-[-1px]">
-              Let&apos;s craft together
-              <span className="grid h-8 w-8 place-items-center rounded-full bg-white/15">
+            <Link href="/iletisim" className="inline-flex items-center gap-2 rounded-full bg-black pl-5 pr-1.5 py-1.5 text-sm font-semibold !text-white shadow-md transition hover:translate-y-[-1px] hover:bg-slate-900 whitespace-nowrap">
+              Bize Ulaşın
+              <span className="grid h-9 w-9 place-items-center rounded-full bg-white text-slate-900">
                 <ArrowIcon />
               </span>
-            </button>
+            </Link>
           </div>
+
         </div>
       </section>
 
       <footer className="mx-auto mt-20 w-full max-w-6xl px-6 pb-16 md:px-12 lg:px-16">
         <div className="grid gap-10 border-t border-slate-200/70 pt-10 md:grid-cols-4 md:gap-6">
           <div className="space-y-4 md:col-span-1">
-            <div className="flex items-center gap-3">
-              <div className="grid h-12 w-12 place-items-center rounded-2xl border border-slate-900/10 bg-white shadow-sm">
-                <HexIcon />
-              </div>
-              <span className="text-lg font-semibold tracking-tight text-slate-900">Awake</span>
+            <div
+              onClick={() => scrollToSection(0)}
+              className="flex items-center -mt-16 -mb-10 cursor-pointer"
+            >
+              <img src="/yosuun-new-logo.png" alt="Yosuun" className="h-40 w-auto" />
             </div>
             <p className="text-sm leading-6 text-slate-600">
-              Empowering businesses with innovative solutions. Let&apos;s create something amazing
-              together.
+              Sen hayatını yaşa, e-ticaret kendi kendine ilerlesin. Yosuun arkada düşünür ve senin
+              adına hareket eder.
             </p>
             <div className="flex items-center gap-4 text-slate-700">
               <span className="text-sm font-semibold">X</span>
@@ -1143,31 +1633,14 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="space-y-3">
-            <p className="text-sm font-semibold text-slate-900">Sitemap</p>
-            <div className="space-y-2 text-sm text-slate-600">
-              <a href="#">About us</a>
-              <a href="#">Work</a>
-              <a href="#">Services</a>
-              <a href="#">Pricing</a>
-            </div>
-          </div>
 
-          <div className="space-y-3">
-            <p className="text-sm font-semibold text-slate-900">Other Pages</p>
-            <div className="space-y-2 text-sm text-slate-600">
-              <a href="#">Contact Us</a>
-              <a href="#">Error 404</a>
-            </div>
-          </div>
 
-          <div className="space-y-3">
-            <p className="text-sm font-semibold text-slate-900">Contact Details</p>
+          <div className="space-y-3 md:col-start-4">
+            <p className="text-sm font-semibold text-slate-900">İletişim Bilgileri</p>
             <div className="space-y-2 text-sm text-slate-600">
-              <p>81 Rivington Street London</p>
-              <p>EC2A 3AY</p>
-              <p>hello@awake.agency</p>
-              <p>0105 192 3556</p>
+              <p>Ostim Teknik Üniversitesi Cezeri Teknoloji ve Araştırma Merkezi</p>
+              <p>Ostim/Ankara</p>
+              <p>info@yosuun.com - (539) 319 22 60</p>
             </div>
           </div>
         </div>
