@@ -1,11 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Footer from "@/components/Footer";
-
-export const dynamic = 'force-dynamic';
 
 const navItems = [
   "Ana Sayfa",
@@ -378,7 +376,7 @@ function useInView(options?: IntersectionObserverInit) {
   return { ref, isInView };
 }
 
-export default function Home() {
+function HomeContent() {
   const searchParams = useSearchParams();
   const marqueeItems = useMemo(() => [...logoStrip, ...logoStrip], []);
   const textSegments = [
@@ -1761,5 +1759,13 @@ export default function Home() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div className="min-h-[100dvh] bg-gradient-to-br from-[#e8ffe6] via-white to-white" />}>
+      <HomeContent />
+    </Suspense>
   );
 }
