@@ -4,6 +4,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Footer from "@/components/Footer";
+
+export const dynamic = 'force-dynamic';
+
 const navItems = [
   "Ana Sayfa",
   "Nasıl Düşünür",
