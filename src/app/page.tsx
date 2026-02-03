@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import Footer from "@/components/Footer";
 const navItems = [
   "Ana Sayfa",
   "Nasıl Düşünür",
@@ -14,11 +15,11 @@ const navItems = [
 ];
 
 const avatarPalette = [
-  { name: "Sofia", from: "#d6b6ff", to: "#3f2bff" },
-  { name: "Mateo", from: "#c6f6d5", to: "#2ec4b6" },
-  { name: "Amir", from: "#fdd6a7", to: "#f47c2c", image: "/sidrex.jpg" },
-  { name: "Jade", from: "#b4e1fa", to: "#4d7cfe", image: "/fosil.jpg" },
-  { name: "Noah", from: "#ffc2d0", to: "#ff6b81", image: "/swiftypartner_logo.jpeg" },
+  { name: "Sofia", from: "#d6b6ff", to: "#3f2bff", image: "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/21.jpg" },
+  { name: "Mateo", from: "#c6f6d5", to: "#2ec4b6", image: "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/22.jpg" },
+  { name: "Amir", from: "#fdd6a7", to: "#f47c2c", image: "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/23.jpg" },
+  { name: "Jade", from: "#b4e1fa", to: "#4d7cfe", image: "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/24.jpg" },
+  { name: "Noah", from: "#ffc2d0", to: "#ff6b81", image: "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/pp1.jpeg" },
 ];
 
 const logoStrip = [
@@ -32,14 +33,14 @@ const logoStrip = [
 const statBlocks = [
   { label: "Manuel Müdahale", value: "0" },
   { label: "Otomatik Takip", value: <>24<span className="text-4xl">/</span>7</> },
-  { label: "Kendi Kendine Karar", value: <span className="inline-block translate-y-[36px] text-[2em] leading-[0]">∞</span> },
+  { label: "Kendi Kendine Karar", value: <span className="inline-block infinity-translate text-[2em] leading-[0]">∞</span> },
 ];
 
 const services = [
-  { title: "Ajans", icon: "", bg: "#ccfac5", text: "#5b3db4", image: "/Ajans.png" },
-  { title: "Girişimci", icon: "", bg: "#ccfac5", text: "#c45d6d", image: "/girisimci.png" },
-  { title: "Satıcı", icon: "", bg: "#ccfac5", text: "#2a74c7", image: "/satici.png" },
-  { title: "Markalar", icon: "", bg: "#ccfac5", text: "#5b3db4", image: "/marka.png" },
+  { title: "Ajans", icon: "", bg: "#ccfac5", text: "#5b3db4", image: "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/Ajans.png" },
+  { title: "Girişimci", icon: "", bg: "#ccfac5", text: "#c45d6d", image: "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/girisimci.png" },
+  { title: "Satıcı", icon: "", bg: "#ccfac5", text: "#2a74c7", image: "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/satici.png" },
+  { title: "Markalar", icon: "", bg: "#ccfac5", text: "#5b3db4", image: "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/marka.png" },
 ];
 
 const caseStudies = [
@@ -104,21 +105,21 @@ const teamMembers = [
   {
     name: "Arda Güner",
     role: "Wordpress Developer",
-    photo: "/Arda.jpeg",
+    photo: "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/Arda.jpeg",
     backdrop:
       "radial-gradient(circle at 20% 30%, #3d32ff 0 30%, transparent 30%), radial-gradient(circle at 80% 35%, #2a22ff 0 30%, transparent 30%), radial-gradient(circle at 50% 80%, #4f46ff 0 36%, transparent 36%), #2f23ff",
   },
   {
     name: "Muhammet Mustafa Dincer",
     role: "Social Media Specialist",
-    photo: "/Muhammet.jpeg",
+    photo: "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/Muhammet.jpeg",
     backdrop:
       "radial-gradient(circle at 30% 25%, #f0f0f0 0 32%, transparent 32%), radial-gradient(circle at 70% 65%, #d8d8d8 0 28%, transparent 28%), #bfbfbf",
   },
   {
     name: "Yağız Efe Alaybay",
     role: "Product Designer",
-    photo: "/Yagiz.jpeg",
+    photo: "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/Yagiz.jpeg",
     backdrop:
       "radial-gradient(circle at 40% 30%, #f7f1c7 0 34%, transparent 34%), radial-gradient(circle at 70% 60%, #ffeaa0 0 30%, transparent 30%), #f5d96b",
   },
@@ -129,7 +130,7 @@ const testimonial = {
     "Kontrol hâlâ bende ama yük artık değil. Birden fazla markayı yönetirken e-ticaret arka planda kendi kendine ilerliyor ve ben asıl işime odaklanıyorum.",
   author: "Serhat ATİK",
   title: "Swifty E-Ticaret Marka Yönetim Ajansı | E-Ticaret Eğitmeni",
-  image: "/customer-story.jpg",
+  image: "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/customer-story.jpg",
   stat: "%147",
   statLabel: "Artık e-ticarette neyi ne zaman yapacağımızı düşünmüyoruz.",
 };
@@ -444,11 +445,11 @@ export default function Home() {
   );
 
   const textSegments5 = [
-    { text: "Bu sistemi " },
-    { text: "anlatmak", className: "font-serif italic", color: "120, 246, 102" },
-    { text: " yerine,\n" },
+    { text: "Yosuun'u " },
+    { text: "yakından", className: "font-serif italic", color: "120, 246, 102" },
+    { text: " görmek için\n" },
     { text: "demo", className: "font-serif italic", color: "120, 246, 102" },
-    { text: " ile gösteriyoruz." },
+    { text: " talep et" },
   ];
 
   const allChars5 = useMemo(
@@ -510,8 +511,8 @@ export default function Home() {
   const [openFaqs, setOpenFaqs] = useState<boolean[]>(faqs.map(() => false));
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
   const [activeSection, setActiveSection] = useState(0);
-  const [heroKey, setHeroKey] = useState(0);
   const { ref: headingRef, isInView: isHeadingVisible } = useInView({ threshold: 0.1 });
   const { ref: pillsRef, isInView: isPillsVisible } = useInView({ threshold: 0.1 });
   const { ref: statsRef, isInView: isStatsVisible } = useInView({ threshold: 0.1 });
@@ -548,34 +549,32 @@ export default function Home() {
   const sectionIds = ['ana-sayfa', 'nasil-dusunur', 'kimler-icin', 'nasil-calisir', 'deneyimler', 'demo', 'sss'];
 
   const scrollToSection = (idx: number) => {
-    if (idx === 0) {
-      setHeroKey((prev) => prev + 1);
-    }
+    // Ana sayfaya tıklanınca sadece scroll yap, animasyonu yeniden tetikleme
     const sectionId = sectionIds[idx];
     const section = document.getElementById(sectionId);
     if (section) {
-      // Deneyimler (4), Demo (5), SSS (6) use 150px
-      // Others:
-      // - Large Desktop (> 1500px): 250px (Preserves "super" layout)
-      // - Standard Desktop (724px - 1500px): 200px (To avoid shifting down too much)
-      // - Mobile (< 724px): 180px
-      let navbarOffset;
-      if (idx >= 4) {
-        navbarOffset = 150;
-      } else {
-        const width = window.innerWidth;
-        if (width > 1500) {
-          navbarOffset = 250;
-        } else if (width >= 724) {
-          navbarOffset = 200;
-        } else {
-          navbarOffset = 180;
-        }
-      }
-      console.log(`Scrolling to: ${sectionId}, idx: ${idx}, offset: ${navbarOffset}`);
+      const viewportHeight = window.innerHeight;
+      const sectionRect = section.getBoundingClientRect();
+      const sectionHeight = sectionRect.height;
       const elementPosition = section.getBoundingClientRect().top + window.scrollY;
+
+      // Navbar yüksekliği için offset
+      const navbarHeight = 180;
+
+      // Eğer bölüm viewport'tan kısa ise: ortalayarak göster
+      // Eğer bölüm viewport'tan uzun ise: başlığı navbar altında göster
+      let scrollPosition;
+      if (sectionHeight <= viewportHeight * 0.7) {
+        // Kısa bölümler: ortala
+        const centerOffset = (viewportHeight - sectionHeight) / 2;
+        scrollPosition = elementPosition - centerOffset;
+      } else {
+        // Uzun bölümler: başlığı navbar altında göster
+        scrollPosition = elementPosition - navbarHeight;
+      }
+
       window.scrollTo({
-        top: elementPosition - navbarOffset,
+        top: scrollPosition,
         behavior: 'smooth'
       });
     }
@@ -594,22 +593,23 @@ export default function Home() {
           // For external navigation, scroll directly without triggering heroKey animation reset
           const section = document.getElementById(scrollTo);
           if (section) {
-            let navbarOffset;
-            if (sectionIdx >= 4) {
-              navbarOffset = 150;
-            } else {
-              const width = window.innerWidth;
-              if (width > 1500) {
-                navbarOffset = 250;
-              } else if (width >= 724) {
-                navbarOffset = 200;
-              } else {
-                navbarOffset = 180;
-              }
-            }
+            const viewportHeight = window.innerHeight;
+            const sectionRect = section.getBoundingClientRect();
+            const sectionHeight = sectionRect.height;
             const elementPosition = section.getBoundingClientRect().top + window.scrollY;
+
+            const navbarHeight = 180;
+
+            let scrollPosition;
+            if (sectionHeight <= viewportHeight * 0.7) {
+              const centerOffset = (viewportHeight - sectionHeight) / 2;
+              scrollPosition = elementPosition - centerOffset;
+            } else {
+              scrollPosition = elementPosition - navbarHeight;
+            }
+
             window.scrollTo({
-              top: elementPosition - navbarOffset,
+              top: scrollPosition,
               behavior: 'smooth'
             });
           }
@@ -677,53 +677,6 @@ export default function Home() {
 
     const handleWindowScroll = () => {
       setIsScrolled(window.scrollY > 20);
-
-      // Active section detection
-      const sections = [
-        { id: 'ana-sayfa', index: 0 },
-        { id: 'nasil-dusunur', index: 1 },
-        { id: 'kimler-icin', index: 2 },
-        { id: 'nasil-calisir', index: 3 },
-        { id: 'deneyimler', index: 4 },
-        { id: 'demo', index: 5 },
-        { id: 'sss', index: 6 },
-      ];
-
-      // Use dynamic offset to match scrollToSection logic + small buffer (10px)
-      // Large Desktop (>1500): 250 + 10 = 260
-      // Standard Desktop (>=724): 200 + 10 = 210
-      // Mobile: 200 (approx buffer)
-      let offset = 200;
-      const width = window.innerWidth;
-      if (width > 1500) {
-        offset = 260;
-      } else if (width >= 724) {
-        offset = 210;
-      }
-
-      const scrollPosition = window.scrollY + offset;
-
-      // Check if we're in the footer area (past SSS section).
-      // If we are at the very bottom or the footer is significantly visible, clear selection.
-      const footerSection = document.getElementById('footer-cta');
-      if (footerSection) {
-        const footerRect = footerSection.getBoundingClientRect();
-        const isAtBottom = (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 20;
-        // If footer top is well within viewport (e.g. bottom 20% of screen or hard pixel value)
-        // or we are simply at the bottom of the page.
-        if (isAtBottom || footerRect.top < window.innerHeight - 100) {
-          setActiveSection(-1);
-          return;
-        }
-      }
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i].id);
-        if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection(sections[i].index);
-          break;
-        }
-      }
     };
 
     const handleScroll5 = () => {
@@ -802,8 +755,84 @@ export default function Home() {
     };
   }, []);
 
+  // IntersectionObserver for active section detection
+  useEffect(() => {
+    const sectionData = [
+      { id: 'ana-sayfa', index: 0 },
+      { id: 'nasil-dusunur', index: 1 },
+      { id: 'kimler-icin', index: 2 },
+      { id: 'nasil-calisir', index: 3 },
+      { id: 'deneyimler', index: 4 },
+      { id: 'demo', index: 5 },
+      { id: 'sss', index: 6 },
+    ];
+
+    const visibilityMap = new Map<string, number>();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // Calculate how much of the section is visible in viewport
+          visibilityMap.set(entry.target.id, entry.intersectionRatio);
+        });
+
+        // Find the section with highest visibility
+        let maxVisibility = 0;
+        let mostVisibleSection = -1;
+
+        sectionData.forEach(({ id, index }) => {
+          const visibility = visibilityMap.get(id) || 0;
+          if (visibility > maxVisibility) {
+            maxVisibility = visibility;
+            mostVisibleSection = index;
+          }
+        });
+
+        // Only update if we have a visible section
+        if (maxVisibility > 0) {
+          setActiveSection(mostVisibleSection);
+        }
+      },
+      {
+        // Multiple thresholds for granular visibility tracking
+        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+        // Adjust root margin to account for fixed header
+        rootMargin: '-100px 0px -100px 0px',
+      }
+    );
+
+    // Observe all sections
+    sectionData.forEach(({ id }) => {
+      const element = document.getElementById(id);
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#e8ffe6] via-white to-white text-slate-900">
+    <div className="min-h-[100dvh] bg-gradient-to-br from-[#e8ffe6] via-white to-white text-slate-900 overflow-x-hidden">
       <header
         className={`fixed top-5 left-0 right-0 z-[100] mx-auto grid grid-cols-[1fr_auto_1fr] items-center gap-2 min-[500px]:gap-12 px-3 min-[500px]:px-6 md:px-8 transition-all duration-300 w-[95%] max-w-[1440px] ${isScrolled
           ? "bg-white/70 py-3 shadow-lg shadow-black/5 backdrop-blur-md rounded-full"
@@ -812,66 +841,121 @@ export default function Home() {
       >
         <div
           onClick={() => scrollToSection(0)}
-          className="relative flex h-12 items-center shrink-0 overflow-visible z-0 justify-self-end min-[724px]:justify-self-start cursor-pointer"
+          className="relative flex h-12 items-center shrink-0 overflow-visible z-0 justify-self-start cursor-pointer"
         >
           {/* Mobile logo - sabit boyut, sıkıştırılmaz, doğal oran korunur */}
-          <img src="/logo-mobile.png" alt="Yosuun" className="min-[724px]:hidden h-[64px]" />
+          <img src="https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/logo-mobile.png" alt="Yosuun" className="min-[724px]:hidden h-[64px]" />
           {/* Desktop logo */}
-          <img src="/yosuun-new-logo.png" alt="Yosuun" className="hidden min-[724px]:block h-[200px] w-auto" />
+          <img src="https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/yosuun-new-logo.png" alt="Yosuun" className="hidden min-[724px]:block h-[200px] w-auto max-w-[240px] min-[1400px]:max-w-none" />
         </div>
-        <nav className="flex items-center gap-1 rounded-full border border-white/20 bg-white/50 p-1.5 backdrop-blur z-10 justify-self-center">
-          {navItems.map((item, idx) => (
-            <button
-              key={item}
-              onClick={() => {
-                if (idx === 0) {
-                  // Mobile: toggle menu on first item, Desktop: scroll to section
-                  if (window.innerWidth < 1262) {
-                    setIsMenuOpen(!isMenuOpen);
-                  } else {
-                    scrollToSection(idx);
-                  }
-                } else {
-                  scrollToSection(idx);
-                }
-              }}
-              className={`rounded-full px-5 py-2 text-sm font-medium transition whitespace-nowrap ${idx === 0
-                ? `${activeSection === idx ? "bg-white text-slate-900 shadow-sm" : "text-slate-600"} w-full min-w-[140px] min-[1262px]:min-w-0 min-[1262px]:w-auto relative z-20`
-                : `hidden min-[1262px]:block ${activeSection === idx ? "bg-white text-slate-900 shadow-sm" : "text-slate-600 hover:bg-white/50 hover:text-slate-900"}`
-                }`}
-              type="button"
-            >
-              {item}
-              {idx === 0 && (
-                <span className="min-[1262px]:hidden absolute right-4 top-1/2 -translate-y-1/2">
-                  <ChevronDownIcon />
-                </span>
-              )}
-            </button>
-          ))}
-          {isMenuOpen && (
-            <div className="absolute top-full left-0 right-0 mt-2 flex flex-col gap-1 rounded-[20px] border border-white/20 bg-white/90 p-2 shadow-xl backdrop-blur-md min-[1262px]:hidden z-10">
-              {navItems.slice(1).map((item, idx) => (
+        <nav className="relative flex items-center rounded-full border border-white/20 bg-white/50 p-1.5 backdrop-blur z-10 justify-self-center">
+          {/* Desktop Navigation - 1400px ve üstü: tüm butonlar görünür */}
+          <div className="hidden min-[1400px]:flex items-center gap-1">
+            {navItems.map((item, idx) => {
+              const current = activeSection === -1 ? 0 : activeSection;
+              const isActive = idx === current;
+
+              return (
                 <button
-                  key={item}
-                  onClick={() => {
-                    scrollToSection(idx + 1);
-                    setIsMenuOpen(false);
-                  }}
-                  className="rounded-full px-5 py-3 text-sm font-medium text-slate-600 transition hover:bg-white hover:text-slate-900 hover:shadow-sm text-center whitespace-nowrap"
+                  key={`nav-desktop-${idx}`}
+                  onClick={() => scrollToSection(idx)}
+                  className={`rounded-full px-5 py-2 text-sm font-medium transition whitespace-nowrap ${isActive
+                    ? "bg-white text-slate-900 shadow-sm"
+                    : "text-slate-600 hover:bg-white/50 hover:text-slate-900"
+                    }`}
                   type="button"
                 >
                   {item}
                 </button>
-              ))}
+              );
+            })}
+          </div>
+
+          {/* Tablet Navigation - 1000px-1400px arası: 7 buton, horizontal scroll */}
+          <div className="hidden min-[1000px]:block min-[1400px]:hidden overflow-hidden w-[338px]">
+            <div
+              className="flex items-center gap-1 transition-transform duration-300 ease-out"
+              style={{
+                transform: `translateX(${(() => {
+                  const section = activeSection === -1 ? 0 : activeSection;
+                  const itemWidth = 114; // 110px buton + 4px gap
+                  if (section <= 1) return 0;
+                  if (section >= 5) return -(4 * itemWidth);
+                  return -((section - 1) * itemWidth);
+                })()
+                  }px)`
+              }}
+            >
+              {navItems.map((item, idx) => {
+                const current = activeSection === -1 ? 0 : activeSection;
+                const isActive = idx === current;
+
+                return (
+                  <button
+                    key={`nav-tablet-${idx}`}
+                    onClick={() => scrollToSection(idx)}
+                    className={`rounded-full py-2 text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 w-[110px] text-center ${isActive
+                      ? "bg-white text-slate-900 shadow-sm"
+                      : "text-slate-600 hover:bg-white/50 hover:text-slate-900"
+                      }`}
+                    type="button"
+                  >
+                    {item}
+                  </button>
+                );
+              })}
             </div>
-          )}
+          </div>
+
+          {/* Mobile Navigation - 1000px altı: dropdown tarzı */}
+          <div className="min-[1000px]:hidden relative" ref={dropdownRef}>
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="flex items-center justify-between gap-2 rounded-full px-5 py-2 text-sm font-medium transition whitespace-nowrap bg-white text-slate-900 shadow-sm min-w-[140px]"
+              type="button"
+            >
+              <span>{navItems[activeSection === -1 ? 0 : activeSection]}</span>
+              <span className={`transition-transform duration-200 ${isMenuOpen ? "rotate-180" : ""}`}>
+                <ChevronDownIcon />
+              </span>
+            </button>
+
+            {/* Dropdown Menu */}
+            {isMenuOpen && (
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 rounded-2xl border border-white/20 bg-white/95 backdrop-blur-md shadow-lg py-2 z-50">
+                {navItems.map((item, idx) => {
+                  const current = activeSection === -1 ? 0 : activeSection;
+                  const isActive = idx === current;
+
+                  return (
+                    <button
+                      key={`nav-mobile-${idx}`}
+                      onClick={() => {
+                        scrollToSection(idx);
+                        setIsMenuOpen(false);
+                      }}
+                      className={`w-full text-center px-4 py-2.5 text-sm font-medium transition ${isActive
+                        ? "bg-[#78f666]/20 text-slate-900"
+                        : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                        }`}
+                      type="button"
+                    >
+                      {item}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
         </nav>
-        <div className="flex items-center gap-2 shrink-0 justify-self-start min-[724px]:justify-self-end ml-1 min-[724px]:ml-0">
+        <div className="flex items-center gap-2 shrink-0 justify-self-end ml-1 min-[724px]:ml-0">
           {/* Mobile: sadece ok ikonu */}
-          <button className="min-[724px]:hidden grid h-9 w-9 place-items-center rounded-full bg-white text-slate-900 shadow-md transition hover:translate-y-[-1px]">
-            <ArrowIcon />
-          </button>
+          <Link href="/iletisim" className="min-[724px]:hidden relative">
+            <div className="absolute -inset-[0.125rem] bg-black rounded-full"></div>
+            <div className="relative grid h-9 w-9 place-items-center rounded-full bg-white text-slate-900 shadow-md transition hover:translate-y-[-1px] p-2">
+              <ArrowIcon />
+            </div>
+          </Link>
           {/* Desktop: tam buton */}
           <Link href="/iletisim" className="hidden min-[724px]:flex items-center gap-2 rounded-full bg-black pl-5 pr-1.5 py-1.5 text-sm font-semibold !text-white shadow-md transition hover:translate-y-[-1px] hover:bg-slate-900 whitespace-nowrap">
             Bize Ulaşın
@@ -881,12 +965,12 @@ export default function Home() {
           </Link>
         </div>
       </header>
-      <div id="ana-sayfa" className="mx-auto flex min-h-screen w-full max-w-6xl flex-col px-6 pb-4 pt-10 md:px-12 lg:px-16">
+      <div id="ana-sayfa" className="mx-auto flex min-h-[100dvh] w-full max-w-6xl flex-col container-padding pb-4 pt-10">
 
         <main className="flex flex-1 flex-col items-center text-center">
-          <div key={heroKey} className="flex flex-1 flex-col items-center justify-center gap-6 w-full translate-y-16">
+          <div className="flex flex-1 flex-col items-center justify-center gap-6 w-full translate-y-16">
             <div className="flex flex-col items-center gap-2">
-              <p className="max-w-4xl text-5xl font-semibold leading-tight tracking-tight text-black md:text-6xl lg:text-7xl">
+              <p className="max-w-4xl heading-hero font-semibold leading-tight tracking-tight text-black">
                 {"Sen hayatını yaşa".split("").map((char, i) => (
                   <span
                     key={i}
@@ -897,7 +981,7 @@ export default function Home() {
                   </span>
                 ))}
               </p>
-              <p className="max-w-4xl text-5xl leading-tight tracking-tight text-slate-800 md:text-6xl lg:text-7xl">
+              <p className="max-w-4xl heading-hero leading-tight tracking-tight text-slate-800">
                 <span className="font-serif italic text-black">
                   {"E-ticaret sessizce çalışsın".split("").map((char, i) => (
                     <span
@@ -914,26 +998,26 @@ export default function Home() {
             </div>
 
             <p
-              className="max-w-3xl text-lg leading-8 text-slate-600 md:text-xl animate-slide-in-up"
+              className="max-w-3xl px-6 md:px-0 text-responsive text-slate-600 animate-slide-in-up"
               style={{ animationDelay: "0.1s" }}
             >
               Yosuun, e-ticaretteki yükü senden alır. Zamanı okur, doğru aksiyonları kendi başına uygular. Sen hayatını yaşarken, e-ticaret arka planda çalışır.
             </p>
 
-            <div className="flex flex-col items-center gap-6 md:flex-row md:gap-10">
-              <Link href="/iletisim" className="group inline-flex w-56 items-center justify-between rounded-full bg-[#78f666] pl-6 pr-2 py-2.5 text-base font-semibold !text-white shadow-lg shadow-[#25f707]/30 transition hover:translate-y-[-1px]">
+            <div className="flex flex-row items-center gap-responsive-lg">
+              <Link href="/iletisim" className="btn-responsive group inline-flex items-center justify-between rounded-full bg-[#78f666] font-semibold !text-white shadow-lg shadow-[#25f707]/30 transition hover:translate-y-[-1px]">
                 Yosuun’u Keşfet
-                <span className="grid h-9 w-9 place-items-center rounded-full bg-white text-slate-900">
+                <span className="btn-icon grid place-items-center rounded-full bg-white text-slate-900">
                   <ArrowIcon />
                 </span>
               </Link>
 
-              <div className="flex flex-col items-center gap-4 md:flex-row md:gap-5">
+              <div className="flex flex-row items-center gap-4">
                 <div className="flex -space-x-3">
                   {avatarPalette.map((avatar) => (
                     <div
                       key={avatar.name}
-                      className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full text-sm font-semibold uppercase text-white shadow ring-4 ring-white"
+                      className="avatar-responsive relative flex items-center justify-center overflow-hidden rounded-full font-semibold uppercase text-white shadow ring-4 ring-white"
                       style={{
                         backgroundImage: `linear-gradient(135deg, ${avatar.from}, ${avatar.to})`,
                       }}
@@ -950,10 +1034,12 @@ export default function Home() {
                   ))}
                 </div>
 
-                <div className="flex flex-col items-center gap-1 text-sm text-slate-600 md:items-start">
-                  <div className="flex items-center gap-1 text-amber-500">
+                <div className="flex flex-col items-center gap-1 text-sm-responsive text-slate-600 md:items-start">
+                  <div className="flex items-center gap-1 text-amber-500 flex-shrink-0">
                     {Array.from({ length: 5 }).map((_, idx) => (
-                      <StarIcon key={idx} />
+                      <span key={idx} className="star-responsive">
+                        <StarIcon />
+                      </span>
                     ))}
                   </div>
                   <p className="text-slate-800">Birçok markanın tercihi</p>
@@ -962,18 +1048,35 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="w-full flex flex-col items-center translate-y-10">
-            <p className="mt-10 text-sm text-slate-500 md:mt-0">
-              Markalar işine odaklanırken, Yosuun geri kalanını halleder
-            </p>
+          <div className="w-full flex flex-col items-center translate-y-2">
+            <div className="mt-10 h-6 flex items-center justify-center md:mt-0 -translate-y-5">
+              <p className="text-sm-responsive text-slate-500">
+                Markalar işine odaklanırken, Yosuun geri kalanını halleder
+              </p>
+            </div>
 
-            <div className="-mt-12 logo-marquee relative w-full overflow-hidden opacity-60">
-              <div className="logo-track flex w-[200%] items-center justify-around">
-                {Array.from({ length: 16 }).map((_, idx) => (
-                  <div key={idx} className="relative h-48 w-60 flex items-center justify-center">
+            <div className="logo-marquee-margin logo-marquee relative w-full overflow-hidden opacity-60">
+              <div className="logo-track flex w-[200%] items-center justify-around gap-[25px]">
+                {[
+                  "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/7.png",
+                  "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/8.png",
+                  "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/9.png",
+                  "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/10.png",
+                  "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/11.png",
+                  "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/12.png",
+                  "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/13.png",
+                  "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/7.png",
+                  "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/8.png",
+                  "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/9.png",
+                  "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/10.png",
+                  "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/11.png",
+                  "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/12.png",
+                  "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/13.png",
+                ].map((logo, idx) => (
+                  <div key={idx} className="relative logo-item-responsive flex items-center justify-center">
                     <img
-                      src="/yosuun-new-logo.png"
-                      alt="Yosuun"
+                      src={logo}
+                      alt="Yosuun Referans"
                       className="h-full w-full object-contain"
                     />
                   </div>
@@ -984,7 +1087,7 @@ export default function Home() {
         </main>
       </div>
 
-      <section id="nasil-dusunur" className="mx-auto mt-32 flex w-full max-w-6xl flex-col items-center px-6 md:px-12 lg:px-16 scroll-mt-[180px] min-[724px]:scroll-mt-[200px] min-[1500px]:scroll-mt-[250px]">
+      <section id="nasil-dusunur" className="mx-auto section-spacing-sm flex w-full max-w-6xl flex-col items-center container-padding scroll-mt-[180px] min-[724px]:scroll-mt-[200px] min-[1500px]:scroll-mt-[250px]">
 
 
 
@@ -993,7 +1096,7 @@ export default function Home() {
           <div ref={headingRef} className="w-full">
             <h2
               ref={revealRef}
-              className={`max-w-full whitespace-pre-line text-4xl font-semibold leading-tight tracking-tight text-slate-800 md:text-5xl ${isHeadingVisible ? "animate-slide-in-up" : "opacity-0"}`}
+              className={`max-w-full whitespace-pre-line heading-section font-semibold leading-tight tracking-tight text-slate-800 ${isHeadingVisible ? "animate-slide-in-up" : "opacity-0"}`}
             >
               {allChars.map((item, idx) => {
                 const totalChars = allChars.length;
@@ -1025,19 +1128,19 @@ export default function Home() {
             className="flex flex-wrap items-center justify-center gap-6"
           >
             <span
-              className={`flex items-center justify-center gap-2 rounded-full bg-[#78f666] px-10 py-4 text-3xl font-serif italic text-white ${isPillsVisible ? "animate-slide-in-up" : "opacity-0"}`}
+              className={`flex items-center justify-center gap-2 rounded-full bg-[#78f666] pill-responsive font-serif italic text-white ${isPillsVisible ? "animate-slide-in-up" : "opacity-0"}`}
               style={{ animationDelay: "0.4s" }}
             >
               Akıl
             </span>
             <span
-              className={`flex items-center justify-center gap-2 rounded-full bg-[#78f666] px-10 py-4 text-3xl font-serif italic text-white ${isPillsVisible ? "animate-slide-in-up" : "opacity-0"}`}
+              className={`flex items-center justify-center gap-2 rounded-full bg-[#78f666] pill-responsive font-serif italic text-white ${isPillsVisible ? "animate-slide-in-up" : "opacity-0"}`}
               style={{ animationDelay: "0.6s" }}
             >
               Süreklilik
             </span>
             <span
-              className={`flex items-center justify-center gap-2 rounded-full bg-[#78f666] px-10 py-4 text-3xl font-serif italic text-white ${isPillsVisible ? "animate-slide-in-up" : "opacity-0"}`}
+              className={`flex items-center justify-center gap-2 rounded-full bg-[#78f666] pill-responsive font-serif italic text-white ${isPillsVisible ? "animate-slide-in-up" : "opacity-0"}`}
               style={{ animationDelay: "0.8s" }}
             >
               Uyum
@@ -1047,36 +1150,36 @@ export default function Home() {
 
         <div
           ref={statsRef}
-          className="mt-20 grid w-full grid-cols-1 gap-12 sm:grid-cols-3 sm:gap-0"
+          className="mt-stats-responsive grid w-full grid-cols-3 gap-0"
         >
           {statBlocks.map((stat, idx) => (
             <div
               key={stat.label}
               className={`flex flex-col items-center ${idx !== statBlocks.length - 1
-                ? "sm:border-r sm:border-slate-200"
+                ? "border-r border-slate-200"
                 : ""
                 } ${isStatsVisible ? "animate-slide-in-up" : "opacity-0"}`}
               style={{ animationDelay: `${1.0 + idx * 0.2}s` }}
             >
               <div className="flex items-start justify-center text-[#1a1a1a]">
                 {idx === 0 && (
-                  <span className="mr-1 mt-2 text-5xl font-medium leading-none">+</span>
+                  <span className="mr-1 mt-2 stat-plus-responsive font-medium leading-none">+</span>
                 )}
-                <span className="text-8xl font-medium tracking-tighter md:text-9xl">
+                <span className="stat-number-responsive font-medium tracking-tighter">
                   {stat.value}
                 </span>
               </div>
-              <p className="mt-4 text-lg font-normal text-slate-500">{stat.label}</p>
+              <p className="mt-4 stat-label-responsive font-normal text-slate-500">{stat.label}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section id="kimler-icin" className="mx-auto mt-56 w-full max-w-6xl px-6 md:px-12 lg:px-16 scroll-mt-[180px] min-[724px]:scroll-mt-[200px] min-[1500px]:scroll-mt-[250px]">
+      <section id="kimler-icin" className="mx-auto section-spacing w-full max-w-6xl container-padding scroll-mt-[180px] min-[724px]:scroll-mt-[200px] min-[1500px]:scroll-mt-[250px]">
         <div ref={whoForHeadingRef} className="flex flex-col items-center gap-3 text-center">
           <h2
             ref={revealRef2}
-            className={`max-w-full whitespace-pre-line text-4xl font-semibold leading-tight tracking-tight text-slate-800 md:text-5xl ${isWhoForHeadingVisible ? "animate-slide-in-up" : "opacity-0"}`}
+            className={`max-w-full whitespace-pre-line heading-section font-semibold leading-tight tracking-tight text-slate-800 ${isWhoForHeadingVisible ? "animate-slide-in-up" : "opacity-0"}`}
             style={{ animationDelay: "0.3s" }}
           >
             {allChars2.map((item, idx) => {
@@ -1106,24 +1209,24 @@ export default function Home() {
 
         <div
           ref={servicesRef}
-          className="mt-10 flex flex-wrap justify-center gap-4"
+          className="mt-10 service-cards-grid"
         >
           {services.map((service, idx) => (
             <div
               key={service.title}
-              className={`flex h-40 w-40 flex-col justify-between rounded-3xl px-5 py-5 ${isServicesVisible ? "animate-slide-in-up" : "opacity-0"}`}
+              className={`flex service-card-responsive flex-col justify-between ${isServicesVisible ? "animate-slide-in-up" : "opacity-0"}`}
               style={{
                 backgroundColor: service.bg,
                 animationDelay: `${0.5 + idx * 0.2}s`
               }}
             >
               {service.image ? (
-                <img src={service.image} alt={service.title} className="h-12 w-12 object-contain" />
+                <img src={service.image} alt={service.title} className="service-icon-responsive object-contain" />
               ) : (
-                <div className="text-2xl">{service.icon}</div>
+                <div className="service-title-responsive">{service.icon}</div>
               )}
               <p
-                className="whitespace-pre-line text-2xl font-semibold leading-7 text-slate-800"
+                className="whitespace-pre-line service-title-responsive font-semibold text-slate-800"
               >
                 {service.title}
               </p>
@@ -1133,23 +1236,23 @@ export default function Home() {
 
         <div
           ref={ctaRef}
-          className={`mt-12 mb-12 flex flex-col gap-4 rounded-[26px] bg-black px-6 py-8 text-white shadow-xl shadow-black/25 md:flex-row md:items-center md:justify-between md:gap-6 md:px-10 ${isCtaVisible ? "animate-slide-in-up" : "opacity-0"}`}
+          className={`flex flex-row gap-responsive cta-banner-responsive bg-black text-white shadow-xl shadow-black/25 items-center justify-between ${isCtaVisible ? "animate-slide-in-up" : "opacity-0"}`}
           style={{ animationDelay: "0.5s" }}
         >
           <div>
-            <p className="text-xl font-semibold leading-7">Kim Olursan Ol</p>
-            <p className="text-base text-slate-300">Sende Yükünü Devretmek İstiyorsan</p>
+            <p className="cta-title-responsive font-semibold">Kim Olursan Ol</p>
+            <p className="cta-subtitle-responsive text-slate-300">Sende Yükünü Devretmek İstiyorsan</p>
           </div>
-          <div className="flex flex-col gap-3 md:flex-row md:items-center">
-            <Link href="/iletisim" className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold !text-black shadow-sm transition hover:translate-y-[-1px]">
+          <div className="flex flex-row gap-3 items-center">
+            <Link href="/iletisim" className="inline-flex items-center gap-2 rounded-full bg-white cta-button-responsive font-semibold !text-black shadow-sm transition hover:translate-y-[-1px]">
               Bize Ulaşın
-              <span className="grid h-7 w-7 place-items-center rounded-full bg-slate-900/10 text-slate-900">
+              <span className="grid cta-icon-responsive place-items-center rounded-full bg-slate-900/10 text-slate-900">
                 <ArrowIcon />
               </span>
             </Link>
-            <Link href="/iletisim" className="inline-flex items-center gap-2 rounded-full border border-white/40 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+            <Link href="/iletisim" className="inline-flex items-center gap-2 rounded-full border border-white/40 cta-button-responsive font-semibold text-white transition hover:bg-white/10">
               Sizi Arayalım
-              <span className="grid h-7 w-7 place-items-center rounded-full bg-white/15">
+              <span className="grid cta-icon-responsive place-items-center rounded-full bg-white/15">
                 <ArrowIcon />
               </span>
             </Link>
@@ -1159,14 +1262,14 @@ export default function Home() {
 
       </section>
 
-      <section id="nasil-calisir" className="mx-auto mt-56 w-full max-w-6xl px-6 md:px-12 lg:px-16 scroll-mt-[180px] min-[724px]:scroll-mt-[200px] min-[1500px]:scroll-mt-[250px]">
+      <section id="nasil-calisir" className="mx-auto section-spacing w-full max-w-6xl container-padding scroll-mt-[180px] min-[724px]:scroll-mt-[200px] min-[1500px]:scroll-mt-[250px]">
         <div
           ref={howItWorksHeadingRef}
           className="flex flex-col items-center gap-3 text-center mb-16"
         >
           <h2
             ref={revealRef3}
-            className={`max-w-full whitespace-pre-line text-4xl font-semibold leading-tight tracking-tight text-slate-800 md:text-5xl ${isHowItWorksHeadingVisible ? "animate-slide-in-up" : "opacity-0"}`}
+            className={`max-w-full whitespace-pre-line heading-section font-semibold leading-tight tracking-tight text-slate-800 ${isHowItWorksHeadingVisible ? "animate-slide-in-up" : "opacity-0"}`}
             style={{ animationDelay: "0.3s" }}
           >
             {allChars3.map((item, idx) => {
@@ -1198,23 +1301,45 @@ export default function Home() {
           {["01", "02", "03", "04", "05", "06"].map((step, idx, arr) => {
             // Per-item scroll-based animation
             const viewportHeight = typeof window !== 'undefined' ? window.innerHeight : 800;
-            const itemHeight = 288; // node (48px) + line (240px) approx
+            const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
+
+            // Responsive itemHeight based on screen size
+            let itemHeight = 288; // Default for large screens
+            if (viewportWidth <= 450) {
+              itemHeight = 160; // Very small screens
+            } else if (viewportWidth <= 600) {
+              itemHeight = 200; // Small screens
+            } else if (viewportWidth <= 750) {
+              itemHeight = 240; // Medium screens
+            }
+
             const itemTop = timelineTop + (idx * itemHeight);
 
-            // Animation triggers: start when item reaches 80% of viewport, end at 50%
-            const animationStartY = viewportHeight * 0.8;
-            const animationEndY = viewportHeight * 0.5;
+            // Responsive animation triggers based on viewport height
+            let startMultiplier = 0.8;
+            let endMultiplier = 0.5;
+            if (viewportHeight < 700) {
+              startMultiplier = 0.75;
+              endMultiplier = 0.45;
+            }
+            if (viewportHeight < 500) {
+              startMultiplier = 0.7;
+              endMultiplier = 0.4;
+            }
+
+            const animationStartY = viewportHeight * startMultiplier;
+            const animationEndY = viewportHeight * endMultiplier;
             const animationRange = animationStartY - animationEndY;
             const traveled = animationStartY - itemTop;
             const rawProgress = traveled / animationRange;
             const lineFill = Math.min(1, Math.max(0, rawProgress));
-            const isActive = itemTop <= viewportHeight * 0.5;
+            const isActive = itemTop <= viewportHeight * endMultiplier;
 
             return (
               <div key={step} className="flex flex-col items-center">
                 {/* Node */}
                 <div
-                  className={`grid place-items-center rounded-full text-sm font-semibold shadow-sm z-10 transition-all duration-300 ${step === "06" ? "h-[84px] w-[84px] overflow-visible" : "h-12 w-12"}`}
+                  className={`grid place-items-center rounded-full font-semibold shadow-sm z-10 transition-all duration-300 ${step === "06" ? "timeline-circle-large-responsive overflow-visible" : "timeline-circle-responsive"}`}
                   style={{
                     backgroundColor: isActive ? (step === "06" ? "#78f666" : "#0f172a") : "#ffffff",
                     color: isActive ? "#ffffff" : "#94a3b8",
@@ -1225,9 +1350,9 @@ export default function Home() {
                 >
                   {step === "06" ? (
                     isActive ? (
-                      <img src="/küçük-logo.png" alt="Yosuun Active" className="h-[70px] w-[70px] object-contain translate-x-1" />
+                      <img src="https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/kucuk-logo.png" alt="Yosuun Active" className="h-[70px] w-[70px] object-contain translate-x-1" />
                     ) : (
-                      <img src="/logo-mobile.png" alt="Yosuun" className="h-[70px] w-[70px] object-contain translate-x-1" />
+                      <img src="https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/logo-mobile.png" alt="Yosuun" className="h-[70px] w-[70px] object-contain translate-x-1" />
                     )
                   ) : (
                     step
@@ -1235,14 +1360,14 @@ export default function Home() {
                 </div>
                 {/* Connecting Line (not for last item) */}
                 {idx < arr.length - 1 && (
-                  <div className={`relative w-0.5 bg-slate-200 overflow-visible ${idx === 4 ? "h-96" : "h-60"}`}>
+                  <div className={`relative w-0.5 bg-slate-200 overflow-visible ${idx === 4 ? "timeline-line-last-responsive" : "timeline-line-responsive"}`}>
                     <div
                       className="absolute top-0 left-0 w-full bg-slate-900 transition-all duration-150"
                       style={{ height: `${lineFill * 100}%` }}
                     />
                     {/* Animated Card */}
                     <div
-                      className={`absolute top-1/2 w-72 rounded-[2rem] bg-slate-50 p-5 shadow-2xl border border-white flex flex-col justify-center h-[300px] ${idx % 2 === 0 ? "left-10" : "right-10"}`}
+                      className={`absolute top-1/2 feature-card-responsive bg-slate-50 shadow-2xl border border-white flex flex-col justify-center ${idx % 2 === 0 ? "left-10" : "right-10"}`}
                       style={{
                         opacity: Math.max(0, (lineFill - 0.2) / 0.8), // Starts fading in after 20% fill
                         transformOrigin: idx % 2 === 0 ? "left center" : "right center",
@@ -1253,7 +1378,17 @@ export default function Home() {
                     >
                       {/* Card Text */}
                       <div className="text-left w-full">
-                        <img src="/snap.png" alt="Yosuun Feature" className="w-full h-[120px] mb-4 object-contain" />
+                        <img
+                          src={[
+                            "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/takvim.png",
+                            "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/rakip.png",
+                            "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/Aksiyon.png",
+                            "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/izleme.png",
+                            "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/rapor.png"
+                          ][idx]}
+                          alt="Yosuun Feature"
+                          className="w-full h-[120px] mb-4 object-contain"
+                        />
                         <h4 className="text-base font-semibold text-slate-900 mb-1">
                           {
                             [
@@ -1290,14 +1425,14 @@ export default function Home() {
 
 
 
-      <section id="deneyimler" className="mx-auto mt-[15.5rem] w-full max-w-6xl px-6 md:px-12 lg:px-16 scroll-mt-[150px]">
+      <section id="deneyimler" className="mx-auto section-spacing w-full max-w-6xl container-padding scroll-mt-[150px]">
         <div
           ref={testimonialsHeadingRef}
           className="flex flex-col items-center gap-3 text-center mb-6"
         >
           <h2
             ref={revealRef4}
-            className={`max-w-full whitespace-pre-line text-4xl font-semibold leading-tight tracking-tight text-slate-800 md:text-5xl ${isTestimonialsHeadingVisible ? "animate-slide-in-up" : "opacity-0"}`}
+            className={`max-w-full whitespace-pre-line heading-section font-semibold leading-tight tracking-tight text-slate-800 ${isTestimonialsHeadingVisible ? "animate-slide-in-up" : "opacity-0"}`}
             style={{ animationDelay: "0.3s" }}
           >
             {allChars4.map((item, idx) => {
@@ -1327,9 +1462,9 @@ export default function Home() {
 
         <div
           ref={testimonialsContentRef}
-          className="mt-6 grid gap-6 lg:grid-cols-3 lg:items-stretch"
+          className="mt-6 grid gap-responsive-lg sm:grid-cols-3 sm:items-stretch"
         >
-          <div className={`lg:col-span-2 ${isTestimonialsContentVisible ? "animate-slide-in-left" : "opacity-0"}`} style={{ animationDelay: "0.5s" }}>
+          <div className={`sm:col-span-2 ${isTestimonialsContentVisible ? "animate-slide-in-left" : "opacity-0"}`} style={{ animationDelay: "0.5s" }}>
             <div className="relative overflow-hidden rounded-[28px] bg-slate-900 shadow-xl shadow-black/20">
               <div
                 className="absolute inset-0 bg-cover bg-top"
@@ -1337,26 +1472,34 @@ export default function Home() {
                 aria-hidden
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/45 to-black/20" />
-              <div className="relative flex min-h-[320px] flex-col justify-end gap-3 p-8 text-white md:min-h-[420px] md:p-10">
-                <p className="text-xs font-semibold tracking-[0.2em] text-white/70">
+              <div className="relative flex testimonial-card-responsive flex-col justify-end gap-3 text-white">
+                <p className="testimonial-label-responsive font-semibold tracking-[0.2em] text-white/70">
                   KULLANICI HİKAYESİ
                 </p>
-                <p className="text-xl font-semibold leading-8 md:text-2xl md:leading-9">
+                <p className="testimonial-quote-responsive font-semibold mt-auto">
                   {testimonial.quote}
                 </p>
-                <div className="mt-3 text-sm text-white/80">
-                  <p className="font-semibold">{testimonial.author}</p>
-                  <p>{testimonial.title}</p>
+                <div className="mt-3 text-white/80 flex items-end justify-between">
+                  <div>
+                    <p className="testimonial-author-responsive font-semibold">{testimonial.author}</p>
+                    <p className="testimonial-desc-responsive">{testimonial.title}</p>
+                  </div>
+                  <Link
+                    href="/kullanici-hikayesi"
+                    className="text-white/70 hover:text-white transition testimonial-desc-responsive font-medium underline underline-offset-2"
+                  >
+                    Detay Gör
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className={`flex flex-col justify-between rounded-[28px] bg-[#ccfac5] px-8 py-10 text-slate-900 shadow-lg shadow-black/10 ${isTestimonialsContentVisible ? "animate-slide-in-right" : "opacity-0"}`} style={{ animationDelay: "0.7s" }}>
-            <p className="text-xs font-semibold tracking-[0.2em] text-slate-700">PAW & MORE</p>
-            <div className="mt-10 flex flex-col gap-3">
-              <p className="text-5xl font-semibold leading-none">{testimonial.stat}</p>
-              <p className="text-base font-semibold leading-6 text-slate-800">
+          <div className={`flex flex-col justify-between testimonial-green-card-responsive bg-[#ccfac5] text-slate-900 shadow-lg shadow-black/10 ${isTestimonialsContentVisible ? "animate-slide-in-right" : "opacity-0"}`} style={{ animationDelay: "0.7s" }}>
+            <p className="testimonial-label-responsive font-semibold tracking-[0.2em] text-slate-700">PAW & MORE</p>
+            <div className="testimonial-green-content-spacing flex flex-col gap-3">
+              <p className="testimonial-number-responsive font-semibold leading-none">{testimonial.stat}</p>
+              <p className="testimonial-subtitle-responsive font-semibold leading-6 text-slate-800">
                 {testimonial.statLabel}
               </p>
             </div>
@@ -1364,11 +1507,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="demo" className="mx-auto mt-[15.5rem] w-full max-w-6xl px-6 md:px-12 lg:px-16 scroll-mt-[150px]">
+      <section id="demo" className="mx-auto section-spacing w-full max-w-6xl container-padding scroll-mt-[150px]">
         <div ref={demoHeadingRef} className="text-center">
           <h2
             ref={revealRef5}
-            className={`max-w-full whitespace-pre-line text-4xl font-semibold leading-tight tracking-tight text-slate-800 md:text-5xl ${isDemoHeadingVisible ? "animate-slide-in-up" : "opacity-0"}`}
+            className={`max-w-full whitespace-pre-line heading-section font-semibold leading-tight tracking-tight text-slate-800 ${isDemoHeadingVisible ? "animate-slide-in-up" : "opacity-0"}`}
             style={{ animationDelay: "0.3s" }}
           >
             {allChars5.map((item, idx) => {
@@ -1398,7 +1541,7 @@ export default function Home() {
 
         <div
           ref={featureCardsRef}
-          className="mt-14 grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
+          className="demo-section-spacing demo-cards-grid"
         >
           {[...pricingPlans, ...pricingPlans].map((plan, idx) => {
             const cardNames = ["Mağaza", "Stok", "Rakip", "Otomasyon"];
@@ -1429,12 +1572,12 @@ export default function Home() {
             return (
               <div
                 key={`${plan.name}-${idx}`}
-                className={`flex flex-col rounded-[20px] px-6 pt-7 pb-10 shadow-lg shadow-black/15 ${isFeatureCardsVisible ? animClass : "opacity-0"}`}
+                className={`flex flex-col demo-card-responsive shadow-lg shadow-black/15 ${isFeatureCardsVisible ? animClass : "opacity-0"}`}
                 style={{ backgroundColor: plan.bg, color: plan.text, animationDelay: animDelay }}
               >
                 <div className="space-y-6">
                   <span
-                    className="inline-flex items-center rounded-full px-3 py-1.5 text-sm font-semibold -mt-6"
+                    className="inline-flex items-center rounded-full demo-badge-responsive font-semibold"
                     style={{
                       backgroundColor: (idx === 1 || idx === 3) ? "#ffffff" : plan.pillBg,
                       color: (idx === 1 || idx === 3) ? "#000000" : (idx === 0 || idx === 2) ? "#ffffff" : plan.pillText
@@ -1443,13 +1586,13 @@ export default function Home() {
                     {cardNames[idx]}
                   </span>
                   <div className="space-y-2">
-                    <div className="space-y-2 text-sm">
+                    <div className="space-y-2 demo-feature-text-responsive">
                       {cardFeatures[idx].map((feature) => (
                         <div key={feature} className="flex items-center gap-2">
                           <svg
                             aria-hidden
                             viewBox="0 0 24 24"
-                            className={`h-4 w-4 ${(idx === 1 || idx === 3) ? "text-white" : "text-slate-900"}`}
+                            className={`demo-icon-responsive ${(idx === 1 || idx === 3) ? "text-white" : "text-slate-900"}`}
                             fill="none"
                             stroke="currentColor"
                             strokeWidth="2.2"
@@ -1472,23 +1615,23 @@ export default function Home() {
         {/* CTA Element */}
         <div
           ref={demoCtaRef}
-          className={`mt-12 mb-12 flex flex-col gap-4 rounded-[26px] bg-black px-6 py-8 text-white shadow-xl shadow-black/25 md:flex-row md:items-center md:justify-between md:gap-6 md:px-10 ${isDemoCtaVisible ? "animate-slide-in-up" : "opacity-0"}`}
+          className={`flex flex-row gap-responsive cta-banner-responsive bg-black text-white shadow-xl shadow-black/25 items-center justify-between ${isDemoCtaVisible ? "animate-slide-in-up" : "opacity-0"}`}
           style={{ animationDelay: "0.5s" }}
         >
           <div>
-            <p className="text-xl font-semibold leading-7">Demo Talep Et</p>
-            <p className="text-base text-slate-300">Bu kadar detayı tek tek yönetmek zorunda değilsin.</p>
+            <p className="cta-title-responsive font-semibold">Demo Talep Et</p>
+            <p className="cta-subtitle-responsive text-slate-300">Bu kadar detayı tek tek yönetmek zorunda değilsin.</p>
           </div>
-          <div className="flex flex-col gap-3 md:flex-row md:items-center">
-            <Link href="/iletisim" className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold !text-black shadow-sm transition hover:translate-y-[-1px]">
+          <div className="flex flex-row gap-3 items-center">
+            <Link href="/iletisim" className="inline-flex items-center gap-2 rounded-full bg-white cta-button-responsive font-semibold !text-black shadow-sm transition hover:translate-y-[-1px]">
               Bize Ulaşın
-              <span className="grid h-7 w-7 place-items-center rounded-full bg-slate-900/10 text-slate-900">
+              <span className="grid cta-icon-responsive place-items-center rounded-full bg-slate-900/10 text-slate-900">
                 <ArrowIcon />
               </span>
             </Link>
-            <Link href="/iletisim" className="inline-flex items-center gap-2 rounded-full border border-white/40 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+            <Link href="/iletisim" className="inline-flex items-center gap-2 rounded-full border border-white/40 cta-button-responsive font-semibold text-white transition hover:bg-white/10">
               Sizi Arayalım
-              <span className="grid h-7 w-7 place-items-center rounded-full bg-white/15">
+              <span className="grid cta-icon-responsive place-items-center rounded-full bg-white/15">
                 <ArrowIcon />
               </span>
             </Link>
@@ -1496,7 +1639,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="sss" className="mx-auto mt-48 mb-48 w-full max-w-4xl px-0 md:px-6 scroll-mt-[150px]">
+      <section id="sss" className="mx-auto mt-48 mb-48 w-full max-w-4xl px-6 scroll-mt-[150px]">
         <div>
           <div
             ref={faqHeadingRef}
@@ -1504,7 +1647,7 @@ export default function Home() {
           >
             <h2
               ref={revealRef6}
-              className={`max-w-full whitespace-pre-line text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight text-slate-800 ${isFaqHeadingVisible ? "animate-slide-in-up" : "opacity-0"}`}
+              className={`max-w-full whitespace-pre-line heading-section font-semibold leading-tight tracking-tight text-slate-800 ${isFaqHeadingVisible ? "animate-slide-in-up" : "opacity-0"}`}
               style={{ animationDelay: "0.3s" }}
             >
               {allChars6.map((item, idx) => {
@@ -1541,12 +1684,12 @@ export default function Home() {
               return (
                 <div
                   key={idx}
-                  className={`overflow-hidden rounded-[18px] border border-[#e6dfd5] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.05)] ${isFaqItemsVisible ? "animate-slide-in-up" : "opacity-0"}`}
+                  className={`overflow-hidden rounded-[18px] border border-[#CCFAC5] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.05)] ${isFaqItemsVisible ? "animate-slide-in-up" : "opacity-0"}`}
                   style={{ animationDelay: `${idx * 0.15}s` }}
                 >
                   <button
                     type="button"
-                    className="flex w-full items-center justify-between px-6 py-5 text-left text-lg font-semibold text-[#1c2a3c]"
+                    className="flex w-full items-center justify-between px-8 py-6 text-left text-xs sm:text-lg font-semibold text-[#1c2a3c]"
                     onClick={() => handleFaqToggle(idx)}
                   >
                     <span>{item.question}</span>
@@ -1561,7 +1704,7 @@ export default function Home() {
                       }`}
                   >
                     <div className="overflow-hidden">
-                      <div className="px-6 pb-6 text-base leading-6 text-[#465568]">
+                      <div className="px-8 pb-8 text-[0.65rem] sm:text-base leading-5 sm:leading-6 text-[#465568]">
                         {item.answer}
                       </div>
                     </div>
@@ -1573,12 +1716,12 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="footer-cta" className="mx-auto mt-48 w-full max-w-6xl px-6 md:px-12 lg:px-16">
-        <div className="overflow-hidden rounded-[32px] bg-gradient-to-r from-[#ccfac5] via-white to-white px-6 py-16 text-center shadow-[0_16px_40px_rgba(0,0,0,0.08)] md:px-14 lg:px-20">
+      <section id="footer-cta" className="mx-auto section-spacing w-full max-w-6xl container-padding">
+        <div className="overflow-hidden footer-cta-container bg-gradient-to-r from-[#ccfac5] via-white to-white text-center shadow-[0_16px_40px_rgba(0,0,0,0.08)]">
 
           <h2
             ref={revealRef7}
-            className="max-w-full whitespace-pre-line text-2xl font-semibold leading-tight tracking-tight text-slate-800 md:text-4xl"
+            className="max-w-full whitespace-pre-line heading-section font-semibold leading-tight tracking-tight text-slate-800"
           >
             {allChars7.map((item, idx) => {
               const alpha = 1;
@@ -1598,13 +1741,13 @@ export default function Home() {
             })}
           </h2>
 
-          <p className="mt-4 text-base leading-7 text-slate-600 md:text-lg">
+          <p className="footer-cta-text text-slate-600">
             Yosuun, mağaza, stok, rakip ve planlama yükünü devralır. <br />Sen sadece kontrolü elinde tutarsın.
           </p>
-          <div className="mt-8 flex justify-center">
-            <Link href="/iletisim" className="inline-flex items-center gap-2 rounded-full bg-black pl-5 pr-1.5 py-1.5 text-sm font-semibold !text-white shadow-md transition hover:translate-y-[-1px] hover:bg-slate-900 whitespace-nowrap">
+          <div className="footer-cta-button-wrapper flex justify-center">
+            <Link href="/iletisim" className="inline-flex items-center gap-2 rounded-full bg-black footer-cta-button font-semibold !text-white shadow-md transition hover:translate-y-[-1px] hover:bg-slate-900 whitespace-nowrap">
               Bize Ulaşın
-              <span className="grid h-9 w-9 place-items-center rounded-full bg-white text-slate-900">
+              <span className="grid footer-cta-icon place-items-center rounded-full bg-white text-slate-900">
                 <ArrowIcon />
               </span>
             </Link>
@@ -1613,38 +1756,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="mx-auto mt-20 w-full max-w-6xl px-6 pb-16 md:px-12 lg:px-16">
-        <div className="grid gap-10 border-t border-slate-200/70 pt-10 md:grid-cols-4 md:gap-6">
-          <div className="space-y-4 md:col-span-1">
-            <div
-              onClick={() => scrollToSection(0)}
-              className="flex items-center -mt-16 -mb-10 cursor-pointer"
-            >
-              <img src="/yosuun-new-logo.png" alt="Yosuun" className="h-40 w-auto" />
-            </div>
-            <p className="text-sm leading-6 text-slate-600">
-              Sen hayatını yaşa, e-ticaret kendi kendine ilerlesin. Yosuun arkada düşünür ve senin
-              adına hareket eder.
-            </p>
-            <div className="flex items-center gap-4 text-slate-700">
-              <span className="text-sm font-semibold">X</span>
-              <span className="text-sm font-semibold">in</span>
-              <span className="text-sm font-semibold">@</span>
-            </div>
-          </div>
-
-
-
-          <div className="space-y-3 md:col-start-4">
-            <p className="text-sm font-semibold text-slate-900">İletişim Bilgileri</p>
-            <div className="space-y-2 text-sm text-slate-600">
-              <p>Ostim Teknik Üniversitesi Cezeri Teknoloji ve Araştırma Merkezi</p>
-              <p>Ostim/Ankara</p>
-              <p>info@yosuun.com - (539) 319 22 60</p>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

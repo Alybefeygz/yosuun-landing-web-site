@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
 
         // Send email to user (confirmation)
         await resend.emails.send({
-            from: 'Yosuun <onboarding@resend.dev>', // Domain doğrulandıktan sonra: info@yosuun.com
+            from: 'Yosuun <info@yosuun.com>',
             to: email,
             subject: 'Mesajınız Alındı! 👋',
             html: `
@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
                 <table width="600" cellpadding="0" cellspacing="0" border="0">
                     <tr>
                         <td align="center" style="padding-bottom: 30px;">
-                            <img src="https://www.hizliresim.com.tr/uploads/images/1767973155_65b22dbea7f8a571.png" alt="Yosuun" width="300" style="display: block;" />
+                            <img src="https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/y-logo.png" alt="Yosuun" width="300" style="display: block;" />
                         </td>
                     </tr>
                 </table>
@@ -103,13 +103,19 @@ export async function POST(request: NextRequest) {
                                         <table cellpadding="0" cellspacing="0" border="0">
                                             <tr>
                                                 <td style="padding: 0 10px;">
-                                                    <img src="https://www.hizliresim.com.tr/uploads/images/1767977694_c1d2f1e496845416.png" alt="Icon 1" width="40" height="40" style="display: block;" />
+                                                    <a href="https://yosuun.com" target="_blank" style="text-decoration: none;">
+                                                        <img src="https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/website-icon.png" alt="Website" width="40" height="40" style="display: block;" />
+                                                    </a>
                                                 </td>
                                                 <td style="padding: 0 10px;">
-                                                    <img src="https://www.hizliresim.com.tr/uploads/images/1767977736_5d66759510a9118c.png" alt="Icon 2" width="40" height="40" style="display: block;" />
+                                                    <a href="https://www.linkedin.com/company/yosuun/" target="_blank" style="text-decoration: none;">
+                                                        <img src="https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/linkedin-icon.png" alt="LinkedIn" width="40" height="40" style="display: block;" />
+                                                    </a>
                                                 </td>
                                                 <td style="padding: 0 10px;">
-                                                    <img src="https://www.hizliresim.com.tr/uploads/images/1767977745_344ea291f0c542ea.png" alt="Icon 3" width="40" height="40" style="display: block;" />
+                                                    <a href="https://www.instagram.com/yosuun.tr/" target="_blank" style="text-decoration: none;">
+                                                        <img src="https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/instagram-icon.png" alt="Instagram" width="40" height="40" style="display: block;" />
+                                                    </a>
                                                 </td>
                                             </tr>
                                         </table>
@@ -147,7 +153,7 @@ export async function POST(request: NextRequest) {
 
         // Send email to admin (info@yosuun.com)
         await resend.emails.send({
-            from: 'Yosuun Web Form <onboarding@resend.dev>',
+            from: 'Yosuun Web Form <info@yosuun.com>',
             to: 'info@yosuun.com',
             subject: `Yeni İletişim Formu: ${firstName} ${lastName}`,
             html: `

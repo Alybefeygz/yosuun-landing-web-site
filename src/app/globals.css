@@ -25,6 +25,7 @@ body {
     "Segoe UI", sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 a {
@@ -58,7 +59,7 @@ a {
 @keyframes slideInLeft {
   from {
     opacity: 0;
-    transform: translateX(-100px);
+    transform: translateX(-6.25rem);
   }
 
   to {
@@ -75,7 +76,7 @@ a {
 @keyframes slideInRight {
   from {
     opacity: 0;
-    transform: translateX(100px);
+    transform: translateX(6.25rem);
   }
 
   to {
@@ -92,7 +93,7 @@ a {
 @keyframes slideInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(1.25rem);
   }
 
   to {
@@ -104,4 +105,647 @@ a {
 .animate-slide-in-up {
   opacity: 0;
   animation: slideInUp 0.8s ease-out forwards;
+}
+
+/* Responsive heading sizes with clamp() */
+.heading-hero {
+  font-size: clamp(1.4rem, 4vw + 0.8rem, 4.5rem);
+}
+
+.heading-section {
+  font-size: clamp(0.95rem, 2.8vw + 0.4rem, 3rem);
+}
+
+.heading-card {
+  font-size: clamp(1.25rem, 2vw + 0.5rem, 1.75rem);
+}
+
+/* Responsive container padding with clamp() */
+.container-padding {
+  padding-left: clamp(0.75rem, 3vw, 4rem);
+  padding-right: clamp(0.75rem, 3vw, 4rem);
+}
+
+/* Responsive section spacing */
+.section-spacing {
+  margin-top: clamp(6rem, 12vw, 14rem);
+}
+
+.section-spacing-sm {
+  margin-top: clamp(5rem, 6vw, 8rem);
+}
+
+/* Responsive gap utilities */
+.gap-responsive {
+  gap: clamp(1rem, 2vw, 2rem);
+}
+
+.gap-responsive-lg {
+  gap: clamp(1rem, 2.4vw, 2.4rem);
+}
+
+/* Responsive button sizing */
+.btn-responsive {
+  font-size: clamp(0.48rem, 1.2vw + 0.16rem, 0.8rem);
+  padding-left: clamp(0.4rem, 1.2vw, 1.2rem);
+  padding-right: clamp(0.2rem, 0.4vw, 0.4rem);
+  padding-top: clamp(0.3rem, 0.6vw, 0.5rem);
+  padding-bottom: clamp(0.3rem, 0.6vw, 0.5rem);
+  width: clamp(5.6rem, 14.4vw + 2.4rem, 11.2rem);
+}
+
+.btn-responsive .btn-icon {
+  width: clamp(1rem, 2vw + 0.32rem, 1.8rem);
+  height: clamp(1rem, 2vw + 0.32rem, 1.8rem);
+}
+
+/* Responsive avatar sizing */
+.avatar-responsive {
+  width: clamp(1.2rem, 2.4vw + 0.32rem, 2.4rem);
+  height: clamp(1.2rem, 2.4vw + 0.32rem, 2.4rem);
+  font-size: clamp(0.4rem, 0.64vw + 0.16rem, 0.7rem);
+}
+
+/* Responsive paragraph text */
+.text-responsive {
+  font-size: clamp(0.448rem, 0.96vw + 0.16rem, 1rem);
+  line-height: clamp(0.704rem, 1.6vw + 0.32rem, 1.6rem);
+}
+
+/* Responsive star icons */
+.star-responsive {
+  width: clamp(0.4rem, 1vw, 1rem);
+  height: clamp(0.4rem, 1vw, 1rem);
+}
+
+/* Responsive small text */
+.text-sm-responsive {
+  font-size: clamp(0.44rem, 0.8vw + 0.2rem, 0.875rem);
+}
+
+/* Fixed logo marquee item sizing - logos don't shrink, fewer logos visible on smaller screens */
+.logo-item-responsive {
+  height: 7.2rem;
+  width: 9rem;
+  flex-shrink: 0;
+}
+
+/* 750px altında: %70 boyut */
+@media (max-width: 750px) {
+  .logo-item-responsive {
+    height: 5rem;
+    width: 6.3rem;
+  }
+}
+
+/* 600px altında: %50 boyut */
+@media (max-width: 600px) {
+  .logo-item-responsive {
+    height: 3.6rem;
+    width: 4.5rem;
+  }
+}
+
+/* Responsive negative margin for logo marquee */
+.logo-marquee-margin {
+  margin-top: clamp(-3rem, -2vw - 0.5rem, -1rem);
+}
+
+/* Responsive pill sizing for nasil-dusunur section - clamp like heading-hero */
+.pill-responsive {
+  padding: clamp(0.4rem, 0.8vw + 0.2rem, 1rem) clamp(1rem, 2vw + 0.5rem, 2.5rem);
+  font-size: clamp(0.6rem, 1.5vw + 0.3rem, 1.875rem);
+}
+
+/* Responsive stat number sizing - clamp like heading-hero */
+.stat-number-responsive {
+  font-size: clamp(1.8rem, 6vw + 1rem, 8rem);
+}
+
+/* Responsive stat plus sign */
+.stat-plus-responsive {
+  font-size: clamp(0.9rem, 2.4vw + 0.4rem, 3rem);
+}
+
+/* Responsive stat label */
+.stat-label-responsive {
+  font-size: clamp(0.35rem, 0.9vw + 0.15rem, 1.125rem);
+}
+
+/* Responsive margin for stats section */
+.mt-stats-responsive {
+  margin-top: clamp(1.5rem, 4vw + 0.5rem, 5rem);
+}
+
+/* Responsive translate-y for infinity symbol */
+.infinity-translate {
+  transform: translateY(clamp(8px, 3vw, 36px));
+}
+
+/* ========== KIMLER ICIN SECTION ========== */
+
+/* Responsive service card sizing - FIXED sizes, only layout changes */
+.service-card-responsive {
+  height: 10rem;
+  width: 10rem;
+  padding: 1.25rem;
+  border-radius: 1.5rem;
+}
+
+/* Service cards container - grid layout with fixed gap */
+.service-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+/* Medium screens (750px): 2x2 grid with same card size */
+@media (max-width: 750px) {
+  .service-cards-grid {
+    grid-template-columns: repeat(2, auto);
+  }
+}
+
+/* Small screens (600px): 2x2 grid with smaller cards */
+@media (max-width: 600px) {
+  .service-card-responsive {
+    height: 7rem;
+    width: 7rem;
+    padding: 0.75rem;
+    border-radius: 1rem;
+  }
+
+  .service-icon-responsive {
+    height: 1.75rem;
+    width: 1.75rem;
+  }
+
+  .service-title-responsive {
+    font-size: 0.9rem;
+  }
+}
+
+/* Responsive service card icon */
+.service-icon-responsive {
+  height: clamp(1.5rem, 3vw + 0.5rem, 3rem);
+  width: clamp(1.5rem, 3vw + 0.5rem, 3rem);
+}
+
+/* Responsive service card title */
+.service-title-responsive {
+  font-size: clamp(0.75rem, 1.5vw + 0.3rem, 1.5rem);
+  line-height: 1.3;
+}
+
+/* Responsive CTA banner */
+.cta-banner-responsive {
+  padding: clamp(1rem, 2vw + 0.5rem, 2rem) clamp(1rem, 2vw + 0.5rem, 2.5rem);
+  border-radius: clamp(1rem, 2vw + 0.5rem, 1.625rem);
+  margin-top: clamp(1.5rem, 3vw + 0.5rem, 3rem);
+  margin-bottom: clamp(1.5rem, 3vw + 0.5rem, 3rem);
+}
+
+/* Responsive CTA title */
+.cta-title-responsive {
+  font-size: clamp(0.5rem, 1.2vw + 0.2rem, 1.25rem);
+  white-space: nowrap;
+}
+
+/* Responsive CTA subtitle */
+.cta-subtitle-responsive {
+  font-size: clamp(0.35rem, 0.8vw + 0.15rem, 1rem);
+  white-space: nowrap;
+}
+
+/* Responsive CTA button */
+.cta-button-responsive {
+  padding: clamp(0.3rem, 0.6vw + 0.15rem, 0.75rem) clamp(0.5rem, 1vw + 0.2rem, 1.25rem);
+  font-size: clamp(0.35rem, 0.6vw + 0.15rem, 0.875rem);
+  white-space: nowrap;
+}
+
+/* Responsive CTA button icon container */
+.cta-icon-responsive {
+  height: clamp(1rem, 2vw + 0.3rem, 1.75rem);
+  width: clamp(1rem, 2vw + 0.3rem, 1.75rem);
+}
+
+/* Responsive CTA button icon SVG */
+.cta-icon-responsive svg {
+  height: clamp(0.6rem, 1vw + 0.2rem, 1rem);
+  width: clamp(0.6rem, 1vw + 0.2rem, 1rem);
+}
+
+/* ========== NASIL CALISIR FEATURE CARDS ========== */
+
+/* Responsive feature card */
+.feature-card-responsive {
+  width: 18rem;
+  height: 300px;
+  padding: 1.25rem;
+  border-radius: 2rem;
+}
+
+/* 750px altında: küçük kartlar (+30% büyütüldü) */
+@media (max-width: 750px) {
+  .feature-card-responsive {
+    width: 15.5rem;
+    height: 285px;
+    padding: 1rem;
+    border-radius: 1.75rem;
+  }
+
+  .feature-card-responsive img {
+    height: 105px !important;
+    margin-bottom: 0.6rem !important;
+  }
+
+  .feature-card-responsive h4 {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .feature-card-responsive p {
+    font-size: 0.78rem;
+    line-height: 1.4;
+  }
+}
+
+/* 600px altında: daha küçük kartlar (+30% büyütüldü) */
+@media (max-width: 600px) {
+  .feature-card-responsive {
+    width: 11.5rem;
+    height: 210px;
+    padding: 0.65rem;
+    border-radius: 1.25rem;
+  }
+
+  .feature-card-responsive img {
+    height: 65px !important;
+    margin-bottom: 0.35rem !important;
+  }
+
+  .feature-card-responsive h4 {
+    font-size: 0.72rem;
+  }
+
+  .feature-card-responsive p {
+    font-size: 0.58rem;
+    line-height: 1.35;
+  }
+}
+
+/* ========== TIMELINE ELEMENTS (450px altında küçülür) ========== */
+
+/* Timeline daire responsive */
+.timeline-circle-responsive {
+  height: 3rem;
+  width: 3rem;
+  font-size: 0.875rem;
+}
+
+/* Timeline son büyük daire */
+.timeline-circle-large-responsive {
+  height: 6rem;
+  width: 6rem;
+}
+
+/* Timeline çizgi yüksekliği */
+.timeline-line-responsive {
+  height: 15rem;
+}
+
+.timeline-line-last-responsive {
+  height: 24rem;
+}
+
+/* 450px altında: küçük daireler ve çizgiler */
+@media (max-width: 450px) {
+  .timeline-circle-responsive {
+    height: 2rem;
+    width: 2rem;
+    font-size: 0.6rem;
+  }
+
+  .timeline-circle-large-responsive {
+    height: 4rem;
+    width: 4rem;
+  }
+
+  .timeline-circle-large-responsive img {
+    height: 45px !important;
+    width: 45px !important;
+  }
+
+  .timeline-line-responsive {
+    height: 10rem;
+  }
+
+  .timeline-line-last-responsive {
+    height: 16rem;
+  }
+
+  .feature-card-responsive {
+    width: 7rem;
+    height: 130px;
+    padding: 0.4rem;
+  }
+
+  .feature-card-responsive img {
+    height: 35px !important;
+  }
+
+  .feature-card-responsive h4 {
+    font-size: 0.45rem;
+  }
+
+  .feature-card-responsive p {
+    font-size: 0.35rem;
+  }
+}
+
+/* ========== DENEYIMLER SECTION RESPONSIVE ========== */
+
+/* Testimonial label (KULLANICI HİKAYESİ, PAW & MORE) */
+.testimonial-label-responsive {
+  font-size: clamp(0.5rem, 0.8vw + 0.2rem, 0.75rem);
+}
+
+/* Testimonial main quote */
+.testimonial-quote-responsive {
+  font-size: clamp(0.75rem, 1.5vw + 0.3rem, 1.5rem);
+  line-height: 1.4;
+}
+
+/* Testimonial author name */
+.testimonial-author-responsive {
+  font-size: clamp(0.5rem, 0.8vw + 0.2rem, 0.875rem);
+}
+
+/* Testimonial author description */
+.testimonial-desc-responsive {
+  font-size: clamp(0.4rem, 0.7vw + 0.15rem, 0.875rem);
+}
+
+/* Testimonial big number (%147) */
+.testimonial-number-responsive {
+  font-size: clamp(1.5rem, 4vw + 0.5rem, 3rem);
+}
+
+/* Testimonial card subtitle */
+.testimonial-subtitle-responsive {
+  font-size: clamp(0.5rem, 0.9vw + 0.2rem, 1rem);
+}
+
+/* Testimonial card min-height responsive */
+.testimonial-card-responsive {
+  min-height: clamp(180px, 30vw + 50px, 420px);
+  padding: clamp(1rem, 2vw + 0.5rem, 2.5rem);
+  border-radius: clamp(1rem, 2vw + 0.5rem, 1.75rem);
+}
+
+/* Testimonial green card padding */
+.testimonial-green-card-responsive {
+  padding: clamp(1rem, 2vw + 0.5rem, 2.5rem);
+  border-radius: clamp(1rem, 2vw + 0.5rem, 1.75rem);
+}
+
+/* 640px altında alt alta geldiğinde: üst kart +%20, alt kart -%30 (sadece padding) */
+@media (max-width: 640px) {
+  .testimonial-card-responsive {
+    min-height: clamp(220px, 36vw + 60px, 500px);
+    padding: clamp(1.2rem, 2.4vw + 0.6rem, 3rem);
+  }
+
+  .testimonial-green-card-responsive {
+    padding-top: clamp(1.2rem, 2.4vw + 0.6rem, 3rem);
+    padding-bottom: clamp(0.5rem, 1vw + 0.25rem, 1.25rem);
+    padding-left: clamp(1.2rem, 2.4vw + 0.6rem, 3rem);
+    padding-right: clamp(1.2rem, 2.4vw + 0.6rem, 3rem);
+  }
+
+  .testimonial-green-content-spacing {
+    margin-top: 1rem;
+  }
+}
+
+/* Yeşil kart içerik margin - varsayılan */
+.testimonial-green-content-spacing {
+  margin-top: 2.5rem;
+}
+
+/* ========== DEMO FEATURE CARDS RESPONSIVE ========== */
+
+/* Demo section spacing - responsive */
+.demo-section-spacing {
+  margin-top: 3.5rem;
+}
+
+@media (max-width: 750px) {
+  .demo-section-spacing {
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .demo-section-spacing {
+    margin-top: 1.5rem;
+  }
+}
+
+/* Demo kartları grid container */
+.demo-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+/* 750px altında: 2 sütun */
+@media (max-width: 750px) {
+  .demo-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .demo-card-responsive {
+    padding: 0.5rem;
+    padding-top: 0.6rem;
+    padding-bottom: 0.8rem;
+    border-radius: 0.75rem;
+  }
+
+  .demo-badge-responsive {
+    padding: 0.15rem 0.35rem;
+    font-size: 0.5rem;
+    margin-top: -0.5rem;
+  }
+
+  .demo-feature-text-responsive {
+    font-size: 0.45rem;
+  }
+
+  .demo-icon-responsive {
+    height: 0.5rem;
+    width: 0.5rem;
+  }
+
+  .demo-card-responsive .space-y-6 {
+    gap: 0.25rem;
+  }
+
+  .demo-card-responsive .space-y-2 {
+    gap: 0.1rem;
+  }
+}
+
+/* 600px altında: daha küçük kartlar */
+@media (max-width: 600px) {
+  .demo-cards-grid {
+    gap: 0.5rem;
+  }
+
+  .demo-card-responsive {
+    padding: 0.35rem;
+    padding-top: 0.4rem;
+    padding-bottom: 0.5rem;
+    border-radius: 0.5rem;
+  }
+
+  .demo-badge-responsive {
+    padding: 0.1rem 0.25rem;
+    font-size: 0.4rem;
+    margin-top: -0.35rem;
+  }
+
+  .demo-feature-text-responsive {
+    font-size: 0.35rem;
+    line-height: 1.2;
+  }
+
+  .demo-icon-responsive {
+    height: 0.35rem;
+    width: 0.35rem;
+  }
+
+  .demo-card-responsive .space-y-6>*+* {
+    margin-top: 0.15rem !important;
+  }
+
+  .demo-card-responsive .space-y-2>*+* {
+    margin-top: 0.05rem !important;
+  }
+
+  .demo-card-responsive .gap-2 {
+    gap: 0.1rem !important;
+  }
+
+  .demo-card-responsive .flex.items-center.gap-2 {
+    gap: 0.1rem !important;
+  }
+}
+
+/* 450px altında: en küçük boyut */
+@media (max-width: 450px) {
+  .demo-cards-grid {
+    gap: 0.25rem;
+  }
+
+  .demo-card-responsive {
+    padding: 0.15rem;
+    padding-top: 0.18rem;
+    padding-bottom: 0.2rem;
+    border-radius: 0.25rem;
+  }
+
+  .demo-badge-responsive {
+    padding: 0.03rem 0.1rem;
+    font-size: 0.2rem;
+    margin-top: -0.15rem;
+  }
+
+  .demo-feature-text-responsive {
+    font-size: 0.18rem;
+    line-height: 1;
+  }
+
+  .demo-icon-responsive {
+    height: 0.15rem;
+    width: 0.15rem;
+  }
+
+  .demo-card-responsive .space-y-6>*+* {
+    margin-top: 0.06rem !important;
+  }
+
+  .demo-card-responsive .space-y-2>*+* {
+    margin-top: 0.02rem !important;
+  }
+
+  .demo-card-responsive .gap-2 {
+    gap: 0.03rem !important;
+  }
+
+  .demo-card-responsive .flex.items-center.gap-2 {
+    gap: 0.03rem !important;
+  }
+}
+
+/* Demo kart responsive - varsayılan */
+.demo-card-responsive {
+  padding: clamp(1rem, 2vw + 0.5rem, 1.5rem);
+  padding-top: clamp(1.25rem, 2.5vw + 0.5rem, 1.75rem);
+  padding-bottom: clamp(1.5rem, 3vw + 0.5rem, 2.5rem);
+  border-radius: clamp(1rem, 2vw + 0.5rem, 1.25rem);
+}
+
+/* Demo kart badge */
+.demo-badge-responsive {
+  padding: clamp(0.25rem, 0.5vw + 0.1rem, 0.375rem) clamp(0.5rem, 1vw + 0.2rem, 0.75rem);
+  font-size: clamp(0.6rem, 0.8vw + 0.2rem, 0.875rem);
+  margin-top: clamp(-1rem, -2vw, -1.5rem);
+}
+
+/* Demo kart feature text */
+.demo-feature-text-responsive {
+  font-size: clamp(0.6rem, 0.9vw + 0.2rem, 0.875rem);
+}
+
+/* Demo kart icon */
+.demo-icon-responsive {
+  height: clamp(0.75rem, 1vw + 0.2rem, 1rem);
+  width: clamp(0.75rem, 1vw + 0.2rem, 1rem);
+}
+
+/* ========== FOOTER CTA RESPONSIVE ========== */
+
+/* Footer CTA container */
+.footer-cta-container {
+  padding: clamp(1.5rem, 4vw + 1rem, 4rem);
+  border-radius: clamp(1rem, 3vw + 0.5rem, 2rem);
+}
+
+/* Footer CTA paragraph */
+.footer-cta-text {
+  font-size: clamp(0.65rem, 1.2vw + 0.3rem, 1.125rem);
+  line-height: clamp(1.2rem, 2vw + 0.5rem, 1.75rem);
+  margin-top: clamp(0.5rem, 1vw + 0.25rem, 1rem);
+}
+
+/* Footer CTA button */
+.footer-cta-button {
+  padding: clamp(0.25rem, 0.5vw + 0.1rem, 0.375rem) clamp(0.75rem, 1.5vw + 0.3rem, 1.25rem);
+  padding-right: clamp(0.25rem, 0.5vw + 0.1rem, 0.375rem);
+  font-size: clamp(0.6rem, 0.9vw + 0.3rem, 0.875rem);
+}
+
+/* Footer CTA button icon */
+.footer-cta-icon {
+  height: clamp(1.25rem, 2.5vw + 0.5rem, 2.25rem);
+  width: clamp(1.25rem, 2.5vw + 0.5rem, 2.25rem);
+}
+
+/* Footer CTA button container margin */
+.footer-cta-button-wrapper {
+  margin-top: clamp(1rem, 2vw + 0.5rem, 2rem);
 }
