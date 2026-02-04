@@ -23,9 +23,9 @@ export default function Footer() {
                         adına hareket eder.
                     </p>
                     <div className="flex items-center gap-3 sm:gap-4 text-slate-700">
-                        <span className="text-xs sm:text-sm font-semibold cursor-pointer hover:text-slate-900 transition-colors">X</span>
-                        <span className="text-xs sm:text-sm font-semibold cursor-pointer hover:text-slate-900 transition-colors">in</span>
-                        <span className="text-xs sm:text-sm font-semibold cursor-pointer hover:text-slate-900 transition-colors">@</span>
+                        <a href="https://x.com/yosuunturkey" target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm font-semibold cursor-pointer hover:text-slate-900 transition-colors">X</a>
+                        <a href="https://www.linkedin.com/company/yosuun/" target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm font-semibold cursor-pointer hover:text-slate-900 transition-colors">in</a>
+                        <a href="https://www.instagram.com/yosuun.tr/" target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm font-semibold cursor-pointer hover:text-slate-900 transition-colors">@</a>
                     </div>
                 </div>
 
