@@ -14,8 +14,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Awake — Building bold brands",
-  description: "Bold brand storytelling and thoughtful design studio landing page.",
+  title: "yosuun | Ya da Hepsini O Yapsın",
+  description: "Yosuun - E-ticaret yapmadan e-ticaret yapmanın en kolay yolu.",
+  icons: {
+    icon: "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/sekme-foto.png",
+  },
 };
 
 export default function RootLayout({

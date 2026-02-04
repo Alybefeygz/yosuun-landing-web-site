@@ -25,6 +25,10 @@ export default function KullaniciHikayesiPage() {
     }, []);
 
     useEffect(() => {
+        document.title = "yosuun - Kullanıcı Hikayesi";
+    }, []);
+
+    useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 20);
         };

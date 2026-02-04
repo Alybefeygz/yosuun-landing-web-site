@@ -273,6 +273,10 @@ export default function ContactPage() {
     }, []);
 
     useEffect(() => {
+        document.title = "yosuun - İletişim";
+    }, []);
+
+    useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 20);
 
