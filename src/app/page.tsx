@@ -1251,7 +1251,7 @@ function HomeContent() {
                 <ArrowIcon />
               </span>
             </Link>
-            <Link href="/iletisim" className="inline-flex items-center gap-2 rounded-full border border-white/40 cta-button-responsive font-semibold text-white transition hover:bg-white/10">
+            <Link href="/iletisim" className="hidden sm:inline-flex items-center gap-2 rounded-full border border-white/40 cta-button-responsive font-semibold text-white transition hover:bg-white/10">
               Sizi Arayalım
               <span className="grid cta-icon-responsive place-items-center rounded-full bg-white/15">
                 <ArrowIcon />
@@ -1499,7 +1499,10 @@ function HomeContent() {
           <div className={`flex flex-col justify-between testimonial-green-card-responsive bg-[#ccfac5] text-slate-900 shadow-lg shadow-black/10 ${isTestimonialsContentVisible ? "animate-slide-in-right" : "opacity-0"}`} style={{ animationDelay: "0.7s" }}>
             <p className="testimonial-label-responsive font-semibold tracking-[0.2em] text-slate-700">PAW & MORE</p>
             <div className="testimonial-green-content-spacing flex flex-col gap-3">
-              <p className="testimonial-number-responsive font-semibold leading-none">{testimonial.stat}</p>
+              <div className="flex items-baseline gap-2">
+                <p className="testimonial-number-responsive font-semibold leading-none">{testimonial.stat}</p>
+                <span className="testimonial-subtitle-responsive font-medium text-slate-700">satış artışı</span>
+              </div>
               <p className="testimonial-subtitle-responsive font-semibold leading-6 text-slate-800">
                 {testimonial.statLabel}
               </p>
@@ -1630,7 +1633,7 @@ function HomeContent() {
                 <ArrowIcon />
               </span>
             </Link>
-            <Link href="/iletisim" className="inline-flex items-center gap-2 rounded-full border border-white/40 cta-button-responsive font-semibold text-white transition hover:bg-white/10">
+            <Link href="/iletisim" className="hidden sm:inline-flex items-center gap-2 rounded-full border border-white/40 cta-button-responsive font-semibold text-white transition hover:bg-white/10">
               Sizi Arayalım
               <span className="grid cta-icon-responsive place-items-center rounded-full bg-white/15">
                 <ArrowIcon />

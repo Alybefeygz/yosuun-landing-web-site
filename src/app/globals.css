@@ -308,33 +308,63 @@ a {
 
 /* Responsive CTA title */
 .cta-title-responsive {
-  font-size: clamp(0.5rem, 1.2vw + 0.2rem, 1.25rem);
+  font-size: clamp(0.6rem, 1.2vw + 0.2rem, 1.25rem);
   white-space: nowrap;
 }
 
 /* Responsive CTA subtitle */
 .cta-subtitle-responsive {
-  font-size: clamp(0.35rem, 0.8vw + 0.15rem, 1rem);
+  font-size: clamp(0.42rem, 0.8vw + 0.15rem, 1rem);
   white-space: nowrap;
 }
 
 /* Responsive CTA button */
 .cta-button-responsive {
-  padding: clamp(0.3rem, 0.6vw + 0.15rem, 0.75rem) clamp(0.5rem, 1vw + 0.2rem, 1.25rem);
-  font-size: clamp(0.35rem, 0.6vw + 0.15rem, 0.875rem);
+  padding: clamp(0.36rem, 0.6vw + 0.15rem, 0.75rem) clamp(0.6rem, 1vw + 0.2rem, 1.25rem);
+  font-size: clamp(0.42rem, 0.6vw + 0.15rem, 0.875rem);
   white-space: nowrap;
 }
 
 /* Responsive CTA button icon container */
 .cta-icon-responsive {
-  height: clamp(1rem, 2vw + 0.3rem, 1.75rem);
-  width: clamp(1rem, 2vw + 0.3rem, 1.75rem);
+  height: clamp(1.2rem, 2vw + 0.3rem, 1.75rem);
+  width: clamp(1.2rem, 2vw + 0.3rem, 1.75rem);
 }
 
 /* Responsive CTA button icon SVG */
 .cta-icon-responsive svg {
-  height: clamp(0.6rem, 1vw + 0.2rem, 1rem);
-  width: clamp(0.6rem, 1vw + 0.2rem, 1rem);
+  height: clamp(0.72rem, 1vw + 0.2rem, 1rem);
+  width: clamp(0.72rem, 1vw + 0.2rem, 1rem);
+}
+
+/* 418px altında: CTA elementlerini küçült */
+@media (max-width: 418px) {
+  .cta-title-responsive {
+    font-size: 0.72rem;
+  }
+
+  .cta-subtitle-responsive {
+    font-size: 0.46rem;
+  }
+
+  .cta-button-responsive {
+    padding: 0.36rem 0.58rem;
+    font-size: 0.46rem;
+  }
+
+  .cta-icon-responsive {
+    height: 1.3rem;
+    width: 1.3rem;
+  }
+
+  .cta-icon-responsive svg {
+    height: 0.72rem;
+    width: 0.72rem;
+  }
+
+  .cta-banner-responsive {
+    padding: 0.86rem 1.15rem;
+  }
 }
 
 /* ========== NASIL CALISIR FEATURE CARDS ========== */
@@ -347,38 +377,56 @@ a {
   border-radius: 2rem;
 }
 
-/* 750px altında: küçük kartlar (+30% büyütüldü) */
+/* 750px altında: küçük kartlar */
 @media (max-width: 750px) {
   .feature-card-responsive {
-    width: 15.5rem;
-    height: 285px;
+    width: 14rem;
+    height: 260px;
     padding: 1rem;
-    border-radius: 1.75rem;
+    border-radius: 1.5rem;
+  }
+
+  /* Kartları merkeze yaklaştır */
+  .feature-card-responsive.left-10 {
+    left: 2rem !important;
+  }
+
+  .feature-card-responsive.right-10 {
+    right: 2rem !important;
   }
 
   .feature-card-responsive img {
-    height: 105px !important;
-    margin-bottom: 0.6rem !important;
+    height: 90px !important;
+    margin-bottom: 0.5rem !important;
   }
 
   .feature-card-responsive h4 {
-    font-size: 1rem;
-    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
   }
 
   .feature-card-responsive p {
-    font-size: 0.78rem;
+    font-size: 0.7rem;
     line-height: 1.4;
   }
 }
 
-/* 600px altında: daha küçük kartlar (+30% büyütüldü) */
+/* 600px altında: daha küçük kartlar */
 @media (max-width: 600px) {
   .feature-card-responsive {
-    width: 11.5rem;
-    height: 210px;
-    padding: 0.65rem;
+    width: 11rem;
+    height: 200px;
+    padding: 0.75rem;
     border-radius: 1.25rem;
+  }
+
+  /* Kartları merkeze yaklaştır */
+  .feature-card-responsive.left-10 {
+    left: 1.5rem !important;
+  }
+
+  .feature-card-responsive.right-10 {
+    right: 1.5rem !important;
   }
 
   .feature-card-responsive img {
@@ -387,11 +435,11 @@ a {
   }
 
   .feature-card-responsive h4 {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
   }
 
   .feature-card-responsive p {
-    font-size: 0.58rem;
+    font-size: 0.55rem;
     line-height: 1.35;
   }
 }
@@ -447,21 +495,30 @@ a {
   }
 
   .feature-card-responsive {
-    width: 7rem;
-    height: 130px;
-    padding: 0.4rem;
+    width: 9.24rem;
+    height: 172px;
+    padding: 0.53rem;
+  }
+
+  /* Kartları merkeze yaklaştır */
+  .feature-card-responsive.left-10 {
+    left: 1rem !important;
+  }
+
+  .feature-card-responsive.right-10 {
+    right: 1rem !important;
   }
 
   .feature-card-responsive img {
-    height: 35px !important;
+    height: 46px !important;
   }
 
   .feature-card-responsive h4 {
-    font-size: 0.45rem;
+    font-size: 0.59rem;
   }
 
   .feature-card-responsive p {
-    font-size: 0.35rem;
+    font-size: 0.46rem;
   }
 }
 
