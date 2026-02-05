@@ -19,6 +19,9 @@ export const metadata: Metadata = {
   icons: {
     icon: "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/sekme-foto.png",
   },
+  other: {
+    "google": "notranslate",
+  },
 };
 
 export default function RootLayout({
@@ -27,9 +30,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="tr" translate="no">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased notranslate`}
       >
         <SmoothScroll />
         {children}
