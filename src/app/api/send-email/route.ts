@@ -203,7 +203,7 @@ export async function POST(request: NextRequest) {
                                                     </a>
                                                 </td>
                                                 <td style="padding: 0 12px;">
-                                                    <a href="https://www.instagram.com/yosuun.tr/" target="_blank" style="text-decoration: none; display: inline-block;">
+                                                    <a href="https://www.instagram.com/yosuunturkey/" target="_blank" style="text-decoration: none; display: inline-block;">
                                                         <img src="https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/instagram-icon.png" alt="Instagram" width="40" height="40" style="display: block; border: 0;" />
                                                     </a>
                                                 </td>
