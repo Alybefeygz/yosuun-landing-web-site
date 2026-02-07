@@ -1334,7 +1334,7 @@ function HomeContent() {
                 {idx < arr.length - 1 && (
                   <div className={`relative w-0.5 bg-slate-200 overflow-visible ${idx === 4 ? "timeline-line-last-responsive" : "timeline-line-responsive"}`}>
                     <div
-                      className="absolute top-0 left-0 w-full bg-slate-900 transition-all duration-150"
+                      className="absolute top-0 left-0 w-full bg-slate-900"
                       style={{ height: `${lineFill * 100}%` }}
                     />
                     {/* Animated Card */}
@@ -1345,7 +1345,7 @@ function HomeContent() {
                         transformOrigin: idx % 2 === 0 ? "left center" : "right center",
                         transform: `translate(0, -49%) scale(${0.6 + 0.4 * lineFill})`,
                         visibility: lineFill > 0.1 ? "visible" : "hidden",
-                        transition: "transform 0.1s linear, opacity 0.1s linear"
+
                       }}
                     >
                       {/* Card Text */}
