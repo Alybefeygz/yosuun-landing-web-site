@@ -5,11 +5,100 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Footer from "@/components/Footer";
 
+// Type for animated heading segments
+type AnimatedSegment = { text: string; className?: string; color?: string };
+
+// AnimatedHeading component - copied from main page
+function AnimatedHeading({
+    segments,
+    className,
+    start = 0.55,
+    end = 0.15,
+}: {
+    segments: AnimatedSegment[];
+    className?: string;
+    start?: number;
+    end?: number;
+}) {
+    const ref = useRef<HTMLHeadingElement | null>(null);
+    const [progress, setProgress] = useState(0);
+
+    useEffect(() => {
+        const handler = () => {
+            const node = ref.current;
+            if (!node) return;
+            const rect = node.getBoundingClientRect();
+            const viewport = window.innerHeight || 1;
+            const startPx = viewport * start;
+            const endPx = viewport * end;
+            const distance = startPx - endPx || 1;
+            const raw = (startPx - rect.top) / distance;
+            const clamped = Math.min(1, Math.max(0, raw));
+            setProgress(clamped);
+        };
+        handler();
+        window.addEventListener("scroll", handler, { passive: true });
+        window.addEventListener("resize", handler);
+        return () => {
+            window.removeEventListener("scroll", handler);
+            window.removeEventListener("resize", handler);
+        };
+    }, [start, end]);
+
+    const baseColor = "28,42,60";
+
+    return (
+        <div ref={ref} className={className} style={{ lineHeight: "1.2" }}>
+            {segments.map((seg, sIdx) => (
+                <span key={sIdx} className={seg.className}>
+                    {seg.text.split("").map((char, idx) => {
+                        const step = 0.0125;
+                        const perChar = Math.min(1, Math.max(0, (progress - idx * step) / 0.05));
+                        const alpha = 0.2 + perChar * 0.8;
+                        const color = seg.color ? seg.color : baseColor;
+                        return (
+                            <span
+                                key={`${sIdx}-${idx}`}
+                                style={{
+                                    color: `rgba(${color}, ${alpha})`,
+                                    transition: "color 120ms ease-out",
+                                    whiteSpace: char === "\n" ? "pre" : undefined,
+                                }}
+                            >
+                                {char}
+                            </span>
+                        );
+                    })}
+                </span>
+            ))}
+        </div>
+    );
+}
+
+
 export default function KullaniciHikayesiPage() {
     const router = useRouter();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
+    const [isContactExpanded, setIsContactExpanded] = useState(false);
+    const contactBtnRef = useRef<HTMLAnchorElement | null>(null);
+
+    // Close contact button when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (contactBtnRef.current && !contactBtnRef.current.contains(event.target as Node)) {
+                setIsContactExpanded(false);
+            }
+        };
+
+        if (isContactExpanded) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isContactExpanded]);
 
     const navItems = ['Ana Sayfa', 'Nasıl Düşünür', 'Kimler İçin', 'Nasıl Çalışır', 'Deneyimler', 'Demo', 'SSS'];
     const sectionIds = ['ana-sayfa', 'nasil-dusunur', 'kimler-icin', 'nasil-calisir', 'deneyimler', 'demo', 'sss'];
@@ -53,9 +142,6 @@ export default function KullaniciHikayesiPage() {
             document.addEventListener('mousedown', handleClickOutside);
         }
 
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
     }, [isMenuOpen]);
 
     // ... (keeping imports and top part same)
@@ -63,12 +149,12 @@ export default function KullaniciHikayesiPage() {
     return (
         <div className="min-h-[100dvh] flex flex-col bg-gradient-to-br from-[#e8ffe6] via-white to-white text-slate-900">
             {/* Navbar - Same as homepage */}
-            <header className={`fixed top-5 left-0 right-0 z-[100] mx-auto grid grid-cols-[1fr_auto_1fr] items-center gap-2 min-[500px]:gap-12 px-3 min-[500px]:px-6 md:px-8 transition-all duration-300 w-[95%] max-w-[1440px] ${isScrolled ? "bg-white/70 py-3 shadow-lg shadow-black/5 backdrop-blur-md rounded-full" : "py-6"}`}>
-                <Link href="/" className="relative flex h-12 items-center shrink-0 overflow-visible z-0 justify-self-start cursor-pointer">
+            <header className={`fixed top-5 left-0 right-0 z-[100] mx-auto flex justify-between min-[1000px]:grid min-[1000px]:grid-cols-[1fr_auto_1fr] items-center gap-2 min-[500px]:gap-12 px-3 min-[500px]:px-6 md:px-8 transition-all duration-300 w-[95%] max-w-[1440px] ${isScrolled ? "bg-white/70 py-3 shadow-lg shadow-black/5 backdrop-blur-md rounded-full" : "py-6"}`}>
+                <Link href="/" className="relative flex h-12 items-center shrink-0 overflow-visible z-0 justify-self-start cursor-pointer transition-all duration-300">
                     <img src="https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/logo-mobile.png" alt="Yosuun" className="min-[724px]:hidden h-[64px]" />
                     <img src="https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/yosuun-new-logo.png" alt="Yosuun" className="hidden min-[724px]:block h-[200px] w-auto max-w-none" />
                 </Link>
-                <nav className="flex items-center gap-1 rounded-full border border-white/20 bg-white/50 p-1.5 backdrop-blur z-10 justify-self-center">
+                <nav className={`flex items-center gap-1 rounded-full border border-white/20 bg-white/50 p-1.5 backdrop-blur z-10 justify-self-center transition-all duration-300 origin-center ${isContactExpanded ? "opacity-0 invisible scale-95" : "opacity-100 visible scale-100"}`}>
                     {/* Desktop Navigation - 1400px ve üstü: tüm butonlar görünür */}
                     <div className="hidden min-[1400px]:flex items-center gap-1">
                         <button onClick={() => navigateToSection('ana-sayfa')} className="rounded-full px-5 py-2 text-sm font-medium transition whitespace-nowrap text-slate-600 hover:bg-white/50 hover:text-slate-900">Ana Sayfa</button>
@@ -129,14 +215,40 @@ export default function KullaniciHikayesiPage() {
                     </div>
                 </nav>
                 <div className="flex items-center gap-2 shrink-0 justify-self-end ml-1 min-[724px]:ml-0">
-                    {/* Mobile: sadece ok ikonu */}
-                    <Link href="/iletisim" className="min-[724px]:hidden relative">
-                        <div className="absolute -inset-[0.125rem] bg-black rounded-full"></div>
-                        <div className="relative grid h-9 w-9 place-items-center rounded-full bg-white text-slate-900 shadow-md transition hover:translate-y-[-1px] p-2">
+                    {/* Mobile/Tablet Expanding Contact Button */}
+                    <Link
+                        ref={contactBtnRef}
+                        href="/iletisim"
+                        className={`min-[724px]:hidden relative flex items-center justify-end rounded-full transition-all duration-500 ease-spring ${isContactExpanded ? "pr-1.5 pl-5 py-1.5 w-[145px]" : "w-9 h-9"
+                            }`}
+                        onClick={(e) => {
+                            if (!isContactExpanded) {
+                                e.preventDefault();
+                                setIsContactExpanded(true);
+                            }
+                        }}
+                        onMouseEnter={() => setIsContactExpanded(true)}
+                        onMouseLeave={() => setIsContactExpanded(false)}
+                    >
+                        {/* Expanded Text */}
+                        <span
+                            className={`text-sm font-semibold text-white whitespace-nowrap overflow-hidden transition-all duration-300 absolute left-5 ${isContactExpanded ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4 pointer-events-none"
+                                }`}
+                        >
+                            Bize Ulaşın
+                        </span>
+
+                        {/* Icon Container */}
+                        <div className={`relative grid h-9 w-9 place-items-center rounded-full transition-all duration-300 z-10 ${isContactExpanded ? "bg-white text-slate-900 rotate-0" : "bg-white text-slate-900 shadow-md"
+                            }`}>
                             <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="none">
                                 <path d="M5 12h14m0 0-5-5m5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
                             </svg>
                         </div>
+
+                        {/* Unified Background Element with smooth transition */}
+                        <div className={`absolute bg-black rounded-full -z-10 transition-all duration-500 ease-spring ${isContactExpanded ? "inset-0" : "-inset-[4px]"
+                            }`}></div>
                     </Link>
                     <Link href="/iletisim" className="hidden min-[724px]:flex items-center gap-2 rounded-full bg-black pl-5 pr-1.5 py-1.5 text-sm font-semibold !text-white shadow-md transition hover:translate-y-[-1px] hover:bg-slate-900 whitespace-nowrap">
                         Bize Ulaşın
@@ -148,7 +260,6 @@ export default function KullaniciHikayesiPage() {
                     </Link>
                 </div>
             </header>
-
             {/* Page Content */}
             <main className="pt-[100px] w-[95%] max-w-[1440px] mx-auto px-3 min-[500px]:px-6 md:px-8 flex-grow">
                 <div className="mx-auto max-w-4xl">
@@ -258,72 +369,4 @@ export default function KullaniciHikayesiPage() {
     );
 }
 
-// Type for animated heading segments
-type AnimatedSegment = { text: string; className?: string; color?: string };
 
-// AnimatedHeading component - copied from main page
-function AnimatedHeading({
-    segments,
-    className,
-    start = 0.55,
-    end = 0.15,
-}: {
-    segments: AnimatedSegment[];
-    className?: string;
-    start?: number;
-    end?: number;
-}) {
-    const ref = useRef<HTMLHeadingElement | null>(null);
-    const [progress, setProgress] = useState(0);
-
-    useEffect(() => {
-        const handler = () => {
-            const node = ref.current;
-            if (!node) return;
-            const rect = node.getBoundingClientRect();
-            const viewport = window.innerHeight || 1;
-            const startPx = viewport * start;
-            const endPx = viewport * end;
-            const distance = startPx - endPx || 1;
-            const raw = (startPx - rect.top) / distance;
-            const clamped = Math.min(1, Math.max(0, raw));
-            setProgress(clamped);
-        };
-        handler();
-        window.addEventListener("scroll", handler, { passive: true });
-        window.addEventListener("resize", handler);
-        return () => {
-            window.removeEventListener("scroll", handler);
-            window.removeEventListener("resize", handler);
-        };
-    }, [start, end]);
-
-    const baseColor = "28,42,60";
-
-    return (
-        <div ref={ref} className={className} style={{ lineHeight: "1.2" }}>
-            {segments.map((seg, sIdx) => (
-                <span key={sIdx} className={seg.className}>
-                    {seg.text.split("").map((char, idx) => {
-                        const step = 0.0125;
-                        const perChar = Math.min(1, Math.max(0, (progress - idx * step) / 0.05));
-                        const alpha = 0.2 + perChar * 0.8;
-                        const color = seg.color ? seg.color : baseColor;
-                        return (
-                            <span
-                                key={`${sIdx}-${idx}`}
-                                style={{
-                                    color: `rgba(${color}, ${alpha})`,
-                                    transition: "color 120ms ease-out",
-                                    whiteSpace: char === "\n" ? "pre" : undefined,
-                                }}
-                            >
-                                {char}
-                            </span>
-                        );
-                    })}
-                </span>
-            ))}
-        </div>
-    );
-}

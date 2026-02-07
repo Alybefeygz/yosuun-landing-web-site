@@ -525,6 +525,9 @@ function HomeContent() {
   const { ref: faqHeadingRef, isInView: isFaqHeadingVisible } = useInView({ threshold: 0.1 });
   const { ref: faqItemsRef, isInView: isFaqItemsVisible } = useInView({ threshold: 0.1 });
 
+  const [isContactExpanded, setIsContactExpanded] = useState(false);
+  const contactBtnRef = useRef<HTMLAnchorElement | null>(null);
+
   const handleFaqToggle = (idx: number) => {
     const currentOpenIdx = openFaqs.findIndex((isOpen) => isOpen);
 
@@ -752,24 +755,44 @@ function HomeContent() {
     };
   }, [isMenuOpen]);
 
+  // Close contact button when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (contactBtnRef.current && !contactBtnRef.current.contains(event.target as Node)) {
+        setIsContactExpanded(false);
+      }
+    };
+
+    if (isContactExpanded) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isContactExpanded]);
+
   return (
     <div className="min-h-[100dvh] bg-gradient-to-br from-[#e8ffe6] via-white to-white text-slate-900 overflow-x-hidden">
       <header
-        className={`fixed top-5 left-0 right-0 z-[100] mx-auto grid grid-cols-[1fr_auto_1fr] items-center gap-2 min-[500px]:gap-12 px-3 min-[500px]:px-6 md:px-8 transition-all duration-300 w-[95%] max-w-[1440px] ${isScrolled
+        className={`fixed top-5 left-0 right-0 z-[100] mx-auto flex justify-between min-[1000px]:grid min-[1000px]:grid-cols-[1fr_auto_1fr] items-center gap-2 min-[500px]:gap-12 px-3 min-[500px]:px-6 md:px-8 transition-all duration-300 w-[95%] max-w-[1440px] ${isScrolled
           ? "bg-white/70 py-3 shadow-lg shadow-black/5 backdrop-blur-md rounded-full"
           : "py-6"
           }`}
       >
-        <div
-          onClick={() => scrollToSection(0)}
-          className="relative flex h-12 items-center shrink-0 overflow-visible z-0 justify-self-start cursor-pointer"
+        <Link
+          href="/"
+          className="relative flex h-12 items-center shrink-0 overflow-visible z-0 justify-self-start cursor-pointer transition-all duration-300"
         >
           {/* Mobile logo - sabit boyut, sıkıştırılmaz, doğal oran korunur */}
           <img src="https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/logo-mobile.png" alt="Yosuun" className="min-[724px]:hidden h-[64px]" />
           {/* Desktop logo */}
           <img src="https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/yosuun-new-logo.png" alt="Yosuun" className="hidden min-[724px]:block h-[200px] w-auto max-w-[240px] min-[1400px]:max-w-none" />
-        </div>
-        <nav className="relative flex items-center rounded-full border border-white/20 bg-white/50 p-1.5 backdrop-blur z-10 justify-self-center">
+        </Link>
+        {/* Center Navigation - Hides when contact button is expanded */}
+        <nav
+          className={`relative flex items-center rounded-full border border-white/20 bg-white/50 p-1.5 backdrop-blur z-10 justify-self-center transition-all duration-300 origin-center ${isContactExpanded ? "opacity-0 invisible scale-95" : "opacity-100 visible scale-100"
+            }`}
+        >
           {/* Desktop Navigation - 1400px ve üstü: tüm butonlar görünür */}
           <div className="hidden min-[1400px]:flex items-center gap-1">
             {navItems.map((item, idx) => {
@@ -870,12 +893,38 @@ function HomeContent() {
           </div>
         </nav>
         <div className="flex items-center gap-2 shrink-0 justify-self-end ml-1 min-[724px]:ml-0">
-          {/* Mobile: sadece ok ikonu */}
-          <Link href="/iletisim" className="min-[724px]:hidden relative">
-            <div className="absolute -inset-[0.125rem] bg-black rounded-full"></div>
-            <div className="relative grid h-9 w-9 place-items-center rounded-full bg-white text-slate-900 shadow-md transition hover:translate-y-[-1px] p-2">
+          {/* Mobile/Tablet Expanding Contact Button */}
+          <Link
+            ref={contactBtnRef}
+            href="/iletisim"
+            className={`min-[724px]:hidden relative flex items-center justify-end rounded-full transition-all duration-500 ease-spring ${isContactExpanded ? "pr-1.5 pl-5 py-1.5 w-[145px]" : "w-9 h-9"
+              }`}
+            onClick={(e) => {
+              if (!isContactExpanded) {
+                e.preventDefault();
+                setIsContactExpanded(true);
+              }
+            }}
+            onMouseEnter={() => setIsContactExpanded(true)}
+            onMouseLeave={() => setIsContactExpanded(false)}
+          >
+            {/* Expanded Text */}
+            <span
+              className={`text-sm font-semibold text-white whitespace-nowrap overflow-hidden transition-all duration-300 absolute left-5 ${isContactExpanded ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4 pointer-events-none"
+                }`}
+            >
+              Bize Ulaşın
+            </span>
+
+            {/* Icon Container */}
+            <div className={`relative grid h-9 w-9 place-items-center rounded-full transition-all duration-300 z-10 ${isContactExpanded ? "bg-white text-slate-900 rotate-0" : "bg-white text-slate-900 shadow-md"
+              }`}>
               <ArrowIcon />
             </div>
+
+            {/* Unified Background Element with smooth transition */}
+            <div className={`absolute bg-black rounded-full -z-10 transition-all duration-500 ease-spring ${isContactExpanded ? "inset-0" : "-inset-[4px]"
+              }`}></div>
           </Link>
           {/* Desktop: tam buton */}
           <Link href="/iletisim" className="hidden min-[724px]:flex items-center gap-2 rounded-full bg-black pl-5 pr-1.5 py-1.5 text-sm font-semibold !text-white shadow-md transition hover:translate-y-[-1px] hover:bg-slate-900 whitespace-nowrap">
