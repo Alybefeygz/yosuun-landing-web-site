@@ -610,7 +610,7 @@ export default function ContactPage() {
                                 >
                                     <button
                                         type="button"
-                                        className="flex w-full items-center justify-between px-8 py-6 text-left text-xs sm:text-lg font-semibold text-[#1c2a3c]"
+                                        className="flex w-full items-center justify-between px-8 py-6 text-left text-sm sm:text-xl font-semibold text-[#1c2a3c]"
                                         onClick={() => handleFaqToggle(idx)}
                                     >
                                         <span>{item.question}</span>
@@ -623,7 +623,7 @@ export default function ContactPage() {
                                             }`}
                                     >
                                         <div className="overflow-hidden">
-                                            <div className="px-8 pb-8 text-[0.65rem] sm:text-base leading-5 sm:leading-6 text-[#465568]">
+                                            <div className="px-8 pb-8 text-[0.78rem] sm:text-lg leading-5 sm:leading-7 text-[#465568]">
                                                 {item.answer}
                                             </div>
                                         </div>

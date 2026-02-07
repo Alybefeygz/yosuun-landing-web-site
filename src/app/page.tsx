@@ -379,14 +379,10 @@ function useInView(options?: IntersectionObserverInit) {
 function HomeContent() {
   const searchParams = useSearchParams();
   const marqueeItems = useMemo(() => [...logoStrip, ...logoStrip], []);
-  const textSegments = [
-    { text: "Yosuun, e-ticareti takip etmez.\n" },
-    { text: "Zamanı", className: "font-serif italic", color: "120, 246, 102" },
-    { text: ", ", color: "120, 246, 102" },
-    { text: "veriyi", className: "font-serif italic", color: "120, 246, 102" },
-    { text: " ve " },
-    { text: "davranışı", className: "font-serif italic", color: "120, 246, 102" },
-    { text: " okuyarak kendi kendine hareket eder." },
+  const textSegments: AnimatedSegment[] = [
+    { text: "Yosuun " },
+    { text: "kendi kendine", className: "font-serif italic", color: "120, 246, 102" },
+    { text: "\nhareket eder" },
   ];
 
   const allChars = useMemo(
@@ -624,135 +620,59 @@ function HomeContent() {
   }, [searchParams]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const node = revealRef.current;
-      if (!node) return;
-      const rect = node.getBoundingClientRect();
-      const viewport = window.innerHeight || 1;
-      const start = viewport * 0.55;
-      const end = viewport * 0.15;
-      const distance = start - end || 1;
-      const raw = (start - rect.top) / distance;
-      const clamped = Math.min(1, Math.max(0, raw));
-      setRevealProgress(clamped);
-    };
+    let animationFrameId: number;
+    let lastScrollY = window.scrollY;
 
-    const handleScroll2 = () => {
-      const node = revealRef2.current;
-      if (!node) return;
-      const rect = node.getBoundingClientRect();
+    const updateAnimations = () => {
       const viewport = window.innerHeight || 1;
-      const start = viewport * 0.55;
-      const end = viewport * 0.15;
-      const distance = start - end || 1;
-      const raw = (start - rect.top) / distance;
-      const clamped = Math.min(1, Math.max(0, raw));
-      setRevealProgress2(clamped);
-    };
 
-    const handleScroll3 = () => {
-      const node = revealRef3.current;
-      if (!node) return;
-      const rect = node.getBoundingClientRect();
-      const viewport = window.innerHeight || 1;
-      const start = viewport * 0.55;
-      const end = viewport * 0.15;
-      const distance = start - end || 1;
-      const raw = (start - rect.top) / distance;
-      const clamped = Math.min(1, Math.max(0, raw));
-      setRevealProgress3(clamped);
-    };
+      // Helper function to update reveal progress for a ref
+      const updateReveal = (ref: React.RefObject<HTMLElement | null>, setProgress: (val: number) => void) => {
+        const node = ref.current;
+        if (!node) return;
+        const rect = node.getBoundingClientRect();
+        const start = viewport * 0.55;
+        const end = viewport * 0.15;
+        const distance = start - end || 1;
+        const raw = (start - rect.top) / distance;
+        const clamped = Math.min(1, Math.max(0, raw));
+        setProgress(clamped);
+      };
 
-    const handleScroll4 = () => {
-      const node = revealRef4.current;
-      if (!node) return;
-      const rect = node.getBoundingClientRect();
-      const viewport = window.innerHeight || 1;
-      const start = viewport * 0.55;
-      const end = viewport * 0.15;
-      const distance = start - end || 1;
-      const raw = (start - rect.top) / distance;
-      const clamped = Math.min(1, Math.max(0, raw));
-      setRevealProgress4(clamped);
-    };
+      // Batch all state updates
+      updateReveal(revealRef, setRevealProgress);
+      updateReveal(revealRef2, setRevealProgress2);
+      updateReveal(revealRef3, setRevealProgress3);
+      updateReveal(revealRef4, setRevealProgress4);
+      updateReveal(revealRef5, setRevealProgress5);
+      updateReveal(revealRef6, setRevealProgress6);
+      updateReveal(revealRef7, setRevealProgress7);
 
-    const handleWindowScroll = () => {
+      if (timelineRef.current) {
+        setTimelineTop(timelineRef.current.getBoundingClientRect().top);
+      }
+
       setIsScrolled(window.scrollY > 20);
     };
 
-    const handleScroll5 = () => {
-      const node = revealRef5.current;
-      if (!node) return;
-      const rect = node.getBoundingClientRect();
-      const viewport = window.innerHeight || 1;
-      const start = viewport * 0.55;
-      const end = viewport * 0.15;
-      const distance = start - end || 1;
-      const raw = (start - rect.top) / distance;
-      const clamped = Math.min(1, Math.max(0, raw));
-      setRevealProgress5(clamped);
+    const onScroll = () => {
+      if (lastScrollY === window.scrollY) return; // Skip if scroll position hasn't changed
+      lastScrollY = window.scrollY;
+
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = requestAnimationFrame(updateAnimations);
     };
 
-    const handleScroll6 = () => {
-      const node = revealRef6.current;
-      if (!node) return;
-      const rect = node.getBoundingClientRect();
-      const viewport = window.innerHeight || 1;
-      const start = viewport * 0.55;
-      const end = viewport * 0.15;
-      const distance = start - end || 1;
-      const raw = (start - rect.top) / distance;
-      const clamped = Math.min(1, Math.max(0, raw));
-      setRevealProgress6(clamped);
-    };
+    // Initial run
+    updateAnimations();
 
-    const handleScroll7 = () => {
-      const node = revealRef7.current;
-      if (!node) return;
-      const rect = node.getBoundingClientRect();
-      const viewport = window.innerHeight || 1;
-      const start = viewport * 0.55;
-      const end = viewport * 0.15;
-      const distance = start - end || 1;
-      const raw = (start - rect.top) / distance;
-      const clamped = Math.min(1, Math.max(0, raw));
-      setRevealProgress7(clamped);
-    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
 
-    const handleTimelineScroll = () => {
-      const node = timelineRef.current;
-      if (!node) return;
-      const rect = node.getBoundingClientRect();
-      setTimelineTop(rect.top);
-    };
-
-    handleScroll();
-    handleScroll2();
-    handleScroll3();
-    handleScroll4();
-    handleScroll5();
-    handleScroll6();
-    handleScroll7();
-    handleTimelineScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("scroll", handleScroll2, { passive: true });
-    window.addEventListener("scroll", handleScroll3, { passive: true });
-    window.addEventListener("scroll", handleScroll4, { passive: true });
-    window.addEventListener("scroll", handleScroll5, { passive: true });
-    window.addEventListener("scroll", handleScroll6, { passive: true });
-    window.addEventListener("scroll", handleScroll7, { passive: true });
-    window.addEventListener("scroll", handleTimelineScroll, { passive: true });
-    window.addEventListener("scroll", handleWindowScroll, { passive: true });
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("scroll", handleScroll2);
-      window.removeEventListener("scroll", handleScroll3);
-      window.removeEventListener("scroll", handleScroll4);
-      window.removeEventListener("scroll", handleScroll5);
-      window.removeEventListener("scroll", handleScroll6);
-      window.removeEventListener("scroll", handleScroll7);
-      window.removeEventListener("scroll", handleTimelineScroll);
-      window.removeEventListener("scroll", handleWindowScroll);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
@@ -1035,7 +955,7 @@ function HomeContent() {
                   ))}
                 </div>
 
-                <div className="flex flex-col items-center gap-1 text-sm-responsive text-slate-600 md:items-start">
+                <div className="flex flex-col items-start gap-1 text-sm-responsive text-slate-600">
                   <div className="flex items-center gap-1 text-amber-500 flex-shrink-0">
                     {Array.from({ length: 5 }).map((_, idx) => (
                       <span key={idx} className="star-responsive">
@@ -1088,7 +1008,7 @@ function HomeContent() {
         </main>
       </div>
 
-      <section id="nasil-dusunur" className="mx-auto section-spacing-sm flex w-full max-w-6xl flex-col items-center container-padding scroll-mt-[180px] min-[724px]:scroll-mt-[200px] min-[1500px]:scroll-mt-[250px]">
+      <section id="nasil-dusunur" className="mx-auto section-spacing flex w-full max-w-6xl flex-col items-center container-padding scroll-mt-[180px] min-[724px]:scroll-mt-[200px] min-[1500px]:scroll-mt-[250px]">
 
 
 
@@ -1351,9 +1271,9 @@ function HomeContent() {
                 >
                   {step === "06" ? (
                     isActive ? (
-                      <img src="https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/kucuk-logo.png" alt="Yosuun Active" className="h-[70px] w-[70px] object-contain translate-x-1" />
+                      <img src="https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/kucuk-logo.png" alt="Yosuun Active" className="h-[70px] w-[70px] object-contain translate-x-1 timeline-logo-responsive" />
                     ) : (
-                      <img src="https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/logo-mobile.png" alt="Yosuun" className="h-[70px] w-[70px] object-contain translate-x-1" />
+                      <img src="https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/logo-mobile.png" alt="Yosuun" className="h-[70px] w-[70px] object-contain translate-x-1 timeline-logo-responsive" />
                     )
                   ) : (
                     step
@@ -1390,7 +1310,7 @@ function HomeContent() {
                           alt="Yosuun Feature"
                           className="w-full h-[120px] mb-4 object-contain"
                         />
-                        <h4 className="text-base font-semibold text-slate-900 mb-1">
+                        <h4 className="text-base font-semibold text-slate-900 mb-3">
                           {
                             [
                               "Zamanı Okur",
@@ -1401,7 +1321,7 @@ function HomeContent() {
                             ][idx]
                           }
                         </h4>
-                        <p className="text-xs text-slate-500 leading-relaxed">
+                        <p className="text-xs text-slate-500 leading-relaxed" style={{ textIndent: '1rem' }}>
                           {
                             [
                               "Sezonları, özel günleri ve piyasa ritmini veriden çıkarır. Ne zaman ne yapılması gerektiğini önceden fark eder.",
@@ -1503,7 +1423,7 @@ function HomeContent() {
                 <p className="testimonial-number-responsive font-semibold leading-none">{testimonial.stat}</p>
                 <span className="testimonial-subtitle-responsive font-medium text-slate-700">satış artışı</span>
               </div>
-              <p className="testimonial-subtitle-responsive font-semibold leading-6 text-slate-800">
+              <p className="testimonial-subtitle-responsive font-semibold leading-snug text-slate-800">
                 {testimonial.statLabel}
               </p>
             </div>
@@ -1643,7 +1563,7 @@ function HomeContent() {
         </div>
       </section>
 
-      <section id="sss" className="mx-auto mt-48 mb-48 w-full max-w-4xl px-6 scroll-mt-[150px]">
+      <section id="sss" className="mx-auto section-spacing w-full max-w-4xl px-6 scroll-mt-[150px]">
         <div>
           <div
             ref={faqHeadingRef}
@@ -1693,7 +1613,7 @@ function HomeContent() {
                 >
                   <button
                     type="button"
-                    className="flex w-full items-center justify-between px-8 py-6 text-left text-xs sm:text-lg font-semibold text-[#1c2a3c]"
+                    className="flex w-full items-center justify-between px-8 py-6 text-left text-sm sm:text-xl font-semibold text-[#1c2a3c]"
                     onClick={() => handleFaqToggle(idx)}
                   >
                     <span>{item.question}</span>
@@ -1708,7 +1628,7 @@ function HomeContent() {
                       }`}
                   >
                     <div className="overflow-hidden">
-                      <div className="px-8 pb-8 text-[0.65rem] sm:text-base leading-5 sm:leading-6 text-[#465568]">
+                      <div className="px-8 pb-8 text-[0.78rem] sm:text-lg leading-5 sm:leading-7 text-[#465568]">
                         {item.answer}
                       </div>
                     </div>

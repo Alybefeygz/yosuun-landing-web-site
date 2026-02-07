@@ -162,14 +162,14 @@ export default function KullaniciHikayesiPage() {
                             { text: "Yük", className: "font-serif italic", color: "120, 246, 102" },
                             { text: " Artık Değil" },
                         ]}
-                        className="mt-20 max-w-full whitespace-pre-line text-[clamp(2.5rem,5vw+1rem,3.75rem)] font-semibold leading-tight tracking-tight text-slate-800 text-center"
+                        className="mt-20 max-w-full whitespace-pre-line heading-section font-semibold leading-tight tracking-tight text-slate-800 text-center"
                         start={0.85}
                         end={0.35}
                     />
                 </div>
 
                 {/* Content Section */}
-                <div className="mx-auto max-w-4xl mt-20 grid grid-cols-1 gap-12 md:grid-cols-2 items-start">
+                <div className="mx-auto max-w-4xl mt-8 grid grid-cols-1 gap-12 md:grid-cols-2 items-start">
                     {/* Left: Text */}
                     <div className="space-y-6 text-[15px] sm:text-lg leading-relaxed text-slate-700 order-last md:order-first">
                         <p>
