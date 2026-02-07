@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 
@@ -526,7 +526,8 @@ function HomeContent() {
   const { ref: faqItemsRef, isInView: isFaqItemsVisible } = useInView({ threshold: 0.1 });
 
   const [isContactExpanded, setIsContactExpanded] = useState(false);
-  const contactBtnRef = useRef<HTMLAnchorElement | null>(null);
+  const router = useRouter();
+  const contactBtnRef = useRef<HTMLDivElement | null>(null);
 
   const handleFaqToggle = (idx: number) => {
     const currentOpenIdx = openFaqs.findIndex((isOpen) => isOpen);
@@ -894,38 +895,39 @@ function HomeContent() {
         </nav>
         <div className="flex items-center gap-2 shrink-0 justify-self-end ml-1 min-[724px]:ml-0">
           {/* Mobile/Tablet Expanding Contact Button */}
-          <Link
-            ref={contactBtnRef}
-            href="/iletisim"
-            className={`min-[724px]:hidden relative flex items-center justify-end rounded-full transition-all duration-500 ease-spring ${isContactExpanded ? "pr-1.5 pl-5 py-1.5 w-[145px]" : "w-9 h-9"
-              }`}
-            onClick={(e) => {
-              if (!isContactExpanded) {
-                e.preventDefault();
-                setIsContactExpanded(true);
-              }
-            }}
-            onMouseEnter={() => setIsContactExpanded(true)}
-            onMouseLeave={() => setIsContactExpanded(false)}
-          >
-            {/* Expanded Text */}
-            <span
-              className={`text-sm font-semibold text-white whitespace-nowrap overflow-hidden transition-all duration-300 absolute left-5 ${isContactExpanded ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4 pointer-events-none"
+          <div className="min-[724px]:hidden relative w-9 h-9">
+            <div
+              ref={contactBtnRef}
+              className={`absolute right-0 top-1/2 -translate-y-1/2 flex items-center justify-end rounded-full transition-all duration-500 ease-spring z-50 cursor-pointer ${isContactExpanded ? "pr-1.5 pl-5 py-1.5 w-[145px]" : "w-9 h-9"
                 }`}
+              onClick={(e) => {
+                if (!isContactExpanded) {
+                  e.preventDefault();
+                  setIsContactExpanded(true);
+                } else {
+                  router.push('/iletisim');
+                }
+              }}
             >
-              Bize Ulaşın
-            </span>
+              {/* Expanded Text */}
+              <span
+                className={`text-sm font-semibold text-white whitespace-nowrap overflow-hidden transition-all duration-300 absolute left-5 ${isContactExpanded ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4 pointer-events-none"
+                  }`}
+              >
+                Bize Ulaşın
+              </span>
 
-            {/* Icon Container */}
-            <div className={`relative grid h-9 w-9 place-items-center rounded-full transition-all duration-300 z-10 ${isContactExpanded ? "bg-white text-slate-900 rotate-0" : "bg-white text-slate-900 shadow-md"
-              }`}>
-              <ArrowIcon />
+              {/* Icon Container */}
+              <div className={`relative grid h-9 w-9 place-items-center rounded-full transition-all duration-300 z-10 ${isContactExpanded ? "bg-white text-slate-900 rotate-0" : "bg-white text-slate-900 shadow-md"
+                }`}>
+                <ArrowIcon />
+              </div>
+
+              {/* Unified Background Element with smooth transition */}
+              <div className={`absolute bg-black rounded-full -z-10 transition-all duration-500 ease-spring ${isContactExpanded ? "inset-0" : "-inset-[4px]"
+                }`}></div>
             </div>
-
-            {/* Unified Background Element with smooth transition */}
-            <div className={`absolute bg-black rounded-full -z-10 transition-all duration-500 ease-spring ${isContactExpanded ? "inset-0" : "-inset-[4px]"
-              }`}></div>
-          </Link>
+          </div>
           {/* Desktop: tam buton */}
           <Link href="/iletisim" className="hidden min-[724px]:flex items-center gap-2 rounded-full bg-black pl-5 pr-1.5 py-1.5 text-sm font-semibold !text-white shadow-md transition hover:translate-y-[-1px] hover:bg-slate-900 whitespace-nowrap">
             Bize Ulaşın
