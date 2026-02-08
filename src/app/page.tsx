@@ -1349,7 +1349,7 @@ function HomeContent() {
                       }}
                     >
                       {/* Card Text */}
-                      <div className="text-left w-full">
+                      <div className="text-center w-full">
                         <img
                           src={[
                             "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/takvim.png",
@@ -1361,27 +1361,43 @@ function HomeContent() {
                           alt="Yosuun Feature"
                           className="w-full h-[120px] mb-4 object-contain"
                         />
-                        <h4 className="text-base font-semibold text-slate-900 mb-3">
+                        <h4 className="text-[17px] font-semibold text-slate-900 mb-3">
                           {
                             [
                               "Zamanı Okur",
                               "Rakipleri Kıyaslar",
-                              "Aksiyon Üretir & Satışa Hazırlar",
+                              "Satışa Odaklanır",
                               "Süreci İzler",
-                              "Öğrenir & Raporlar",
+                              <span key="learn-report">
+                                <span className="max-[450px]:hidden">Öğrenir & Raporlar</span>
+                                <span className="hidden max-[450px]:inline">Raporlar</span>
+                              </span>,
                             ][idx]
                           }
                         </h4>
-                        <p className="text-xs text-slate-500 leading-relaxed" style={{ textIndent: '1rem' }}>
-                          {
-                            [
-                              "Sezonları, özel günleri ve piyasa ritmini veriden çıkarır. Ne zaman ne yapılması gerektiğini önceden fark eder.",
-                              "Kullanıcının eklediği rakipleri sürekli izler. Fiyatları, içerikleri ve değişimleri karşılaştırarak rekabet içindeki doğru konumu netleştirir.",
-                              "Veriye göre karar alır, beklemez. Ürünleri, içerikleri ve detayları satışa hazır hale getirir.",
-                              "Yapılanla yetinmez. Satış geldikçe, sonuçları anlık takip eder ve süreci yönlendirir.",
-                              "Her hareketten öğrenir. Ne işe yaradı, ne yaramadı netleşir ve sonraki adımlar buna göre şekillenir.",
-                            ][idx]
-                          }
+                        <p className="text-[13px] text-slate-500 leading-relaxed">
+                          <span className="max-[601px]:hidden">
+                            {
+                              [
+                                "Sezonları, özel günleri ve piyasa ritmini veriden çıkarır. Ne zaman ne yapılması gerektiğini önceden fark eder.",
+                                "Kullanıcının eklediği rakipleri sürekli izler ve rekabet içindeki doğru konumu netleştirir.",
+                                "Veriye göre karar alır, beklemez. Ürünleri, içerikleri ve detayları satışa hazır hale getirir.",
+                                "Yapılanla yetinmez. Satış geldikçe, sonuçları anlık takip eder ve süreci yönlendirir.",
+                                "Her hareketten öğrenir. Ne işe yaradı, ne yaramadı netleşir ve sonraki adımlar buna göre şekillenir.",
+                              ][idx]
+                            }
+                          </span>
+                          <span className="hidden max-[601px]:inline">
+                            {
+                              [
+                                "Sezonları okur. Ne zaman ne yapılacağını önceden görür.",
+                                "Eklenen rakipleri sürekli izler, fiyat ve içerikleri kıyaslar.",
+                                "Veriye göre karar alır, beklemez. Satışa hazır hale getirir.",
+                                "Satış geldikçe, sonuçları anlık takip eder ve süreci yönlendirir.",
+                                "Her hareketten öğrenir ve sonraki adımlar buna göre şekillenir.",
+                              ][idx]
+                            }
+                          </span>
                         </p>
                       </div>
                     </div>

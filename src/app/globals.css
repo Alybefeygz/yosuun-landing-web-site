@@ -559,18 +559,18 @@ a {
   }
 
   .feature-card-responsive h4 {
-    font-size: 0.9rem;
-    margin-bottom: 0.25rem;
+    font-size: 15px;
+    margin-bottom: 0.5rem;
   }
 
   .feature-card-responsive p {
-    font-size: 0.7rem;
+    font-size: 12px;
     line-height: 1.4;
   }
 }
 
 /* 600px altında: daha küçük kartlar */
-@media (max-width: 600px) {
+@media (max-width: 601px) {
   .feature-card-responsive {
     width: 11rem;
     height: 200px;
@@ -593,11 +593,12 @@ a {
   }
 
   .feature-card-responsive h4 {
-    font-size: 0.84rem;
+    font-size: 16px;
+    margin-bottom: 2px;
   }
 
   .feature-card-responsive p {
-    font-size: 0.66rem;
+    font-size: 12px;
     line-height: 1.35;
   }
 }
@@ -669,14 +670,16 @@ a {
 
   .feature-card-responsive img {
     height: 46px !important;
+    margin-bottom: 8px !important;
   }
 
   .feature-card-responsive h4 {
-    font-size: 0.71rem;
+    font-size: 15px;
+    margin-bottom: 2px;
   }
 
   .feature-card-responsive p {
-    font-size: 0.55rem;
+    font-size: 11.5px;
   }
 }
 
