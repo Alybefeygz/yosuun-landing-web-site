@@ -739,6 +739,48 @@ function HomeContent() {
     };
   }, [isMenuOpen]);
 
+  const [fixedViewportHeight, setFixedViewportHeight] = useState(0);
+
+  useEffect(() => {
+    let lastWidth = window.innerWidth;
+
+    const handleResize = () => {
+      const currentWidth = window.innerWidth;
+
+      // On mobile (small width), ignore vertical resizes (address bar)
+      // Only update if width changes (orientation change) or if it's desktop
+      if (currentWidth >= 768 || currentWidth !== lastWidth) {
+        setFixedViewportHeight(window.innerHeight);
+        lastWidth = currentWidth;
+      }
+    };
+
+    // Set initial
+    if (typeof window !== 'undefined') {
+      setFixedViewportHeight(window.innerHeight);
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
   // Close contact button when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -756,7 +798,7 @@ function HomeContent() {
   }, [isContactExpanded]);
 
   return (
-    <div className="min-h-[100dvh] bg-gradient-to-br from-[#e8ffe6] via-white to-white text-slate-900 overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#e8ffe6] via-white to-white text-slate-900 overflow-x-hidden">
       <header
         className={`fixed top-5 left-0 right-0 z-[100] mx-auto flex justify-between min-[1000px]:grid min-[1000px]:grid-cols-[1fr_auto_1fr] items-center gap-2 min-[500px]:gap-12 px-3 min-[500px]:px-6 md:px-8 transition-all duration-300 w-[95%] max-w-[1440px] ${isScrolled
           ? "bg-white/70 py-3 shadow-lg shadow-black/5 backdrop-blur-md rounded-full"
@@ -920,7 +962,7 @@ function HomeContent() {
           </Link>
         </div>
       </header>
-      <div id="ana-sayfa" className="mx-auto flex min-h-[100dvh] w-full max-w-6xl flex-col container-padding pb-4 pt-10">
+      <div id="ana-sayfa" className="mx-auto flex min-h-screen w-full max-w-6xl flex-col container-padding pb-4 pt-10">
 
         <main className="flex flex-1 flex-col items-center text-center">
           <div className="flex flex-1 flex-col items-center justify-center gap-6 w-full translate-y-16">
@@ -1094,7 +1136,7 @@ function HomeContent() {
         <div ref={timelineRef} className="flex flex-col items-center justify-center gap-0 mb-16">
           {["01", "02", "03", "04", "05", "06"].map((step, idx, arr) => {
             // Per-item scroll-based animation
-            const viewportHeight = typeof window !== 'undefined' ? window.innerHeight : 800;
+            const viewportHeight = fixedViewportHeight || 800; // Use fixed state or fallback
             const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
 
             // Responsive itemHeight based on screen size
