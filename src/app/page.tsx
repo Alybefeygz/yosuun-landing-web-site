@@ -1006,7 +1006,7 @@ function HomeContent() {
           <div className="w-full flex flex-col items-center">
             {/* Mouse Scroll Animation */}
             <div
-              className={`flex flex-col items-center gap-2 my-6 sm:my-8 transition-all duration-[1000ms] ease-in-out ${isScrolled ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'}`}
+              className={`flex flex-col items-center gap-2 my-3 sm:my-8 transition-all duration-[1000ms] ease-in-out ${isScrolled ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'}`}
               style={{ transitionDelay: isScrolled ? '0s' : '5s' }}
             >
               {/* Mouse */}
@@ -1018,7 +1018,7 @@ function HomeContent() {
               <span className="text-[10px] font-semibold text-slate-400 tracking-wide uppercase">Aşağı Kaydır</span>
             </div>
 
-            <div className="h-6 flex items-center justify-center mb-6">
+            <div className="h-6 flex items-center justify-center mb-3">
               <p className="text-sm-responsive text-slate-500">
                 Markalar işine odaklanırken, Yosuun geri kalanını halleder
               </p>
