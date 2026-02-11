@@ -1308,7 +1308,7 @@ function HomeContent() {
                 <ArrowIcon />
               </span>
             </Link>
-            <Link href="/iletisim" className="hidden sm:inline-flex items-center gap-2 rounded-full border border-white/40 cta-button-responsive font-semibold text-white transition hover:bg-white/10">
+            <Link href="/iletisim?wantCall=true" className="hidden sm:inline-flex items-center gap-2 rounded-full border border-white/40 cta-button-responsive font-semibold text-white transition hover:bg-white/10">
               Sizi Arayalım
               <span className="grid cta-icon-responsive place-items-center rounded-full bg-white/15">
                 <ArrowIcon />
@@ -1531,7 +1531,7 @@ function HomeContent() {
                 <ArrowIcon />
               </span>
             </Link>
-            <Link href="/iletisim" className="hidden sm:inline-flex items-center gap-2 rounded-full border border-white/40 cta-button-responsive font-semibold text-white transition hover:bg-white/10">
+            <Link href="/iletisim?wantCall=true" className="hidden sm:inline-flex items-center gap-2 rounded-full border border-white/40 cta-button-responsive font-semibold text-white transition hover:bg-white/10">
               Sizi Arayalım
               <span className="grid cta-icon-responsive place-items-center rounded-full bg-white/15">
                 <ArrowIcon />

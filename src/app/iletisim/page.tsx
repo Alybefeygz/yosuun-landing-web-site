@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useLayoutEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Footer from "@/components/Footer";
 
 function useInView(options?: IntersectionObserverInit) {
@@ -160,6 +160,7 @@ const contactHeadingChars = [
 
 export default function ContactPage() {
     const router = useRouter();
+    const searchParams = useSearchParams();
     const [openFaqs, setOpenFaqs] = useState<boolean[]>(faqs.map(() => false));
     const [revealProgress6, setRevealProgress6] = useState(0);
     const [revealProgressContact, setRevealProgressContact] = useState(0);
@@ -199,6 +200,14 @@ export default function ContactPage() {
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+    // Check for wantCall query param
+    useEffect(() => {
+        const wantCallParam = searchParams.get('wantCall');
+        if (wantCallParam === 'true') {
+            setFormData(prev => ({ ...prev, wantCall: true }));
+        }
+    }, [searchParams]);
 
     const { ref: faqHeadingRef, isInView: isFaqHeadingVisible } = useInView({ threshold: 0.1 });
     const { ref: faqItemsRef, isInView: isFaqItemsVisible } = useInView({ threshold: 0.1 });
