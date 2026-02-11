@@ -7,9 +7,8 @@ import Footer from "@/components/Footer";
 
 const navItems = [
   "Ana Sayfa",
-  "Nasıl Düşünür",
-  "Kimler İçin",
   "Nasıl Çalışır",
+  "Kimler İçin",
   "Deneyimler",
   "Demo",
   "SSS",
@@ -41,7 +40,7 @@ const services = [
   { title: "Ajans", icon: "", bg: "#ccfac5", text: "#5b3db4", image: "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/Ajans.png" },
   { title: "Girişimci", icon: "", bg: "#ccfac5", text: "#c45d6d", image: "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/girisimci.png" },
   { title: "Satıcı", icon: "", bg: "#ccfac5", text: "#2a74c7", image: "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/satici.png" },
-  { title: "Markalar", icon: "", bg: "#ccfac5", text: "#5b3db4", image: "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/marka.png" },
+  { title: "Marka", icon: "", bg: "#ccfac5", text: "#5b3db4", image: "https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/marka.png" },
 ];
 
 const caseStudies = [
@@ -196,14 +195,14 @@ const faqs = [
       "Sen rakip mağazaların linklerini eklersin. Yosuun bu mağazalar için özel bir sanal alan oluşturur ve ürün, fiyat, içerik ve yorum değişikliklerini düzenli olarak izler.",
   },
   {
-    question: "Yosuun yaptığı işlemleri görebilir miyim?",
+    question: "Yosuun'un yaptığı işlemleri görebilir miyim?",
     answer:
-      "Evet. Yapılan tüm işlemler takvimde tarih ve saat bilgisiyle kayıt altındadır. Hangi gün, hangi aksiyon alındı net şekilde görünür.",
+      "Evet. Yapılan tüm işlemler takvimde tarih ve saat bilgisiyle kayıt altındadır. Hangi gün, hangi aksiyon alındığı net şekilde görünür. Aynı zamanda takvim üzerinden ileri tarihli görevler tanımlayabilirsin; belirlediğin tarihte bu görevler otomatik olarak uygulanır. Kontrol sende kalır, zamanlamayı Yosuun takip eder.",
   },
   {
-    question: "Demo nasıl ilerliyor?",
+    question: "Demo süreci nasıl ilerliyor?",
     answer:
-      "Demo’da Yosuun’u canlı olarak gösteriyoruz. İstersen örnek bir yapı üzerinden, istersen kendi mağazanı bağlayarak sistemi birebir görürsün. Demo sonrasında dilediğin anda kendi mağazaların için kullanmaya başlayabilirsin.",
+      "Demo talebinden sonra seninle iletişime geçiyoruz. Yosuun’un nasıl çalıştığını ve neler yapabildiğini ihtiyaçlarına göre anlatıp gösteriyoruz. Demo sürecimiz tamamlanmak üzere; tamamlanır tamamlanmaz ilk kullanıcılar arasına alıyor ve Yosuun’u mağazaların için kullanmanı sağlıyoruz.",
   },
 
 ];
@@ -379,19 +378,7 @@ function useInView(options?: IntersectionObserverInit) {
 function HomeContent() {
   const searchParams = useSearchParams();
   const marqueeItems = useMemo(() => [...logoStrip, ...logoStrip], []);
-  const textSegments: AnimatedSegment[] = [
-    { text: "Yosuun " },
-    { text: "kendi kendine", className: "font-serif italic", color: "120, 246, 102" },
-    { text: "\nhareket eder" },
-  ];
 
-  const allChars = useMemo(
-    () =>
-      textSegments.flatMap((seg) =>
-        seg.text.split("").map((char) => ({ char, className: seg.className, color: seg.color }))
-      ),
-    []
-  );
 
   const textSegments2 = [
     { text: "E-ticareti " },
@@ -489,8 +476,7 @@ function HomeContent() {
     []
   );
 
-  const [revealProgress, setRevealProgress] = useState(0);
-  const revealRef = useRef<HTMLHeadingElement | null>(null);
+
   const [revealProgress2, setRevealProgress2] = useState(0);
   const revealRef2 = useRef<HTMLHeadingElement | null>(null);
   const [revealProgress3, setRevealProgress3] = useState(0);
@@ -510,9 +496,7 @@ function HomeContent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const [activeSection, setActiveSection] = useState(0);
-  const { ref: headingRef, isInView: isHeadingVisible } = useInView({ threshold: 0.1 });
-  const { ref: pillsRef, isInView: isPillsVisible } = useInView({ threshold: 0.1 });
-  const { ref: statsRef, isInView: isStatsVisible } = useInView({ threshold: 0.1 });
+
   const { ref: whoForHeadingRef, isInView: isWhoForHeadingVisible } = useInView({ threshold: 0.1 });
   const { ref: servicesRef, isInView: isServicesVisible } = useInView({ threshold: 0.1 });
   const { ref: ctaRef, isInView: isCtaVisible } = useInView({ threshold: 0.1 });
@@ -547,7 +531,7 @@ function HomeContent() {
     }
   };
 
-  const sectionIds = ['ana-sayfa', 'nasil-dusunur', 'kimler-icin', 'nasil-calisir', 'deneyimler', 'demo', 'sss'];
+  const sectionIds = ['ana-sayfa', 'nasil-calisir', 'kimler-icin', 'deneyimler', 'demo', 'sss'];
 
   const scrollToSection = (idx: number) => {
     // Ana sayfaya tıklanınca sadece scroll yap, animasyonu yeniden tetikleme
@@ -644,7 +628,7 @@ function HomeContent() {
       };
 
       // Batch all state updates
-      updateReveal(revealRef, setRevealProgress);
+
       updateReveal(revealRef2, setRevealProgress2);
       updateReveal(revealRef3, setRevealProgress3);
       updateReveal(revealRef4, setRevealProgress4);
@@ -684,12 +668,11 @@ function HomeContent() {
   useEffect(() => {
     const sectionData = [
       { id: 'ana-sayfa', index: 0 },
-      { id: 'nasil-dusunur', index: 1 },
+      { id: 'nasil-calisir', index: 1 },
       { id: 'kimler-icin', index: 2 },
-      { id: 'nasil-calisir', index: 3 },
-      { id: 'deneyimler', index: 4 },
-      { id: 'demo', index: 5 },
-      { id: 'sss', index: 6 },
+      { id: 'deneyimler', index: 3 },
+      { id: 'demo', index: 4 },
+      { id: 'sss', index: 5 },
     ];
 
     const visibilityMap = new Map<string, number>();
@@ -825,7 +808,7 @@ function HomeContent() {
                   const section = activeSection === -1 ? 0 : activeSection;
                   const itemWidth = 114; // 110px buton + 4px gap
                   if (section <= 1) return 0;
-                  if (section >= 5) return -(4 * itemWidth);
+                  if (section >= 4) return -(4 * itemWidth);
                   return -((section - 1) * itemWidth);
                 })()
                   }px)`
@@ -1020,8 +1003,22 @@ function HomeContent() {
             </div>
           </div>
 
-          <div className="w-full flex flex-col items-center translate-y-2">
-            <div className="mt-10 h-6 flex items-center justify-center md:mt-0 -translate-y-5">
+          <div className="w-full flex flex-col items-center">
+            {/* Mouse Scroll Animation */}
+            <div
+              className={`flex flex-col items-center gap-2 my-6 sm:my-8 transition-all duration-[1000ms] ease-in-out ${isScrolled ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'}`}
+              style={{ transitionDelay: isScrolled ? '0s' : '5s' }}
+            >
+              {/* Mouse */}
+              <div className="relative h-[36px] w-[22px] rounded-full border-2 border-slate-300 bg-transparent flex justify-center pt-2">
+                {/* Wheel */}
+                <div className="h-1.5 w-1 rounded-full bg-[#78f666] animate-scroll-wheel shadow-[0_0_4px_rgba(120,246,102,0.8)]"></div>
+              </div>
+              {/* Text */}
+              <span className="text-[10px] font-semibold text-slate-400 tracking-wide uppercase">Aşağı Kaydır</span>
+            </div>
+
+            <div className="h-6 flex items-center justify-center mb-6">
               <p className="text-sm-responsive text-slate-500">
                 Markalar işine odaklanırken, Yosuun geri kalanını halleder
               </p>
@@ -1058,181 +1055,6 @@ function HomeContent() {
           </div>
         </main>
       </div>
-
-      <section id="nasil-dusunur" className="mx-auto section-spacing flex w-full max-w-6xl flex-col items-center container-padding scroll-mt-[180px] min-[724px]:scroll-mt-[200px] min-[1500px]:scroll-mt-[250px]">
-
-
-
-
-        <div className="mt-0 flex w-full flex-col items-center gap-6 text-center">
-          <div ref={headingRef} className="w-full">
-            <h2
-              ref={revealRef}
-              className={`max-w-full whitespace-pre-line heading-section font-semibold leading-tight tracking-tight text-slate-800 ${isHeadingVisible ? "animate-slide-in-up" : "opacity-0"}`}
-            >
-              {allChars.map((item, idx) => {
-                const totalChars = allChars.length;
-                const step = 0.85 / totalChars; // Dinamik step: tüm karakterler %85 progress'te tamamlanır
-                const perChar = Math.min(
-                  1,
-                  Math.max(0, (revealProgress - idx * step) / 0.05)
-                );
-                const alpha = 0.2 + perChar * 0.8;
-                const baseRgb = item.color || "15, 23, 42";
-                return (
-                  <span
-                    key={idx}
-                    className={item.className}
-                    style={{
-                      color: `rgba(${baseRgb}, ${alpha})`,
-                      transition: "color 120ms ease-out",
-                    }}
-                  >
-                    {item.char}
-                  </span>
-                );
-              })}
-            </h2>
-          </div>
-
-          <div
-            ref={pillsRef}
-            className="flex flex-wrap items-center justify-center gap-6"
-          >
-            <span
-              className={`flex items-center justify-center gap-2 rounded-full bg-[#78f666] pill-responsive font-serif italic text-white ${isPillsVisible ? "animate-slide-in-up" : "opacity-0"}`}
-              style={{ animationDelay: "0.4s" }}
-            >
-              Akıl
-            </span>
-            <span
-              className={`flex items-center justify-center gap-2 rounded-full bg-[#78f666] pill-responsive font-serif italic text-white ${isPillsVisible ? "animate-slide-in-up" : "opacity-0"}`}
-              style={{ animationDelay: "0.6s" }}
-            >
-              Süreklilik
-            </span>
-            <span
-              className={`flex items-center justify-center gap-2 rounded-full bg-[#78f666] pill-responsive font-serif italic text-white ${isPillsVisible ? "animate-slide-in-up" : "opacity-0"}`}
-              style={{ animationDelay: "0.8s" }}
-            >
-              Uyum
-            </span>
-          </div>
-        </div>
-
-        <div
-          ref={statsRef}
-          className="mt-stats-responsive grid w-full grid-cols-3 gap-0"
-        >
-          {statBlocks.map((stat, idx) => (
-            <div
-              key={stat.label}
-              className={`flex flex-col items-center ${idx !== statBlocks.length - 1
-                ? "border-r border-slate-200"
-                : ""
-                } ${isStatsVisible ? "animate-slide-in-up" : "opacity-0"}`}
-              style={{ animationDelay: `${1.0 + idx * 0.2}s` }}
-            >
-              <div className="flex items-start justify-center text-[#1a1a1a]">
-                {idx === 0 && (
-                  <span className="mr-1 mt-2 stat-plus-responsive font-medium leading-none">+</span>
-                )}
-                <span className="stat-number-responsive font-medium tracking-tighter">
-                  {stat.value}
-                </span>
-              </div>
-              <p className="mt-4 stat-label-responsive font-normal text-slate-500">{stat.label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="kimler-icin" className="mx-auto section-spacing w-full max-w-6xl container-padding scroll-mt-[180px] min-[724px]:scroll-mt-[200px] min-[1500px]:scroll-mt-[250px]">
-        <div ref={whoForHeadingRef} className="flex flex-col items-center gap-3 text-center">
-          <h2
-            ref={revealRef2}
-            className={`max-w-full whitespace-pre-line heading-section font-semibold leading-tight tracking-tight text-slate-800 ${isWhoForHeadingVisible ? "animate-slide-in-up" : "opacity-0"}`}
-            style={{ animationDelay: "0.3s" }}
-          >
-            {allChars2.map((item, idx) => {
-              const totalChars = allChars2.length;
-              const step = 0.85 / totalChars;
-              const perChar = Math.min(
-                1,
-                Math.max(0, (revealProgress2 - idx * step) / 0.05)
-              );
-              const alpha = 0.2 + perChar * 0.8;
-              const baseRgb = item.color || "15, 23, 42";
-              return (
-                <span
-                  key={idx}
-                  className={item.className}
-                  style={{
-                    color: `rgba(${baseRgb}, ${alpha})`,
-                    transition: "color 120ms ease-out",
-                  }}
-                >
-                  {item.char}
-                </span>
-              );
-            })}
-          </h2>
-        </div>
-
-        <div
-          ref={servicesRef}
-          className="mt-10 service-cards-grid"
-        >
-          {services.map((service, idx) => (
-            <div
-              key={service.title}
-              className={`flex service-card-responsive flex-col justify-between ${isServicesVisible ? "animate-slide-in-up" : "opacity-0"}`}
-              style={{
-                backgroundColor: service.bg,
-                animationDelay: `${0.5 + idx * 0.2}s`
-              }}
-            >
-              {service.image ? (
-                <img src={service.image} alt={service.title} className="service-icon-responsive object-contain" />
-              ) : (
-                <div className="service-title-responsive">{service.icon}</div>
-              )}
-              <p
-                className="whitespace-pre-line service-title-responsive font-semibold text-slate-800"
-              >
-                {service.title}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        <div
-          ref={ctaRef}
-          className={`flex flex-row gap-responsive cta-banner-responsive bg-black text-white shadow-xl shadow-black/25 items-center justify-between ${isCtaVisible ? "animate-slide-in-up" : "opacity-0"}`}
-          style={{ animationDelay: "0.5s" }}
-        >
-          <div>
-            <p className="cta-title-responsive font-semibold">Kim Olursan Ol</p>
-            <p className="cta-subtitle-responsive text-slate-300">Sende Yükünü Devretmek İstiyorsan</p>
-          </div>
-          <div className="flex flex-row gap-3 items-center">
-            <Link href="/iletisim" className="inline-flex items-center gap-2 rounded-full bg-white cta-button-responsive font-semibold !text-black shadow-sm transition hover:translate-y-[-1px]">
-              Bize Ulaşın
-              <span className="grid cta-icon-responsive place-items-center rounded-full bg-slate-900/10 text-slate-900">
-                <ArrowIcon />
-              </span>
-            </Link>
-            <Link href="/iletisim" className="hidden sm:inline-flex items-center gap-2 rounded-full border border-white/40 cta-button-responsive font-semibold text-white transition hover:bg-white/10">
-              Sizi Arayalım
-              <span className="grid cta-icon-responsive place-items-center rounded-full bg-white/15">
-                <ArrowIcon />
-              </span>
-            </Link>
-          </div>
-        </div>
-
-
-      </section>
 
       <section id="nasil-calisir" className="mx-auto section-spacing w-full max-w-6xl container-padding scroll-mt-[180px] min-[724px]:scroll-mt-[200px] min-[1500px]:scroll-mt-[250px]">
         <div
@@ -1410,6 +1232,95 @@ function HomeContent() {
 
 
       </section>
+
+      <section id="kimler-icin" className="mx-auto section-spacing w-full max-w-6xl container-padding scroll-mt-[180px] min-[724px]:scroll-mt-[200px] min-[1500px]:scroll-mt-[250px]">
+        <div ref={whoForHeadingRef} className="flex flex-col items-center gap-3 text-center">
+          <h2
+            ref={revealRef2}
+            className={`max-w-full whitespace-pre-line heading-section font-semibold leading-tight tracking-tight text-slate-800 ${isWhoForHeadingVisible ? "animate-slide-in-up" : "opacity-0"}`}
+            style={{ animationDelay: "0.3s" }}
+          >
+            {allChars2.map((item, idx) => {
+              const totalChars = allChars2.length;
+              const step = 0.85 / totalChars;
+              const perChar = Math.min(
+                1,
+                Math.max(0, (revealProgress2 - idx * step) / 0.05)
+              );
+              const alpha = 0.2 + perChar * 0.8;
+              const baseRgb = item.color || "15, 23, 42";
+              return (
+                <span
+                  key={idx}
+                  className={item.className}
+                  style={{
+                    color: `rgba(${baseRgb}, ${alpha})`,
+                    transition: "color 120ms ease-out",
+                  }}
+                >
+                  {item.char}
+                </span>
+              );
+            })}
+          </h2>
+        </div>
+
+        <div
+          ref={servicesRef}
+          className="mt-10 service-cards-grid"
+        >
+          {services.map((service, idx) => (
+            <div
+              key={service.title}
+              className={`flex service-card-responsive flex-col justify-between ${isServicesVisible ? "animate-slide-in-up" : "opacity-0"}`}
+              style={{
+                backgroundColor: service.bg,
+                animationDelay: `${0.5 + idx * 0.2}s`
+              }}
+            >
+              {service.image ? (
+                <img src={service.image} alt={service.title} className="service-icon-responsive object-contain" />
+              ) : (
+                <div className="service-title-responsive">{service.icon}</div>
+              )}
+              <p
+                className="whitespace-pre-line service-title-responsive font-semibold text-slate-800"
+              >
+                {service.title}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div
+          ref={ctaRef}
+          className={`flex flex-row gap-responsive cta-banner-responsive bg-black text-white shadow-xl shadow-black/25 items-center justify-between ${isCtaVisible ? "animate-slide-in-up" : "opacity-0"}`}
+          style={{ animationDelay: "0.5s" }}
+        >
+          <div>
+            <p className="cta-title-responsive font-semibold">Kim Olursan Ol</p>
+            <p className="cta-subtitle-responsive text-slate-300">Sende Yükünü Devretmek İstiyorsan</p>
+          </div>
+          <div className="flex flex-row gap-3 items-center">
+            <Link href="/iletisim" className="inline-flex items-center gap-2 rounded-full bg-white cta-button-responsive font-semibold !text-black shadow-sm transition hover:translate-y-[-1px]">
+              Bize Ulaşın
+              <span className="grid cta-icon-responsive place-items-center rounded-full bg-slate-900/10 text-slate-900">
+                <ArrowIcon />
+              </span>
+            </Link>
+            <Link href="/iletisim" className="hidden sm:inline-flex items-center gap-2 rounded-full border border-white/40 cta-button-responsive font-semibold text-white transition hover:bg-white/10">
+              Sizi Arayalım
+              <span className="grid cta-icon-responsive place-items-center rounded-full bg-white/15">
+                <ArrowIcon />
+              </span>
+            </Link>
+          </div>
+        </div>
+
+
+      </section>
+
+
 
 
 

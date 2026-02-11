@@ -185,8 +185,8 @@ export default function ContactPage() {
         };
     }, [isContactExpanded]);
 
-    const navItems = ['Ana Sayfa', 'Nasıl Düşünür', 'Kimler İçin', 'Nasıl Çalışır', 'Deneyimler', 'Demo', 'SSS'];
-    const sectionIds = ['ana-sayfa', 'nasil-dusunur', 'kimler-icin', 'nasil-calisir', 'deneyimler', 'demo', 'sss'];
+    const navItems = ['Ana Sayfa', 'Nasıl Çalışır', 'Kimler İçin', 'Deneyimler', 'Demo', 'SSS'];
+    const sectionIds = ['ana-sayfa', 'nasil-calisir', 'kimler-icin', 'deneyimler', 'demo', 'sss'];
 
     // Form states
     const [formData, setFormData] = useState({
@@ -370,9 +370,8 @@ export default function ContactPage() {
                     {/* Desktop Navigation - 1400px ve üstü: tüm butonlar görünür */}
                     <div className="hidden min-[1400px]:flex items-center gap-1">
                         <button onClick={() => navigateToSection('ana-sayfa')} className="rounded-full px-5 py-2 text-sm font-medium transition whitespace-nowrap text-slate-600 hover:bg-white/50 hover:text-slate-900">Ana Sayfa</button>
-                        <button onClick={() => navigateToSection('nasil-dusunur')} className="rounded-full px-5 py-2 text-sm font-medium transition whitespace-nowrap text-slate-600 hover:bg-white/50 hover:text-slate-900">Nasıl Düşünür</button>
-                        <button onClick={() => navigateToSection('kimler-icin')} className="rounded-full px-5 py-2 text-sm font-medium transition whitespace-nowrap text-slate-600 hover:bg-white/50 hover:text-slate-900">Kimler İçin</button>
                         <button onClick={() => navigateToSection('nasil-calisir')} className="rounded-full px-5 py-2 text-sm font-medium transition whitespace-nowrap text-slate-600 hover:bg-white/50 hover:text-slate-900">Nasıl Çalışır</button>
+                        <button onClick={() => navigateToSection('kimler-icin')} className="rounded-full px-5 py-2 text-sm font-medium transition whitespace-nowrap text-slate-600 hover:bg-white/50 hover:text-slate-900">Kimler İçin</button>
                         <button onClick={() => navigateToSection('deneyimler')} className="rounded-full px-5 py-2 text-sm font-medium transition whitespace-nowrap text-slate-600 hover:bg-white/50 hover:text-slate-900">Deneyimler</button>
                         <button onClick={() => navigateToSection('demo')} className="rounded-full px-5 py-2 text-sm font-medium transition whitespace-nowrap text-slate-600 hover:bg-white/50 hover:text-slate-900">Demo</button>
                         <button onClick={() => navigateToSection('sss')} className="rounded-full px-5 py-2 text-sm font-medium transition whitespace-nowrap text-slate-600 hover:bg-white/50 hover:text-slate-900">SSS</button>
@@ -382,9 +381,8 @@ export default function ContactPage() {
                     <div className="hidden min-[1000px]:block min-[1400px]:hidden overflow-hidden w-[338px]">
                         <div className="flex items-center gap-1">
                             <button onClick={() => navigateToSection('ana-sayfa')} className="rounded-full py-2 text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 w-[110px] text-center text-slate-600 hover:bg-white/50 hover:text-slate-900">Ana Sayfa</button>
-                            <button onClick={() => navigateToSection('nasil-dusunur')} className="rounded-full py-2 text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 w-[110px] text-center text-slate-600 hover:bg-white/50 hover:text-slate-900">Nasıl Düşünür</button>
-                            <button onClick={() => navigateToSection('kimler-icin')} className="rounded-full py-2 text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 w-[110px] text-center text-slate-600 hover:bg-white/50 hover:text-slate-900">Kimler İçin</button>
                             <button onClick={() => navigateToSection('nasil-calisir')} className="rounded-full py-2 text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 w-[110px] text-center text-slate-600 hover:bg-white/50 hover:text-slate-900">Nasıl Çalışır</button>
+                            <button onClick={() => navigateToSection('kimler-icin')} className="rounded-full py-2 text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 w-[110px] text-center text-slate-600 hover:bg-white/50 hover:text-slate-900">Kimler İçin</button>
                             <button onClick={() => navigateToSection('deneyimler')} className="rounded-full py-2 text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 w-[110px] text-center text-slate-600 hover:bg-white/50 hover:text-slate-900">Deneyimler</button>
                             <button onClick={() => navigateToSection('demo')} className="rounded-full py-2 text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 w-[110px] text-center text-slate-600 hover:bg-white/50 hover:text-slate-900">Demo</button>
                             <button onClick={() => navigateToSection('sss')} className="rounded-full py-2 text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 w-[110px] text-center text-slate-600 hover:bg-white/50 hover:text-slate-900">SSS</button>
@@ -474,7 +472,7 @@ export default function ContactPage() {
             </header>
 
             {/* Page content */}
-            <main className="pt-28 sm:pt-52 w-full max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
+            <main className="pt-28 sm:pt-40 w-full max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
                 <div className="flex flex-col items-center gap-3 text-center" ref={contactHeadingRef}>
                     <h2
                         className="max-w-full whitespace-pre-line heading-section font-semibold leading-tight tracking-tight text-slate-800"
@@ -613,7 +611,7 @@ export default function ContactPage() {
                     </form>
                 </div>
 
-                <div className="mx-auto mt-24 sm:mt-64 mb-16 sm:mb-24 w-full max-w-4xl">
+                <div className="mx-auto section-spacing mb-16 sm:mb-24 w-full max-w-4xl">
                     <div ref={faqHeadingRef} className="text-center">
                         <h2
                             ref={revealRef6}
