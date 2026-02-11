@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useLayoutEffect } from "react";
+import { useState, useRef, useEffect, useLayoutEffect, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import Footer from "@/components/Footer";
@@ -158,7 +158,7 @@ const contactHeadingChars = [
     { char: "m", className: "font-serif italic", color: "120, 246, 102" },
 ];
 
-export default function ContactPage() {
+function ContactContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [openFaqs, setOpenFaqs] = useState<boolean[]>(faqs.map(() => false));
@@ -686,10 +686,18 @@ export default function ContactPage() {
                         })}
                     </div>
                 </div>
-            </main >
+            </main>
 
             {/* Footer */}
             <Footer />
         </div >
+    );
+}
+
+export default function ContactPage() {
+    return (
+        <Suspense fallback={<div className="min-h-[100dvh] bg-gradient-to-br from-[#e8ffe6] via-white to-white" />}>
+            <ContactContent />
+        </Suspense>
     );
 }
