@@ -154,7 +154,7 @@ export default function KullaniciHikayesiPage() {
                     <img src="https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/logo-mobile.png" alt="Yosuun" className="min-[724px]:hidden h-[64px]" />
                     <img src="https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/yosuun-new-logo.png" alt="Yosuun" className="hidden min-[724px]:block h-[200px] w-auto max-w-none" />
                 </Link>
-                <nav className={`flex items-center gap-1 rounded-full border border-white/20 bg-white/50 p-1.5 backdrop-blur z-10 justify-self-center transition-all duration-300 origin-center ${isContactExpanded ? "opacity-0 invisible scale-95" : "opacity-100 visible scale-100"}`}>
+                <nav className={`absolute left-1/2 -translate-x-1/2 flex items-center gap-1 rounded-full border border-white/20 bg-white/50 p-1.5 backdrop-blur z-10 transition-all duration-300 origin-center ${isContactExpanded ? "opacity-0 invisible scale-95" : "opacity-100 visible scale-100"}`}>
                     {/* Desktop Navigation - 1400px ve üstü: tüm butonlar görünür */}
                     <div className="hidden min-[1400px]:flex items-center gap-1">
                         <button onClick={() => navigateToSection('ana-sayfa')} className="rounded-full px-5 py-2 text-sm font-medium transition whitespace-nowrap text-slate-600 hover:bg-white/50 hover:text-slate-900">Ana Sayfa</button>
@@ -212,7 +212,7 @@ export default function KullaniciHikayesiPage() {
                         )}
                     </div>
                 </nav>
-                <div className="flex items-center gap-2 shrink-0 justify-self-end ml-1 min-[724px]:ml-0">
+                <div className="flex items-center gap-2 shrink-0 justify-self-end ml-1 min-[724px]:ml-0 min-[1000px]:col-start-3">
                     {/* Mobile/Tablet Expanding Contact Button */}
                     {/* Mobile/Tablet Expanding Contact Button */}
                     <div className="min-[724px]:hidden relative w-9 h-9">
