@@ -816,7 +816,7 @@ function HomeContent() {
         </Link>
         {/* Center Navigation - Hides when contact button is expanded */}
         <nav
-          className={`relative flex items-center rounded-full border border-white/20 bg-white/50 p-1.5 backdrop-blur z-10 justify-self-center transition-all duration-300 origin-center ${isContactExpanded ? "opacity-0 invisible scale-95" : "opacity-100 visible scale-100"
+          className={`absolute left-1/2 -translate-x-1/2 flex items-center rounded-full border border-white/20 bg-white/50 p-1.5 backdrop-blur z-10 transition-all duration-300 origin-center ${isContactExpanded ? "opacity-0 invisible scale-95" : "opacity-100 visible scale-100"
             }`}
         >
           {/* Desktop Navigation - 1400px ve üstü: tüm butonlar görünür */}
@@ -918,7 +918,7 @@ function HomeContent() {
             )}
           </div>
         </nav>
-        <div className="flex items-center gap-2 shrink-0 justify-self-end ml-1 min-[724px]:ml-0">
+        <div className="flex items-center gap-2 shrink-0 justify-self-end ml-1 min-[724px]:ml-0 min-[1000px]:col-start-3">
           {/* Mobile/Tablet Expanding Contact Button */}
           <div className="min-[724px]:hidden relative w-9 h-9">
             <div
