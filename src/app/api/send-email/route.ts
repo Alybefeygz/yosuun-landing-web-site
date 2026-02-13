@@ -73,6 +73,17 @@ export async function POST(request: NextRequest) {
             <o:PixelsPerInch>96</o:PixelsPerInch>
         </o:OfficeDocumentSettings>
     </xml>
+    <style type="text/css">
+        body, table, td, p, h1, span, strong, a {
+            font-family: Arial, Helvetica, sans-serif !important;
+        }
+        table {
+            border-collapse: collapse;
+        }
+        .card-table {
+            background-color: #ffffff !important;
+        }
+    </style>
     <![endif]-->
     <style type="text/css">
         :root {
@@ -80,31 +91,57 @@ export async function POST(request: NextRequest) {
             supported-color-schemes: light only;
         }
         
-        /* Dark Mode Override Prevention */
+        /* Outlook Dark Mode Override Prevention - Expanded */
         [data-ogsc], [data-ogsb] {
             background-color: #f8fafc !important;
             color: #1e293b !important;
         }
+        [data-ogsc] .card-bg, [data-ogsb] .card-bg {
+            background-color: #ffffff !important;
+        }
+        [data-ogsc] .greeting-text, [data-ogsb] .greeting-text {
+            color: #1e293b !important;
+        }
+        [data-ogsc] .text-green, [data-ogsb] .text-green {
+            color: #78f666 !important;
+        }
+        [data-ogsc] .body-text, [data-ogsb] .body-text,
+        [data-ogsc] .text-gray, [data-ogsb] .text-gray {
+            color: #475569 !important;
+        }
+        [data-ogsc] .text-light-gray, [data-ogsb] .text-light-gray {
+            color: #64748b !important;
+        }
+        [data-ogsc] .footer-strong, [data-ogsb] .footer-strong {
+            color: #64748b !important;
+        }
         
         @media (prefers-color-scheme: dark) {
-            .email-body, .email-container, .email-content {
+            .email-body, .email-container, .email-content,
+            .email-body-table, .email-outer-td {
                 background-color: #f8fafc !important;
             }
-            .card-bg {
+            .card-bg, .card-table-outer {
                 background-color: #ffffff !important;
                 background: linear-gradient(to right, #ccfac5, #ffffff, #ffffff) !important;
             }
-            .text-dark {
+            .text-dark, .greeting-text {
                 color: #1e293b !important;
             }
             .text-green {
-                color: #22c55e !important;
+                color: #78f666 !important;
             }
-            .text-gray {
+            .text-gray, .body-text {
                 color: #475569 !important;
             }
-            .text-light-gray {
+            .text-light-gray, .footer-strong {
                 color: #64748b !important;
+            }
+            .social-icon-cell {
+                background-color: transparent !important;
+            }
+            .footer-td {
+                background-color: #f8fafc !important;
             }
         }
         
@@ -140,69 +177,71 @@ export async function POST(request: NextRequest) {
         Mesajınız bize ulaştı! En kısa sürede size geri dönüş yapacağız.
     </div>
     
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" class="email-container" style="background-color: #f8fafc !important;" bgcolor="#f8fafc">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" class="email-body-table" style="background-color: #f8fafc !important;" bgcolor="#f8fafc">
         <tr>
-            <td align="center" style="padding: 40px 16px;" bgcolor="#f8fafc">
+            <td align="center" class="email-outer-td" style="padding: 40px 16px; background-color: #f8fafc !important;" bgcolor="#f8fafc">
                 
                 <!-- Logo -->
-                <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" class="email-container" style="max-width: 600px;">
+                <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" class="email-container" style="max-width: 600px;" bgcolor="#f8fafc">
                     <tr>
-                        <td align="center" style="padding-bottom: 30px;">
+                        <td align="center" style="padding-bottom: 0px; background-color: #f8fafc !important;" bgcolor="#f8fafc">
                             <img src="https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/y-logo.png" alt="Yosuun" width="280" class="logo-img" style="display: block; max-width: 280px; height: auto;" />
                         </td>
                     </tr>
                 </table>
                 
                 <!-- White Card with Gradient -->
-                <table role="presentation" width="90%" cellpadding="0" cellspacing="0" border="0" class="card-table" style="border-collapse: separate; max-width: 520px; background-color: #ffffff; background: linear-gradient(to right, #ccfac5 0%, #ffffff 40%, #ffffff 100%); border-radius: 32px; box-shadow: 0 16px 40px rgba(0,0,0,0.08); -webkit-box-shadow: 0 16px 40px rgba(0,0,0,0.08);" bgcolor="#ffffff">
+                <!--[if mso]>
+                <table role="presentation" width="660" cellpadding="0" cellspacing="0" border="0" align="center" style="background-color: #ffffff;">
                     <tr>
-                        <td class="card-padding email-content card-bg" style="padding: 40px 32px; background-color: transparent;">
+                        <td style="padding: 40px 32px; background-color: #ffffff;">
+                <![endif]-->
+                <table role="presentation" width="96%" cellpadding="0" cellspacing="0" border="0" class="card-table card-table-outer" style="border-collapse: separate; max-width: 660px; background-color: #ffffff !important; background: linear-gradient(to right, #ccfac5 0%, #ffffff 40%, #ffffff 100%); border-radius: 40px; box-shadow: 0 16px 40px rgba(0,0,0,0.08); -webkit-box-shadow: 0 16px 40px rgba(0,0,0,0.08);" bgcolor="#ffffff">
+                    <tr>
+                        <td class="card-padding email-content card-bg" style="padding: 40px 32px; background-color: #ffffff !important; background: linear-gradient(to right, #ccfac5 0%, #ffffff 40%, #ffffff 100%);" bgcolor="#ffffff">
                             
                             <!-- Greeting -->
-                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" style="background-color: transparent;">
                                 <tr>
-                                    <td align="center" style="padding-bottom: 20px;">
+                                    <td align="center" style="padding-bottom: 20px; background-color: transparent;" bgcolor="#ffffff">
                                         <h1 class="greeting-text text-dark" style="margin: 0; font-size: 24px; color: #1e293b !important; font-weight: 600; line-height: 1.3;">
-                                            Merhaba <span class="text-green" style="color: #22c55e !important; font-style: italic; font-family: Georgia, 'Times New Roman', Times, serif;">${firstName}</span>
-                                        </h1>
-                                        <h1 class="greeting-text text-dark" style="margin: 4px 0 0 0; font-size: 24px; color: #1e293b !important; font-weight: 600; line-height: 1.3;">
-                                            ${lastName}
+                                            Merhaba <span class="text-green" style="color: #78f666 !important; font-style: italic; font-family: Georgia, 'Times New Roman', Times, serif;">${firstName}</span> ${lastName}
                                         </h1>
                                     </td>
                                 </tr>
                             </table>
                             
                             <!-- Message Body -->
-                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: transparent;">
                                 <tr>
-                                    <td align="center">
+                                    <td align="center" style="background-color: transparent;">
                                         <p class="body-text text-gray" style="margin: 0; font-size: 16px; color: #475569 !important; line-height: 1.7; text-align: center;">
                                             Mesajın bize ulaştı, teşekkür ederiz. Yosuun'a gösterdiğin ilgi için mutluyuz.
                                         </p>
                                         <p class="body-text text-gray" style="margin: 12px 0 0 0; font-size: 16px; color: #475569 !important; line-height: 1.7; text-align: center;">
-                                            En kısa sürede sana geri dönüş yaparak tüm sorularını birlikte değerlendireceğiz.
+                                            En kısa sürede sana geri dönüş yaparak tüm sorularını birlikte<br>değerlendireceğiz.
                                         </p>
                                     </td>
                                 </tr>
                             </table>
                             
                             <!-- Social Icons -->
-                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top: 32px;">
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top: 32px; background-color: transparent;">
                                 <tr>
-                                    <td align="center">
-                                        <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                                    <td align="center" style="background-color: transparent;">
+                                        <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="background-color: transparent;">
                                             <tr>
-                                                <td style="padding: 0 12px;">
+                                                <td class="social-icon-cell" style="padding: 0 12px; background-color: transparent;">
                                                     <a href="https://yosuun.com" target="_blank" style="text-decoration: none; display: inline-block;">
                                                         <img src="https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/website-icon.png" alt="Website" width="40" height="40" style="display: block; border: 0;" />
                                                     </a>
                                                 </td>
-                                                <td style="padding: 0 12px;">
+                                                <td class="social-icon-cell" style="padding: 0 12px; background-color: transparent;">
                                                     <a href="https://www.linkedin.com/company/yosuun/" target="_blank" style="text-decoration: none; display: inline-block;">
                                                         <img src="https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/linkedin-icon.png" alt="LinkedIn" width="40" height="40" style="display: block; border: 0;" />
                                                     </a>
                                                 </td>
-                                                <td style="padding: 0 12px;">
+                                                <td class="social-icon-cell" style="padding: 0 12px; background-color: transparent;">
                                                     <a href="https://www.instagram.com/yosuunturkey/" target="_blank" style="text-decoration: none; display: inline-block;">
                                                         <img src="https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/instagram-icon.png" alt="Instagram" width="40" height="40" style="display: block; border: 0;" />
                                                     </a>
@@ -216,13 +255,18 @@ export async function POST(request: NextRequest) {
                         </td>
                     </tr>
                 </table>
+                <!--[if mso]>
+                        </td>
+                    </tr>
+                </table>
+                <![endif]-->
                 
                 <!-- Footer -->
-                <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" class="email-container" style="max-width: 600px;">
+                <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" class="email-container" style="max-width: 600px;" bgcolor="#f8fafc">
                     <tr>
-                        <td align="center" style="padding: 32px 16px;">
+                        <td align="center" class="footer-td" style="padding: 32px 16px; background-color: #f8fafc !important;" bgcolor="#f8fafc">
                             <p class="text-light-gray" style="margin: 0; font-size: 14px; color: #64748b !important;">
-                                <strong style="color: #64748b !important;">Yosuun</strong>
+                                <strong class="footer-strong" style="color: #64748b !important;">Yosuun</strong>
                             </p>
                             <p class="text-light-gray" style="margin: 8px 0 0 0; font-size: 12px; color: #64748b !important;">
                                 Bu otomatik bir mesaj, ama arkasında gerçek insanlar var!

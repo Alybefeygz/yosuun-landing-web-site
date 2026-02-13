@@ -150,7 +150,7 @@ const pricingPlans = [
     ],
     bg: "#ccfac5",
     text: "#1f1b10",
-    pillBg: "#1f1b10",
+    pillBg: "#000000",
     pillText: "#f3dd6d",
     ctaBg: "#f3dd6d",
     ctaText: "#1f1b10",
@@ -170,7 +170,7 @@ const pricingPlans = [
     ],
     bg: "#000000",
     text: "#f6f4ff",
-    pillBg: "#161329",
+    pillBg: "#000000",
     pillText: "#f6f4ff",
     ctaBg: "#f6f4ff",
     ctaText: "#161329",
@@ -1002,7 +1002,7 @@ function HomeContent() {
             </p>
 
             <div className="flex flex-row items-center gap-responsive-lg">
-              <Link href="/iletisim" className="btn-responsive group inline-flex items-center justify-between rounded-full bg-[#78f666] font-semibold !text-white shadow-lg shadow-[#25f707]/30 transition hover:translate-y-[-1px]">
+              <Link href="/iletisim" className="btn-responsive group inline-flex items-center justify-between rounded-full bg-[#78f666] font-semibold !text-white transition hover:translate-y-[-1px]">
                 Yosuun’u Keşfet
                 <span className="btn-icon grid place-items-center rounded-full bg-white text-slate-900">
                   <ArrowIcon />

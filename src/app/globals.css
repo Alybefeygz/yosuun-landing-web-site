@@ -661,6 +661,7 @@ a {
   .timeline-circle-large-responsive img {
     height: 45px !important;
     width: 45px !important;
+    transform: translateX(-2px) !important;
   }
 
   .timeline-line-responsive {
