@@ -186,8 +186,8 @@ function ContactContent() {
         };
     }, [isContactExpanded]);
 
-    const navItems = ['Ana Sayfa', 'Nasıl Çalışır', 'Kimler İçin', 'Deneyimler', 'Demo', 'SSS'];
-    const sectionIds = ['ana-sayfa', 'nasil-calisir', 'kimler-icin', 'deneyimler', 'demo', 'sss'];
+    const navItems = ['Ana Sayfa', 'Ajans mı?', 'Nasıl Çalışır', 'Kimler İçin', 'Deneyimler', 'Demo', 'SSS'];
+    const sectionIds = ['ana-sayfa', 'ajans-mi', 'nasil-calisir', 'kimler-icin', 'deneyimler', 'demo', 'sss'];
 
     // Form states
     const [formData, setFormData] = useState({
@@ -379,6 +379,7 @@ function ContactContent() {
                     {/* Desktop Navigation - 1400px ve üstü: tüm butonlar görünür */}
                     <div className="hidden min-[1400px]:flex items-center gap-1">
                         <button onClick={() => navigateToSection('ana-sayfa')} className="rounded-full px-5 py-2 text-sm font-medium transition whitespace-nowrap text-slate-600 hover:bg-white/50 hover:text-slate-900">Ana Sayfa</button>
+                        <button onClick={() => navigateToSection('ajans-mi')} className="rounded-full px-5 py-2 text-sm font-medium transition whitespace-nowrap text-slate-600 hover:bg-white/50 hover:text-slate-900">Ajans mı?</button>
                         <button onClick={() => navigateToSection('nasil-calisir')} className="rounded-full px-5 py-2 text-sm font-medium transition whitespace-nowrap text-slate-600 hover:bg-white/50 hover:text-slate-900">Nasıl Çalışır</button>
                         <button onClick={() => navigateToSection('kimler-icin')} className="rounded-full px-5 py-2 text-sm font-medium transition whitespace-nowrap text-slate-600 hover:bg-white/50 hover:text-slate-900">Kimler İçin</button>
                         <button onClick={() => navigateToSection('deneyimler')} className="rounded-full px-5 py-2 text-sm font-medium transition whitespace-nowrap text-slate-600 hover:bg-white/50 hover:text-slate-900">Deneyimler</button>
@@ -390,6 +391,7 @@ function ContactContent() {
                     <div className="hidden min-[1000px]:block min-[1400px]:hidden overflow-hidden w-[338px]">
                         <div className="flex items-center gap-1">
                             <button onClick={() => navigateToSection('ana-sayfa')} className="rounded-full py-2 text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 w-[110px] text-center text-slate-600 hover:bg-white/50 hover:text-slate-900">Ana Sayfa</button>
+                            <button onClick={() => navigateToSection('ajans-mi')} className="rounded-full py-2 text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 w-[110px] text-center text-slate-600 hover:bg-white/50 hover:text-slate-900">Ajans mı?</button>
                             <button onClick={() => navigateToSection('nasil-calisir')} className="rounded-full py-2 text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 w-[110px] text-center text-slate-600 hover:bg-white/50 hover:text-slate-900">Nasıl Çalışır</button>
                             <button onClick={() => navigateToSection('kimler-icin')} className="rounded-full py-2 text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 w-[110px] text-center text-slate-600 hover:bg-white/50 hover:text-slate-900">Kimler İçin</button>
                             <button onClick={() => navigateToSection('deneyimler')} className="rounded-full py-2 text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 w-[110px] text-center text-slate-600 hover:bg-white/50 hover:text-slate-900">Deneyimler</button>

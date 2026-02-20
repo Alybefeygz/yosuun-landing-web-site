@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 
 const navItems = [
   "Ana Sayfa",
+  "Ajans mı?",
   "Nasıl Çalışır",
   "Kimler İçin",
   "Deneyimler",
@@ -321,7 +322,7 @@ function AnimatedHeading({
     };
   }, [start, end]);
 
-  const baseColor = "28,42,60";
+  const baseColor = "0,0,0";
 
   return (
     <div ref={ref} className={className} style={{ lineHeight: "1.2" }}>
@@ -476,6 +477,20 @@ function HomeContent() {
     []
   );
 
+  const textSegments8 = [
+    { text: "Ajans mı? Hayır!\n" },
+    { text: "E-ticaret", className: "font-serif italic", color: "120, 246, 102" },
+    { text: " kendi kendine." },
+  ];
+
+  const allChars8 = useMemo(
+    () =>
+      textSegments8.flatMap((seg) =>
+        seg.text.split("").map((char) => ({ char, className: seg.className, color: seg.color }))
+      ),
+    []
+  );
+
 
   const [revealProgress2, setRevealProgress2] = useState(0);
   const revealRef2 = useRef<HTMLHeadingElement | null>(null);
@@ -489,6 +504,8 @@ function HomeContent() {
   const revealRef6 = useRef<HTMLHeadingElement | null>(null);
   const [revealProgress7, setRevealProgress7] = useState(0);
   const revealRef7 = useRef<HTMLHeadingElement | null>(null);
+  const [revealProgress8, setRevealProgress8] = useState(0);
+  const revealRef8 = useRef<HTMLHeadingElement | null>(null);
   const timelineRef = useRef<HTMLDivElement | null>(null);
   const [timelineTop, setTimelineTop] = useState<number>(9999);
   const [openFaqs, setOpenFaqs] = useState<boolean[]>(faqs.map(() => false));
@@ -501,6 +518,8 @@ function HomeContent() {
   const { ref: servicesRef, isInView: isServicesVisible } = useInView({ threshold: 0.1 });
   const { ref: ctaRef, isInView: isCtaVisible } = useInView({ threshold: 0.1 });
   const { ref: howItWorksHeadingRef, isInView: isHowItWorksHeadingVisible } = useInView({ threshold: 0.1 });
+  const { ref: newSectionHeadingRef, isInView: isNewSectionHeadingVisible } = useInView({ threshold: 0.1 });
+  const { ref: newSectionContentRef, isInView: isNewSectionContentVisible } = useInView({ threshold: 0.1 });
   const { ref: testimonialsHeadingRef, isInView: isTestimonialsHeadingVisible } = useInView({ threshold: 0.1 });
   const { ref: testimonialsContentRef, isInView: isTestimonialsContentVisible } = useInView({ threshold: 0.1 });
   const { ref: demoHeadingRef, isInView: isDemoHeadingVisible } = useInView({ threshold: 0.1 });
@@ -531,7 +550,7 @@ function HomeContent() {
     }
   };
 
-  const sectionIds = ['ana-sayfa', 'nasil-calisir', 'kimler-icin', 'deneyimler', 'demo', 'sss'];
+  const sectionIds = ['ana-sayfa', 'ajans-mi', 'nasil-calisir', 'kimler-icin', 'deneyimler', 'demo', 'sss'];
 
   const scrollToSection = (idx: number) => {
     // Ana sayfaya tıklanınca sadece scroll yap, animasyonu yeniden tetikleme
@@ -544,7 +563,7 @@ function HomeContent() {
       const elementPosition = section.getBoundingClientRect().top + window.scrollY;
 
       // Navbar yüksekliği için offset
-      const navbarHeight = 180;
+      const navbarHeight = 100;
 
       // Eğer bölüm viewport'tan kısa ise: ortalayarak göster
       // Eğer bölüm viewport'tan uzun ise: başlığı navbar altında göster
@@ -583,7 +602,7 @@ function HomeContent() {
             const sectionHeight = sectionRect.height;
             const elementPosition = section.getBoundingClientRect().top + window.scrollY;
 
-            const navbarHeight = 180;
+            const navbarHeight = 100;
 
             let scrollPosition;
             if (sectionHeight <= viewportHeight * 0.7) {
@@ -635,6 +654,7 @@ function HomeContent() {
       updateReveal(revealRef5, setRevealProgress5);
       updateReveal(revealRef6, setRevealProgress6);
       updateReveal(revealRef7, setRevealProgress7);
+      updateReveal(revealRef8, setRevealProgress8);
 
       if (timelineRef.current) {
         setTimelineTop(timelineRef.current.getBoundingClientRect().top);
@@ -668,11 +688,12 @@ function HomeContent() {
   useEffect(() => {
     const sectionData = [
       { id: 'ana-sayfa', index: 0 },
-      { id: 'nasil-calisir', index: 1 },
-      { id: 'kimler-icin', index: 2 },
-      { id: 'deneyimler', index: 3 },
-      { id: 'demo', index: 4 },
-      { id: 'sss', index: 5 },
+      { id: 'ajans-mi', index: 1 },
+      { id: 'nasil-calisir', index: 2 },
+      { id: 'kimler-icin', index: 3 },
+      { id: 'deneyimler', index: 4 },
+      { id: 'demo', index: 5 },
+      { id: 'sss', index: 6 },
     ];
 
     const visibilityMap = new Map<string, number>();
@@ -850,7 +871,7 @@ function HomeContent() {
                   const section = activeSection === -1 ? 0 : activeSection;
                   const itemWidth = 114; // 110px buton + 4px gap
                   if (section <= 1) return 0;
-                  if (section >= 4) return -(4 * itemWidth);
+                  if (section >= 5) return -(5 * itemWidth);
                   return -((section - 1) * itemWidth);
                 })()
                   }px)`
@@ -962,7 +983,7 @@ function HomeContent() {
           </Link>
         </div>
       </header>
-      <div id="ana-sayfa" className="mx-auto flex min-h-screen w-full max-w-6xl flex-col container-padding pb-4 pt-10">
+      <div id="ana-sayfa" className="mx-auto flex min-h-screen w-full max-w-6xl flex-col container-padding pt-10">
 
         <main className="flex flex-1 flex-col items-center text-center">
           <div className="flex flex-1 flex-col items-center justify-center gap-6 w-full translate-y-16">
@@ -978,7 +999,7 @@ function HomeContent() {
                   </span>
                 ))}
               </p>
-              <p className="max-w-4xl heading-hero leading-tight tracking-tight text-slate-800">
+              <p className="max-w-4xl heading-hero leading-tight tracking-tight text-black">
                 <span className="font-serif italic text-black">
                   {"E-ticaret sessizce çalışsın".split("").map((char, i) => (
                     <span
@@ -1098,6 +1119,130 @@ function HomeContent() {
         </main>
       </div>
 
+      {/* Ajans mı? Hayır! Hayır! Section */}
+      <section id="ajans-mi" className="mx-auto section-spacing w-full max-w-6xl container-padding scroll-mt-[180px] min-[724px]:scroll-mt-[200px] min-[1500px]:scroll-mt-[250px]">
+        <div
+          ref={newSectionHeadingRef}
+          className="flex flex-col items-center gap-3 text-center"
+        >
+          <h2
+            ref={revealRef8}
+            className={`max-w-full whitespace-pre-line heading-section font-semibold leading-tight tracking-tight text-slate-800 ${isNewSectionHeadingVisible ? "animate-slide-in-up" : "opacity-0"}`}
+            style={{ animationDelay: "0.3s" }}
+          >
+            {allChars8.map((item, idx) => {
+              const totalChars = allChars8.length;
+              const step = 0.85 / totalChars;
+              const perChar = Math.min(
+                1,
+                Math.max(0, (revealProgress8 - idx * step) / 0.05)
+              );
+              const alpha = 0.2 + perChar * 0.8;
+              const baseRgb = item.color || "0, 0, 0";
+              return (
+                <span
+                  key={idx}
+                  className={item.className}
+                  style={{
+                    color: `rgba(${baseRgb}, ${alpha})`,
+                    transition: "color 120ms ease-out",
+                  }}
+                >
+                  {item.char}
+                </span>
+              );
+            })}
+          </h2>
+          <p
+            className={`mt-4 max-w-2xl text-responsive text-slate-500 ${isNewSectionHeadingVisible ? "animate-slide-in-up" : "opacity-0"}`}
+            style={{ animationDelay: "0.5s" }}
+          >
+            Veriyi izler, karar üretir ve belirlediğin kurallara göre uygular. Sen hayatını yaşarken, sistem arka planda çalışır.
+          </p>
+        </div>
+
+        {/* Do / Don't Karşılaştırma Kartları */}
+        <div
+          ref={newSectionContentRef}
+          className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 w-full max-w-5xl mx-auto"
+        >
+          {/* Sol Kart — DO (Yosuun) */}
+          <div
+            className={`relative transition-all duration-500 ${isNewSectionContentVisible ? "animate-slide-in-up" : "opacity-0"}`}
+            style={{ animationDelay: "0.1s" }}
+          >
+            <div className="flex flex-col-reverse md:flex-row h-full items-stretch">
+              {/* İçerik */}
+              <div className="flex-1 p-6 sm:p-8 space-y-5 bg-white rounded-[24px] shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
+                {[
+                  "Tüm pazaryerlerini tek panelde yönetir.",
+                  "Stokları tüm kanallarda anlık senkronize eder.",
+                  "Rakipleri sürekli izler ve aksiyon üretir.",
+                  "Özel günleri algılar, otomatik hazırlanır.",
+                  "Süreci baştan sona otonom yürütür.",
+                ].map((text, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <div className="mt-0.5 flex-shrink-0 grid h-5 w-5 sm:h-6 sm:w-6 place-items-center rounded-full bg-[#78f666]/15">
+                      <svg viewBox="0 0 24 24" className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-[#78f666]" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="m5 13 4 4 10-10" />
+                      </svg>
+                    </div>
+                    <p className="text-sm sm:text-[15px] text-slate-600 leading-relaxed">{text}</p>
+                  </div>
+                ))}
+              </div>
+              {/* Yeşil Bar — Mobilde Üst, Masaüstünde Sağ Kenar */}
+              <div className="relative h-12 w-full md:h-auto md:w-14 flex-shrink-0 flex items-center justify-center overflow-visible">
+                <div className="h-full w-[65%] md:w-full md:h-[65%] rounded-tl-[24px] rounded-tr-[24px] rounded-bl-none rounded-br-none md:rounded-tl-none md:rounded-bl-none md:rounded-tr-[24px] md:rounded-br-[24px] flex items-center justify-center overflow-visible" style={{ background: "linear-gradient(180deg, #78f666 0%, #5ce04a 100%)" }}>
+                  <img
+                    src="https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/yatay-logo.png"
+                    alt="Yosuun"
+                    className="max-w-none h-8 sm:h-9 md:rotate-90 scale-[1.2] object-contain"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Sağ Kart — DON'T (Ajans) */}
+          <div
+            className={`relative transition-all duration-500 ${isNewSectionContentVisible ? "animate-slide-in-up" : "opacity-0"}`}
+            style={{ animationDelay: "0.25s" }}
+          >
+            <div className="flex flex-col md:flex-row h-full items-stretch">
+              {/* Siyah Bar — Mobilde Üst, Masaüstünde Sol Kenar */}
+              <div className="relative h-12 w-full md:h-auto md:w-14 flex-shrink-0 flex items-center justify-center">
+                <div className="h-full w-[65%] md:w-full md:h-[65%] rounded-tl-[24px] rounded-tr-[24px] rounded-bl-none rounded-br-none md:rounded-tl-[24px] md:rounded-bl-[24px] md:rounded-tr-none md:rounded-br-none flex items-center justify-center gap-3" style={{ background: "#000000" }}>
+                  <span
+                    className="text-white font-bold text-sm sm:text-base tracking-widest md:rotate-180 md:[writing-mode:vertical-rl]">
+                    Ajans
+                  </span>
+                </div>
+              </div>
+              {/* İçerik */}
+              <div className="flex-1 p-6 sm:p-8 space-y-5 bg-white rounded-[24px] shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
+                {[
+                  "Tüm kanalları tek sistemde anlık yönetemez.",
+                  "Çoklu stokları gerçek zamanlı güncelleyemez.",
+                  "Rakipleri 7/24 otomatik izleyemez.",
+                  "Özel günleri sistemsel algılayamaz.",
+                  "Süreci insan olmadan yürütemez.",
+                ].map((text, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <div className="mt-0.5 flex-shrink-0 grid h-5 w-5 sm:h-6 sm:w-6 place-items-center rounded-full bg-slate-900/10">
+                      <svg viewBox="0 0 24 24" className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-slate-900" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M18 6 6 18M6 6l12 12" />
+                      </svg>
+                    </div>
+                    <p className="text-sm sm:text-[15px] text-slate-600 leading-relaxed">{text}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="nasil-calisir" className="mx-auto section-spacing w-full max-w-6xl container-padding scroll-mt-[180px] min-[724px]:scroll-mt-[200px] min-[1500px]:scroll-mt-[250px]">
         <div
           ref={howItWorksHeadingRef}
@@ -1116,7 +1261,7 @@ function HomeContent() {
                 Math.max(0, (revealProgress3 - idx * step) / 0.05)
               );
               const alpha = 0.2 + perChar * 0.8;
-              const baseRgb = item.color || "15, 23, 42";
+              const baseRgb = item.color || "0, 0, 0";
               return (
                 <span
                   key={idx}
@@ -1177,7 +1322,7 @@ function HomeContent() {
                 <div
                   className={`grid place-items-center rounded-full font-semibold shadow-sm z-10 transition-all duration-300 ${step === "06" ? "timeline-circle-large-responsive overflow-visible" : "timeline-circle-responsive"}`}
                   style={{
-                    backgroundColor: isActive ? (step === "06" ? "#78f666" : "#0f172a") : "#ffffff",
+                    backgroundColor: isActive ? (step === "06" ? "#78f666" : "#000000") : "#ffffff",
                     color: isActive ? "#ffffff" : "#94a3b8",
                     borderWidth: isActive ? 0 : 1,
                     borderColor: "#e2e8f0",
@@ -1198,7 +1343,7 @@ function HomeContent() {
                 {idx < arr.length - 1 && (
                   <div className={`relative w-0.5 bg-slate-200 overflow-visible ${idx === 4 ? "timeline-line-last-responsive" : "timeline-line-responsive"}`}>
                     <div
-                      className="absolute top-0 left-0 w-full bg-slate-900"
+                      className="absolute top-0 left-0 w-full bg-black"
                       style={{ height: `${lineFill * 100}%` }}
                     />
                     {/* Animated Card */}
@@ -1290,7 +1435,7 @@ function HomeContent() {
                 Math.max(0, (revealProgress2 - idx * step) / 0.05)
               );
               const alpha = 0.2 + perChar * 0.8;
-              const baseRgb = item.color || "15, 23, 42";
+              const baseRgb = item.color || "0, 0, 0";
               return (
                 <span
                   key={idx}
@@ -1384,7 +1529,7 @@ function HomeContent() {
                 Math.max(0, (revealProgress4 - idx * step) / 0.05)
               );
               const alpha = 0.2 + perChar * 0.8;
-              const baseRgb = item.color || "15, 23, 42";
+              const baseRgb = item.color || "0, 0, 0";
               return (
                 <span
                   key={idx}
@@ -1466,7 +1611,7 @@ function HomeContent() {
                 Math.max(0, (revealProgress5 - idx * step) / 0.05)
               );
               const alpha = 0.2 + perChar * 0.8;
-              const baseRgb = item.color || "15, 23, 42";
+              const baseRgb = item.color || "0, 0, 0";
               return (
                 <span
                   key={idx}
@@ -1602,7 +1747,7 @@ function HomeContent() {
                   Math.max(0, (revealProgress6 - idx * step) / 0.05)
                 );
                 const alpha = 0.2 + perChar * 0.8;
-                const baseRgb = item.color || "28, 42, 60";
+                const baseRgb = item.color || "0, 0, 0";
                 return (
                   <span
                     key={idx}
@@ -1669,7 +1814,7 @@ function HomeContent() {
           >
             {allChars7.map((item, idx) => {
               const alpha = 1;
-              const baseRgb = item.color || "15, 23, 42";
+              const baseRgb = item.color || "0, 0, 0";
               return (
                 <span
                   key={idx}
