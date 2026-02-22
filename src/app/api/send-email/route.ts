@@ -232,7 +232,7 @@ export async function POST(request: NextRequest) {
                                         <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="background-color: transparent;">
                                             <tr>
                                                 <td class="social-icon-cell" style="padding: 0 12px; background-color: transparent;">
-                                                    <a href="https://yosuun.com" target="_blank" style="text-decoration: none; display: inline-block;">
+                                                    <a href="https://yosuun.com.tr" target="_blank" style="text-decoration: none; display: inline-block;">
                                                         <img src="https://hscaphuhndggoryhceoz.supabase.co/storage/v1/object/public/foto/website-icon.png" alt="Website" width="40" height="40" style="display: block; border: 0;" />
                                                     </a>
                                                 </td>
