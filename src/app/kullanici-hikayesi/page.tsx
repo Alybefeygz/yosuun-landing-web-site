@@ -220,14 +220,14 @@ export default function KullaniciHikayesiPage() {
                     <div className="min-[724px]:hidden relative w-9 h-9">
                         <div
                             ref={contactBtnRef}
-                            className={`absolute right-0 top-1/2 -translate-y-1/2 flex items-center justify-end rounded-full transition-all duration-500 ease-spring z-50 cursor-pointer ${isContactExpanded ? "pr-1.5 pl-5 py-1.5 w-[145px]" : "w-9 h-9"
+                            className={`absolute right-0 top-1/2 -translate-y-1/2 flex items-center justify-end rounded-full transition-all duration-500 ease-spring z-50 cursor-pointer ${isContactExpanded ? "pr-1.5 pl-5 py-1.5 w-[115px]" : "w-9 h-9"
                                 }`}
                             onClick={(e) => {
                                 if (!isContactExpanded) {
                                     e.preventDefault();
                                     setIsContactExpanded(true);
                                 } else {
-                                    router.push('/iletisim');
+                                    window.location.href = "https://app.yosuun.com.tr/";
                                 }
                             }}
                         >
@@ -236,7 +236,7 @@ export default function KullaniciHikayesiPage() {
                                 className={`text-sm font-semibold text-white whitespace-nowrap overflow-hidden transition-all duration-300 absolute left-5 ${isContactExpanded ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4 pointer-events-none"
                                     }`}
                             >
-                                Bize Ulaşın
+                                Giriş Yap
                             </span>
 
                             {/* Icon Container */}
@@ -252,8 +252,8 @@ export default function KullaniciHikayesiPage() {
                                 }`}></div>
                         </div>
                     </div>
-                    <Link href="/iletisim" className="hidden min-[724px]:flex items-center gap-2 rounded-full bg-black pl-5 pr-1.5 py-1.5 text-sm font-semibold !text-white shadow-md transition hover:translate-y-[-1px] hover:bg-slate-900 whitespace-nowrap">
-                        Bize Ulaşın
+                    <Link href="https://app.yosuun.com.tr/" className="hidden min-[724px]:flex items-center gap-2 rounded-full bg-black pl-5 pr-1.5 py-1.5 text-sm font-semibold !text-white shadow-md transition hover:translate-y-[-1px] hover:bg-slate-900 whitespace-nowrap">
+                        Giriş Yap
                         <span className="grid h-9 w-9 place-items-center rounded-full bg-white text-slate-900">
                             <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="none">
                                 <path d="M5 12h14m0 0-5-5m5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
@@ -370,5 +370,3 @@ export default function KullaniciHikayesiPage() {
         </div>
     );
 }
-
-

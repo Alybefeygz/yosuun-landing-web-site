@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 
@@ -529,7 +529,6 @@ function HomeContent() {
   const { ref: faqItemsRef, isInView: isFaqItemsVisible } = useInView({ threshold: 0.1 });
 
   const [isContactExpanded, setIsContactExpanded] = useState(false);
-  const router = useRouter();
   const contactBtnRef = useRef<HTMLDivElement | null>(null);
 
   const handleFaqToggle = (idx: number) => {
@@ -944,14 +943,14 @@ function HomeContent() {
           <div className="min-[724px]:hidden relative w-9 h-9">
             <div
               ref={contactBtnRef}
-              className={`absolute right-0 top-1/2 -translate-y-1/2 flex items-center justify-end rounded-full transition-all duration-500 ease-spring z-50 cursor-pointer ${isContactExpanded ? "pr-1.5 pl-5 py-1.5 w-[145px]" : "w-9 h-9"
+              className={`absolute right-0 top-1/2 -translate-y-1/2 flex items-center justify-end rounded-full transition-all duration-500 ease-spring z-50 cursor-pointer ${isContactExpanded ? "pr-1.5 pl-5 py-1.5 w-[115px]" : "w-9 h-9"
                 }`}
               onClick={(e) => {
                 if (!isContactExpanded) {
                   e.preventDefault();
                   setIsContactExpanded(true);
                 } else {
-                  router.push('/iletisim');
+                  window.location.href = "https://app.yosuun.com.tr/";
                 }
               }}
             >
@@ -960,7 +959,7 @@ function HomeContent() {
                 className={`text-sm font-semibold text-white whitespace-nowrap overflow-hidden transition-all duration-300 absolute left-5 ${isContactExpanded ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4 pointer-events-none"
                   }`}
               >
-                Bize Ulaşın
+                Giriş Yap
               </span>
 
               {/* Icon Container */}
@@ -975,8 +974,8 @@ function HomeContent() {
             </div>
           </div>
           {/* Desktop: tam buton */}
-          <Link href="/iletisim" className="hidden min-[724px]:flex items-center gap-2 rounded-full bg-black pl-5 pr-1.5 py-1.5 text-sm font-semibold !text-white shadow-md transition hover:translate-y-[-1px] hover:bg-slate-900 whitespace-nowrap">
-            Bize Ulaşın
+          <Link href="https://app.yosuun.com.tr/" className="hidden min-[724px]:flex items-center gap-2 rounded-full bg-black pl-5 pr-1.5 py-1.5 text-sm font-semibold !text-white shadow-md transition hover:translate-y-[-1px] hover:bg-slate-900 whitespace-nowrap">
+            Giriş Yap
             <span className="grid h-9 w-9 place-items-center rounded-full bg-white text-slate-900">
               <ArrowIcon />
             </span>
@@ -1023,7 +1022,7 @@ function HomeContent() {
             </p>
 
             <div className="flex flex-row items-center gap-responsive-lg">
-              <Link href="/iletisim" className="btn-responsive group inline-flex items-center justify-between rounded-full bg-[#78f666] font-semibold !text-white transition hover:translate-y-[-1px]">
+              <Link href="https://app.yosuun.com.tr/" className="btn-responsive group inline-flex items-center justify-between rounded-full bg-[#78f666] font-semibold !text-white transition hover:translate-y-[-1px]">
                 Yosuun’u Keşfet
                 <span className="btn-icon grid place-items-center rounded-full bg-white text-slate-900">
                   <ArrowIcon />
