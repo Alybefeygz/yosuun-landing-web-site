@@ -43,6 +43,12 @@ export default function Footer() {
                         <p>Ostim Teknik Üniversitesi Cezeri Teknoloji ve Araştırma Merkezi</p>
                         <p>Ostim/Ankara</p>
                         <p>info@yosuun.com - (539) 319 22 60</p>
+                        <Link
+                            href="/kvkk-politikasi"
+                            className="inline-block font-medium underline decoration-slate-300 underline-offset-4 transition-colors hover:text-slate-900 hover:decoration-slate-900"
+                        >
+                            KVKK Politikası
+                        </Link>
                     </div>
                 </div>
             </div>
