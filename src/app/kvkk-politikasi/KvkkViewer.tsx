@@ -197,7 +197,7 @@ export default function KvkkViewer() {
             alt="Yosuun"
             width={1563}
             height={1563}
-            className="h-[64px] min-[724px]:hidden"
+            className="h-[64px] w-auto min-[724px]:hidden"
             priority
           />
           <Image
@@ -356,7 +356,7 @@ export default function KvkkViewer() {
             data-lenis-prevent-touch
             tabIndex={0}
             onScroll={(event) => setIsScrolled(event.currentTarget.scrollTop > 20)}
-            className="h-[calc(100dvh-212px)] touch-pan-y overflow-y-scroll overscroll-contain bg-slate-100/70 p-2 outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#78f666] sm:h-[calc(100dvh-244px)] sm:p-3 lg:p-4"
+            className="max-h-[calc(100dvh-212px)] touch-pan-y overflow-y-auto overscroll-contain bg-slate-100/70 p-2 outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#78f666] sm:max-h-[calc(100dvh-244px)] sm:p-3 lg:p-4"
             style={{ WebkitOverflowScrolling: "touch" }}
           >
             <div
